@@ -11,8 +11,8 @@ assignees: ''
 
 
 ## Todo
-[ ] function
-[ ] function
+- [ ] function
+- [ ] function
 
 <!----
 ## etc.
