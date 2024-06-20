@@ -1,5 +1,5 @@
 //
-//  CalendarViewController.swift
+//  CalendarView.swift
 //  ThreeShots
 //
 //  Created by woong on 6/18/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CalendarViewController: UIViewController {
+class CalendarView: UIViewController {
     
     lazy var dateView: UICalendarView = {
         var view = UICalendarView()
@@ -39,7 +39,7 @@ class CalendarViewController: UIViewController {
         
         let dateViewConstraints = [
             dateView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-//            dateView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            dateView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             dateView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             dateView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ]
@@ -53,7 +53,7 @@ class CalendarViewController: UIViewController {
     }
 }
 
-extension CalendarViewController: UICalendarViewDelegate, UICalendarSelectionSingleDateDelegate {
+extension CalendarView: UICalendarViewDelegate, UICalendarSelectionSingleDateDelegate {
     
     func calendarView(_ calendarView: UICalendarView, decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration? {
         if let selectedDate = selectedDate, selectedDate == dateComponents {
@@ -70,7 +70,11 @@ extension CalendarViewController: UICalendarViewDelegate, UICalendarSelectionSin
     func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
         selection.setSelected(dateComponents, animated: true)
         selectedDate = dateComponents
-        reloadDateView(date: Calendar.current.date(from: dateComponents!))
+//        reloadDateView(date: Calendar.current.date(from: dateComponents!))
+        
+        let testViewController = TestView()
+        testViewController.selectedDate = selectedDate?.date
+        self.present(testViewController, animated: true)
     }
     
     
