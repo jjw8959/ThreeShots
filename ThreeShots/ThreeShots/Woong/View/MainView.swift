@@ -39,7 +39,7 @@ final class MainView: UIViewController {
         return view
     }()
     
-    let monthVC = CalendarNDiaryView()
+    let monthVC = MonthView()
     
     let dayVC = DailyView()
     
@@ -119,83 +119,5 @@ final class MainView: UIViewController {
     }
     
 }
-
-//final class UnderLineSegmentedControl: UIView {
-//    
-//    let segmentedControl: UISegmentedControl = {
-//        let view = UISegmentedControl()
-//        
-//        view.setBackgroundImage(UIImage(), for: .normal, barMetrics: .default)
-//        view.setDividerImage(UIImage(), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
-//        
-//        view.setTitleTextAttributes([
-//            NSAttributedString.Key.foregroundColor: UIColor.lightGray,
-//            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)
-//        ], for: .normal)
-//        view.setTitleTextAttributes([
-//            NSAttributedString.Key.foregroundColor: UIColor.black,
-//            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)
-//        ], for: .selected)
-//        
-//        view.selectedSegmentIndex = 0
-//        view.insertSegment(withTitle: "Month", at: 0, animated: true)
-//        view.insertSegment(withTitle: "Day", at: 1, animated: true)
-//        
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        
-//        view.addTarget(self, action: #selector(moveUnderLine), for: .valueChanged)
-//        
-//        return view
-//    }()
-//    
-//    private let underLineView: UIView = {
-//        let view = UIView()
-//        view.backgroundColor = .black
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        return view
-//    }()
-//    
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//        addSubviewNConstraint()
-//    }
-//    
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-//    
-//    private func addSubviewNConstraint() {
-//        self.addSubview(segmentedControl)
-//        self.addSubview(underLineView)
-//        
-//        NSLayoutConstraint.activate([
-//            segmentedControl.topAnchor.constraint(equalTo: self.topAnchor),
-//            //            segmentedControl.bottomAnchor.constraint(equalTo: self.topAnchor),
-//            segmentedControl.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-//            segmentedControl.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-//            
-//            
-//            underLineView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 5),
-//            underLineView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-//            underLineView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-//            underLineView.heightAnchor.constraint(equalToConstant: 2),
-//            underLineView.widthAnchor.constraint(equalToConstant: segmentedControl.frame.width / CGFloat(segmentedControl.numberOfSegments))
-//        ])
-//    }
-//    
-//    @objc
-//    func moveUnderLine(_ segment: UISegmentedControl) {
-//        let segmentIndex = CGFloat(segmentedControl.selectedSegmentIndex)
-//        let segmentWidth = segmentedControl.frame.width / CGFloat(segmentedControl.numberOfSegments)
-//        let leadingDistance = segmentWidth * segmentIndex
-//        
-//        UIView.animate(withDuration: 0.2) {
-//            self.underLineView.leadingAnchor.constraint(equalTo: self.segmentedControl.leadingAnchor).constant = leadingDistance
-//            self.underLineView.updateConstraints()
-//        }
-//        self.layoutIfNeeded()
-//    }
-//    
-//}
 
 
