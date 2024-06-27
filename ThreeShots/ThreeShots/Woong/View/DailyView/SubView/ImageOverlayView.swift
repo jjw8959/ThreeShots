@@ -171,4 +171,15 @@ extension ImageOverlayView: UIPageViewControllerDataSource, UIPageViewController
         }
         return dataViewControllers[nextIndex]
     }
+    
+    func presentationCount(for pageViewController: UIPageViewController) -> Int {
+        return dataViewControllers.count
+    }
+    
+    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
+        guard let viewController = pageViewController.viewControllers?.first,
+              let currentIndex = dataViewControllers.firstIndex(of: viewController) else { return 0 }
+        
+        return currentIndex
+    }
 }
