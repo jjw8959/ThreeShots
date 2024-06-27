@@ -47,7 +47,7 @@ final class MainView: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        
+        dayVC.view.isHidden = true
         addSubViews()
         addConstraints()
     }
