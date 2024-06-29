@@ -15,6 +15,12 @@ extension Date {
         df.timeZone = TimeZone(identifier: "UTC")
         return df.string(from: self)
     }
+    func toStringDate() -> String {
+        let df = DateFormatter()
+        df.dateFormat = "dd일"
+        df.timeZone = TimeZone(identifier: "UTC")
+        return df.string(from: self)
+    }
 }
 
 extension String {
