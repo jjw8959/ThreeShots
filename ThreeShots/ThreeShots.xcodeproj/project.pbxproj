@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		04E4C31F2C3BBB19009A5DD4 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4C31E2C3BBB19009A5DD4 /* ModalViewController.swift */; };
+		04E4C3232C3CE76D009A5DD4 /* AddPhotoBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4C3222C3CE76D009A5DD4 /* AddPhotoBoxViewController.swift */; };
 		096098552C22DB66008E8992 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096098542C22DB66008E8992 /* TestView.swift */; };
 		098BF5482C2909C500182E3D /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098BF5432C2909C500182E3D /* CalendarView.swift */; };
 		098BF5492C2909C500182E3D /* SmallDiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098BF5442C2909C500182E3D /* SmallDiaryView.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		04E4C31E2C3BBB19009A5DD4 /* ModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
+		04E4C3222C3CE76D009A5DD4 /* AddPhotoBoxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoBoxViewController.swift; sourceTree = "<group>"; };
 		096098542C22DB66008E8992 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		098BF5432C2909C500182E3D /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		098BF5442C2909C500182E3D /* SmallDiaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallDiaryView.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				04E4C31E2C3BBB19009A5DD4 /* ModalViewController.swift */,
+				04E4C3222C3CE76D009A5DD4 /* AddPhotoBoxViewController.swift */,
 			);
 			path = UDI;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 				098BF5482C2909C500182E3D /* CalendarView.swift in Sources */,
 				096098552C22DB66008E8992 /* TestView.swift in Sources */,
 				0999EFD82C2D9AF300CAAE98 /* DiaryModel.swift in Sources */,
+				04E4C3232C3CE76D009A5DD4 /* AddPhotoBoxViewController.swift in Sources */,
 				09A070622C14525900FFA98E /* ViewController.swift in Sources */,
 				0999EFD62C2D996300CAAE98 /* DiaryStruct.swift in Sources */,
 				04E4C31F2C3BBB19009A5DD4 /* ModalViewController.swift in Sources */,
