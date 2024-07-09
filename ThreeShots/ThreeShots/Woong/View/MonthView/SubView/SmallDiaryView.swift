@@ -26,12 +26,10 @@ final class SmallDiaryView: UIViewController {
     //  일기 추가용 버튼
     var addButton: UIButton = {
         let view = UIButton()
-        
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 17)
         let image = UIImage(systemName: "plus", withConfiguration: imageConfig)
         view.setImage(image, for: .normal)
         view.tintColor = .black
-        
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -65,12 +63,14 @@ final class SmallDiaryView: UIViewController {
         if textContents != nil {
             diaryLabel.text = textContents
         }
-        
         addSubViews()
         addConstraints()
     }
     
     private func addSubViews() {
+        
+        addButton.addTarget(self, action: #selector(showModalButtonTapped), for: .touchUpInside)
+
         if textContents == nil {
             // TODO: 플러스 버튼이랑 날짜만 있는거
             self.view.addSubview(dateLabel)
@@ -87,7 +87,6 @@ final class SmallDiaryView: UIViewController {
         
         switch textContents {   // 내용유뮤
         case nil:   // 없으면
-            
             let emptyConstraint = [
                 dateLabel.topAnchor.constraint(equalTo: self.view.topAnchor),
                 dateLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
@@ -100,7 +99,6 @@ final class SmallDiaryView: UIViewController {
             NSLayoutConstraint.activate(emptyConstraint)
             
         default:    // 있으면
-            
             let filledConstraint = [
                 dateLabel.topAnchor.constraint(equalTo: self.view.topAnchor),
                 dateLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
@@ -114,7 +112,11 @@ final class SmallDiaryView: UIViewController {
             ]
             NSLayoutConstraint.activate(filledConstraint)
         }
-        
-        
+    }
+    
+    @objc func showModalButtonTapped() {
+        let secondViewController = ModalViewController()
+        secondViewController.modalPresentationStyle = .pageSheet
+        present(secondViewController, animated: true, completion: nil)
     }
 }

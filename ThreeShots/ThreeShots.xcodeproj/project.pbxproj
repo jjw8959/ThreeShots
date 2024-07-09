@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04E4C31F2C3BBB19009A5DD4 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4C31E2C3BBB19009A5DD4 /* ModalViewController.swift */; };
 		096098552C22DB66008E8992 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096098542C22DB66008E8992 /* TestView.swift */; };
 		098BF5482C2909C500182E3D /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098BF5432C2909C500182E3D /* CalendarView.swift */; };
 		098BF5492C2909C500182E3D /* SmallDiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098BF5442C2909C500182E3D /* SmallDiaryView.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04E4C31E2C3BBB19009A5DD4 /* ModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
 		096098542C22DB66008E8992 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		098BF5432C2909C500182E3D /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		098BF5442C2909C500182E3D /* SmallDiaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallDiaryView.swift; sourceTree = "<group>"; };
@@ -63,6 +65,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		045687CF2C3B8EED005AEB6E /* UDI */ = {
+			isa = PBXGroup;
+			children = (
+				04E4C31E2C3BBB19009A5DD4 /* ModalViewController.swift */,
+			);
+			path = UDI;
+			sourceTree = "<group>";
+		};
 		096098582C23C1D1008E8992 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -157,6 +167,7 @@
 		09A0705C2C14525900FFA98E /* ThreeShots */ = {
 			isa = PBXGroup;
 			children = (
+				045687CF2C3B8EED005AEB6E /* UDI */,
 				0960985A2C23C2B1008E8992 /* App */,
 				09A070612C14525900FFA98E /* ViewController.swift */,
 				098BF54B2C2909E800182E3D /* Extensions.swift */,
@@ -248,6 +259,7 @@
 				0999EFD82C2D9AF300CAAE98 /* DiaryModel.swift in Sources */,
 				09A070622C14525900FFA98E /* ViewController.swift in Sources */,
 				0999EFD62C2D996300CAAE98 /* DiaryStruct.swift in Sources */,
+				04E4C31F2C3BBB19009A5DD4 /* ModalViewController.swift in Sources */,
 				098BF5502C290ADC00182E3D /* MainView.swift in Sources */,
 				098BF54D2C2909E800182E3D /* Extensions.swift in Sources */,
 				098BF5552C290B3900182E3D /* PhotoView.swift in Sources */,
