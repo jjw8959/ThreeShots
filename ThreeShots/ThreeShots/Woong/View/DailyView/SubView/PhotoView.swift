@@ -14,7 +14,6 @@ final class PhotoView: UIView {
         view.image = UIImage(named: "mock1")
         view.clipsToBounds = true
         view.contentMode = .scaleAspectFill
-        view.layer.cornerRadius = 10
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -24,7 +23,6 @@ final class PhotoView: UIView {
         view.image = UIImage(named: "mock2")
         view.clipsToBounds = true
         view.contentMode = .scaleAspectFill
-        view.layer.cornerRadius = 10
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -34,7 +32,6 @@ final class PhotoView: UIView {
         view.image = UIImage(named: "mock3")
         view.clipsToBounds = true
         view.contentMode = .scaleAspectFill
-        view.layer.cornerRadius = 10
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -50,7 +47,9 @@ final class PhotoView: UIView {
     }
     
     private func addSubviews() {
-        
+        applyRoundedCorners(to: firstImageView, corners: [.bottomLeft, .topLeft], radius: 10)
+        applyRoundedCorners(to: secondImageView, corners: [.topRight], radius: 10)
+        applyRoundedCorners(to: thirdImageView, corners: [.bottomRight], radius: 10)
         self.addSubview(firstImageView)
         self.addSubview(secondImageView)
         self.addSubview(thirdImageView)
@@ -106,8 +105,22 @@ final class PhotoView: UIView {
     }
     
     private func thirdImageViewTapped() {
-        print("secondImageViewTapped Tapped in PhotoView")
+        print("thirdImageViewTapped Tapped in PhotoView")
     }
+    
+    func applyRoundedCorners(to view: UIView, corners: UIRectCorner, radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: view.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        view.layer.mask = mask
+    }
+    
+    override func layoutSubviews() {
+            super.layoutSubviews()
+            applyRoundedCorners(to: firstImageView, corners: [.topLeft, .bottomLeft], radius: 10)
+            applyRoundedCorners(to: secondImageView, corners: [.topRight], radius: 10)
+            applyRoundedCorners(to: thirdImageView, corners: [.bottomRight], radius: 10)
+        }
 }
 
 #Preview {
