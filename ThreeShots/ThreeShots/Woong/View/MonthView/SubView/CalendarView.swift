@@ -55,26 +55,26 @@ class CalendarView: UIViewController {
 
 extension CalendarView: UICalendarViewDelegate, UICalendarSelectionSingleDateDelegate {
     
-    func calendarView(_ calendarView: UICalendarView, decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration? {
-        if let selectedDate = selectedDate, selectedDate == dateComponents {
-            return .customView {
-                let label = UILabel()
-                label.text = "🎉"
-                label.textAlignment = .center
-                return label
-            }
-        }
-        return nil
-    }
+//    func calendarView(_ calendarView: UICalendarView, decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration? {
+//        if let selectedDate = selectedDate, selectedDate == dateComponents {
+//            return .customView {
+//                let label = UILabel()
+//                label.text = "🎉"
+//                label.textAlignment = .center
+//                return label
+//            }
+//        }
+//        return nil
+//    }
     
     func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
         selection.setSelected(dateComponents, animated: true)
         selectedDate = dateComponents
 //        reloadDateView(date: Calendar.current.date(from: dateComponents!))
         
-        let testViewController = TestView()
-        testViewController.selectedDate = selectedDate?.date
-        self.present(testViewController, animated: true)
+//        let testViewController = TestView()
+//        testViewController.selectedDate = selectedDate?.date
+//        self.present(testViewController, animated: true)
     }
     
     
