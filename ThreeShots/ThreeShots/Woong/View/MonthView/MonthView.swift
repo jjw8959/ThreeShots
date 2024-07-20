@@ -37,12 +37,12 @@ final class MonthView: UIViewController {
             calendarView.view.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 16),
             calendarView.view.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             calendarView.view.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            calendarView.view.heightAnchor.constraint(equalToConstant: self.view.frame.height / 7 * 5),
+            calendarView.view.heightAnchor.constraint(equalToConstant: self.view.frame.height / 7 * 4),
             
             smallDiaryView.view.topAnchor.constraint(equalTo: calendarView.view.bottomAnchor, constant: 16),
             smallDiaryView.view.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             smallDiaryView.view.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            smallDiaryView.view.heightAnchor.constraint(equalToConstant: self.view.frame.height / 7 * 2)
+            smallDiaryView.view.heightAnchor.constraint(equalToConstant: self.view.frame.height / 7 * 3)
         ])
         
     }
