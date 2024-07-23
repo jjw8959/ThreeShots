@@ -7,7 +7,13 @@
 
 import UIKit
 
+import RxSwift
+import RxCocoa
+
 final class SmallDiaryView: UIViewController {
+    
+    var selectedDateInput = PublishSubject<String>()
+    let disposeBag = DisposeBag()
     
     var dateString: String? = "24.06.20"
 //    var textContents: String? = "난 알아요 이밤이 흐르고 흐르고,aa난 알아요 이밤이 흐르고 흐르고,난 알아요 이밤이 흐르고 흐르고,난 알아요 이밤이 흐르고 흐르고,난 알아요 이밤이 흐르고 흐르고,난 알아요 이밤이 흐르고 흐르고,난 알아요 이밤이 흐르고 흐르고,난 알아요 이밤이 흐르고 흐르고,난 알아요 이밤이 흐르고 흐르고,난 알아요 이밤이 흐르고 흐르고,난 알아요 이밤이 흐르고 흐르고,난 알아요 이밤이 흐르고 흐르고,"
@@ -58,8 +64,12 @@ final class SmallDiaryView: UIViewController {
         
         self.view.backgroundColor = .white // 수정필
         
-        dateLabel.text = dateString
-//        print(dateLabel.text)
+        selectedDateInput
+            .subscribe { [weak self] dateString in
+                self?.dateLabel.text = dateString
+            }
+            .disposed(by: disposeBag)
+        
         if textContents != nil {
             diaryLabel.text = textContents
         }

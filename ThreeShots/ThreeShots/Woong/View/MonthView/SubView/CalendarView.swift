@@ -7,6 +7,9 @@
 
 import UIKit
 
+import RxSwift
+import RxCocoa
+
 class CalendarView: UIViewController {
     
     lazy var dateView: UICalendarView = {
@@ -17,6 +20,8 @@ class CalendarView: UIViewController {
     }()
     
     var selectedDate: DateComponents? = nil
+    
+    var selectedDateString = PublishRelay<String>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,28 +60,12 @@ class CalendarView: UIViewController {
 
 extension CalendarView: UICalendarViewDelegate, UICalendarSelectionSingleDateDelegate {
     
-//    func calendarView(_ calendarView: UICalendarView, decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration? {
-//        if let selectedDate = selectedDate, selectedDate == dateComponents {
-//            return .customView {
-//                let label = UILabel()
-//                label.text = "🎉"
-//                label.textAlignment = .center
-//                return label
-//            }
-//        }
-//        return nil
-//    }
-    
     func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
         selection.setSelected(dateComponents, animated: true)
         selectedDate = dateComponents
-//        reloadDateView(date: Calendar.current.date(from: dateComponents!))
-        
-//        let testViewController = TestView()
-//        testViewController.selectedDate = selectedDate?.date
-//        self.present(testViewController, animated: true)
+        selectedDateString.accept(selectedDate?.date?.toString(dateFormat: "yyyy.MM.dd") ?? "fail")
+
     }
-    
     
 }
 

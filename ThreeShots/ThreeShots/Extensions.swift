@@ -11,7 +11,7 @@ import UIKit
 extension Date {
     func toString() -> String {
         let df = DateFormatter()
-        df.dateFormat = "yy MM dd"
+        df.dateFormat = "yy.MM.dd"
         df.timeZone = TimeZone(identifier: "UTC")
         return df.string(from: self)
     }

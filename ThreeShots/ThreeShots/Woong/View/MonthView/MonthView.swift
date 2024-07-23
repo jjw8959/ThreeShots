@@ -7,13 +7,15 @@
 
 import UIKit
 
+import RxSwift
+import RxCocoa
+
 final class MonthView: UIViewController {
     
     let calendarView = CalendarView()
-    
     let smallDiaryView = SmallDiaryView()
     
-    var date: String?
+    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,12 +23,17 @@ final class MonthView: UIViewController {
         addChild(calendarView)
         view.addSubview(calendarView.view)
         calendarView.didMove(toParent: self)
-        
         addChild(smallDiaryView)
         view.addSubview(smallDiaryView.view)
         smallDiaryView.didMove(toParent: self)
-        
         addConstraints()
+        
+        let currentDateString = Date().toString(dateFormat: "yyyy.MM.dd")
+        smallDiaryView.selectedDateInput.onNext(currentDateString)
+        
+        calendarView.selectedDateString
+            .bind(to: smallDiaryView.selectedDateInput)
+            .disposed(by: disposeBag)
     }
     
     private func addConstraints() {
