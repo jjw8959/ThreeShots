@@ -77,37 +77,6 @@ final class PhotoView: UIView {
             thirdImageView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
         ])
     }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
-        
-        guard let touch = touches.first else { return }
-        let location = touch.location(in: self)
-        
-        if firstImageView.frame.contains(location) {
-            firstImageViewTapped()
-        }
-        
-        if secondImageView.frame.contains(location) {
-            secondImageViewTapped()
-        }
-        
-        if thirdImageView.frame.contains(location) {
-            thirdImageViewTapped()
-        }
-    }
-    
-    private func firstImageViewTapped() {
-        print("firstImageView Tapped in PhotoView")
-    }
-    
-    private func secondImageViewTapped() {
-        print("secondImageViewTapped Tapped in PhotoView")
-    }
-    
-    private func thirdImageViewTapped() {
-        print("secondImageViewTapped Tapped in PhotoView")
-    }
 }
 
 #Preview {
