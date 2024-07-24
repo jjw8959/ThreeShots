@@ -11,6 +11,8 @@ class ModalViewController: UIViewController {
     let toolbar = UIToolbar()
     let addPhotoBoxViewController = AddPhotoBoxViewController()
     
+    var todayString = " "
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,10 +26,10 @@ class ModalViewController: UIViewController {
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonTapped))
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
-        let today = Date().toString()
-        let todayToString = UIBarButtonItem(title: today)
+        
+        let todayToString = UIBarButtonItem(title: todayString)
         todayToString.tintColor = .black
-        todayToString.isEnabled = false
+//        todayToString.isEnabled = false
         
         toolbar.items = [cancelButton, flexSpace, todayToString, flexSpace, doneButton]
         
