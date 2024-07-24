@@ -104,7 +104,6 @@ final class SmallDiaryView: UIViewController {
                 addButton.topAnchor.constraint(equalTo: self.view.topAnchor),
                 addButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
                 addButton.widthAnchor.constraint(equalToConstant: 50),
-                addButton.heightAnchor.constraint(equalToConstant: 50),
             ]
             NSLayoutConstraint.activate(emptyConstraint)
             
@@ -127,6 +126,7 @@ final class SmallDiaryView: UIViewController {
     @objc func showModalButtonTapped() {
         let secondViewController = ModalViewController()
         secondViewController.modalPresentationStyle = .pageSheet
+        secondViewController.dateString = dateLabel.text!
         present(secondViewController, animated: true, completion: nil)
     }
 }

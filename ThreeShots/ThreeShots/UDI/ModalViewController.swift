@@ -11,7 +11,7 @@ class ModalViewController: UIViewController {
     let toolbar = UIToolbar()
     let addPhotoBoxViewController = AddPhotoBoxViewController()
     
-    var todayString = " "
+    var dateString = " "
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +27,7 @@ class ModalViewController: UIViewController {
         let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonTapped))
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
         
-        let todayToString = UIBarButtonItem(title: todayString)
+        let todayToString = UIBarButtonItem(title: dateString)
         todayToString.tintColor = .black
 //        todayToString.isEnabled = false
         
