@@ -10,6 +10,8 @@
 		04E4C31F2C3BBB19009A5DD4 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4C31E2C3BBB19009A5DD4 /* ModalViewController.swift */; };
 		04E4C3232C3CE76D009A5DD4 /* AddPhotoBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4C3222C3CE76D009A5DD4 /* AddPhotoBoxViewController.swift */; };
 		05BF1B9D011B7F2374426D29 /* Pods_ThreeShots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AE99160916CBAFB619A6518 /* Pods_ThreeShots.framework */; };
+		093B84382C50C6950017FD94 /* EditDiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093B84372C50C6950017FD94 /* EditDiaryView.swift */; };
+		093B843A2C50CAEA0017FD94 /* ModalFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093B84392C50CAEA0017FD94 /* ModalFormView.swift */; };
 		096098552C22DB66008E8992 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096098542C22DB66008E8992 /* TestView.swift */; };
 		098BF5482C2909C500182E3D /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098BF5432C2909C500182E3D /* CalendarView.swift */; };
 		098BF5492C2909C500182E3D /* SmallDiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098BF5442C2909C500182E3D /* SmallDiaryView.swift */; };
@@ -34,6 +36,8 @@
 /* Begin PBXFileReference section */
 		04E4C31E2C3BBB19009A5DD4 /* ModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
 		04E4C3222C3CE76D009A5DD4 /* AddPhotoBoxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoBoxViewController.swift; sourceTree = "<group>"; };
+		093B84372C50C6950017FD94 /* EditDiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDiaryView.swift; sourceTree = "<group>"; };
+		093B84392C50CAEA0017FD94 /* ModalFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalFormView.swift; sourceTree = "<group>"; };
 		096098542C22DB66008E8992 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		098BF5432C2909C500182E3D /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		098BF5442C2909C500182E3D /* SmallDiaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallDiaryView.swift; sourceTree = "<group>"; };
@@ -86,6 +90,8 @@
 			children = (
 				098BF54F2C290ADC00182E3D /* MainView.swift */,
 				098BF5532C290B3900182E3D /* DetailView.swift */,
+				093B84372C50C6950017FD94 /* EditDiaryView.swift */,
+				093B84392C50CAEA0017FD94 /* ModalFormView.swift */,
 				098BF5542C290B3900182E3D /* DailyView */,
 				098BF5472C2909C500182E3D /* MonthView */,
 			);
@@ -177,11 +183,11 @@
 		09A0705C2C14525900FFA98E /* ThreeShots */ = {
 			isa = PBXGroup;
 			children = (
-				045687CF2C3B8EED005AEB6E /* UDI */,
 				0960985A2C23C2B1008E8992 /* App */,
 				09A070612C14525900FFA98E /* ViewController.swift */,
 				098BF54B2C2909E800182E3D /* Extensions.swift */,
 				098BF54C2C2909E800182E3D /* Enums.swift */,
+				045687CF2C3B8EED005AEB6E /* UDI */,
 				096098592C23C1DD008E8992 /* Woong */,
 				096098542C22DB66008E8992 /* TestView.swift */,
 				09A070662C14525900FFA98E /* Assets.xcassets */,
@@ -330,6 +336,7 @@
 				0999EFD82C2D9AF300CAAE98 /* DiaryModel.swift in Sources */,
 				04E4C3232C3CE76D009A5DD4 /* AddPhotoBoxViewController.swift in Sources */,
 				09A070622C14525900FFA98E /* ViewController.swift in Sources */,
+				093B84382C50C6950017FD94 /* EditDiaryView.swift in Sources */,
 				0999EFD62C2D996300CAAE98 /* DiaryStruct.swift in Sources */,
 				04E4C31F2C3BBB19009A5DD4 /* ModalViewController.swift in Sources */,
 				098BF5502C290ADC00182E3D /* MainView.swift in Sources */,
@@ -337,6 +344,7 @@
 				098BF5552C290B3900182E3D /* PhotoView.swift in Sources */,
 				098BF54A2C2909C500182E3D /* MonthView.swift in Sources */,
 				0999EFDA2C2DA2E200CAAE98 /* DailyViewCell.swift in Sources */,
+				093B843A2C50CAEA0017FD94 /* ModalFormView.swift in Sources */,
 				09A0705E2C14525900FFA98E /* AppDelegate.swift in Sources */,
 				098BF54E2C2909E800182E3D /* Enums.swift in Sources */,
 				098BF5492C2909C500182E3D /* SmallDiaryView.swift in Sources */,
