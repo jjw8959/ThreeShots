@@ -9,15 +9,10 @@ import Foundation
 import UIKit
 
 extension Date {
-    func toString() -> String {
-        let df = DateFormatter()
-        df.dateFormat = "yy.MM.dd"
-        return df.string(from: self)
-    }
-    func toStringDate() -> String {
-        let df = DateFormatter()
-        df.dateFormat = "dd일"
-        return df.string(from: self)
+    func toString(dateFormat format: String = "yyyy-MM-dd") -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        return dateFormatter.string(from: self)
     }
 }
 
