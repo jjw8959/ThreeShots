@@ -6,11 +6,10 @@
 //
 
 import UIKit
+import CoreData
 
 import RxSwift
 import RxCocoa
-
-import CoreData
 
 final class EditDiaryView: UIViewController {
     //    TODO: 다이어리 추가 및 수정시에 현재 뷰 하나로 활용할 수 있도록 제작.
