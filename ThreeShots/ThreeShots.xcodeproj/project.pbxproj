@@ -45,8 +45,8 @@
 		093B843C2C53468A0017FD94 /* DiaryDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DiaryDataModel.xcdatamodel; sourceTree = "<group>"; };
 		093B84422C534FC50017FD94 /* CoredataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoredataManager.swift; sourceTree = "<group>"; };
 		093B844C2C554D420017FD94 /* DiaryDataModelv2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DiaryDataModelv2.xcdatamodel; sourceTree = "<group>"; };
-		093B846A2C56C5630017FD94 /* Diary+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Diary+CoreDataClass.swift"; path = "ThreeShots/Diary+CoreDataClass.swift"; sourceTree = "<group>"; };
-		093B846B2C56C5630017FD94 /* Diary+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Diary+CoreDataProperties.swift"; path = "ThreeShots/Diary+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		093B846A2C56C5630017FD94 /* Diary+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Diary+CoreDataClass.swift"; sourceTree = "<group>"; };
+		093B846B2C56C5630017FD94 /* Diary+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Diary+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		096098542C22DB66008E8992 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		098BF5432C2909C500182E3D /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		098BF5442C2909C500182E3D /* SmallDiaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallDiaryView.swift; sourceTree = "<group>"; };
@@ -119,6 +119,8 @@
 		0960985A2C23C2B1008E8992 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				093B846A2C56C5630017FD94 /* Diary+CoreDataClass.swift */,
+				093B846B2C56C5630017FD94 /* Diary+CoreDataProperties.swift */,
 				09A0705D2C14525900FFA98E /* AppDelegate.swift */,
 				09A0705F2C14525900FFA98E /* SceneDelegate.swift */,
 			);
@@ -175,8 +177,6 @@
 		09A070512C14525900FFA98E = {
 			isa = PBXGroup;
 			children = (
-				093B846A2C56C5630017FD94 /* Diary+CoreDataClass.swift */,
-				093B846B2C56C5630017FD94 /* Diary+CoreDataProperties.swift */,
 				09A0705C2C14525900FFA98E /* ThreeShots */,
 				09A0705B2C14525900FFA98E /* Products */,
 				A431379CA1D03DBB9FBC124B /* Pods */,
