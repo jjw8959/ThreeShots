@@ -7,11 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		04E4C31F2C3BBB19009A5DD4 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4C31E2C3BBB19009A5DD4 /* ModalViewController.swift */; };
+		04E4C31F2C3BBB19009A5DD4 /* AddPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4C31E2C3BBB19009A5DD4 /* AddPhotoView.swift */; };
 		04E4C3232C3CE76D009A5DD4 /* AddPhotoBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4C3222C3CE76D009A5DD4 /* AddPhotoBoxViewController.swift */; };
 		05BF1B9D011B7F2374426D29 /* Pods_ThreeShots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AE99160916CBAFB619A6518 /* Pods_ThreeShots.framework */; };
 		093B84382C50C6950017FD94 /* EditDiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093B84372C50C6950017FD94 /* EditDiaryView.swift */; };
 		093B843A2C50CAEA0017FD94 /* ModalFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093B84392C50CAEA0017FD94 /* ModalFormView.swift */; };
+		093B843D2C53468A0017FD94 /* DiaryDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 093B843B2C53468A0017FD94 /* DiaryDataModel.xcdatamodeld */; };
+		093B84432C534FC50017FD94 /* CoredataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093B84422C534FC50017FD94 /* CoredataManager.swift */; };
+		093B846C2C56C5630017FD94 /* Diary+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093B846A2C56C5630017FD94 /* Diary+CoreDataClass.swift */; };
+		093B846D2C56C5630017FD94 /* Diary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093B846B2C56C5630017FD94 /* Diary+CoreDataProperties.swift */; };
 		096098552C22DB66008E8992 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096098542C22DB66008E8992 /* TestView.swift */; };
 		098BF5482C2909C500182E3D /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098BF5432C2909C500182E3D /* CalendarView.swift */; };
 		098BF5492C2909C500182E3D /* SmallDiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098BF5442C2909C500182E3D /* SmallDiaryView.swift */; };
@@ -34,10 +38,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		04E4C31E2C3BBB19009A5DD4 /* ModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
+		04E4C31E2C3BBB19009A5DD4 /* AddPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoView.swift; sourceTree = "<group>"; };
 		04E4C3222C3CE76D009A5DD4 /* AddPhotoBoxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoBoxViewController.swift; sourceTree = "<group>"; };
 		093B84372C50C6950017FD94 /* EditDiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDiaryView.swift; sourceTree = "<group>"; };
 		093B84392C50CAEA0017FD94 /* ModalFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalFormView.swift; sourceTree = "<group>"; };
+		093B843C2C53468A0017FD94 /* DiaryDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DiaryDataModel.xcdatamodel; sourceTree = "<group>"; };
+		093B84422C534FC50017FD94 /* CoredataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoredataManager.swift; sourceTree = "<group>"; };
+		093B844C2C554D420017FD94 /* DiaryDataModelv2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DiaryDataModelv2.xcdatamodel; sourceTree = "<group>"; };
+		093B846A2C56C5630017FD94 /* Diary+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Diary+CoreDataClass.swift"; path = "ThreeShots/Diary+CoreDataClass.swift"; sourceTree = "<group>"; };
+		093B846B2C56C5630017FD94 /* Diary+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Diary+CoreDataProperties.swift"; path = "ThreeShots/Diary+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		096098542C22DB66008E8992 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		098BF5432C2909C500182E3D /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		098BF5442C2909C500182E3D /* SmallDiaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallDiaryView.swift; sourceTree = "<group>"; };
@@ -79,7 +88,7 @@
 		045687CF2C3B8EED005AEB6E /* UDI */ = {
 			isa = PBXGroup;
 			children = (
-				04E4C31E2C3BBB19009A5DD4 /* ModalViewController.swift */,
+				04E4C31E2C3BBB19009A5DD4 /* AddPhotoView.swift */,
 				04E4C3222C3CE76D009A5DD4 /* AddPhotoBoxViewController.swift */,
 			);
 			path = UDI;
@@ -158,6 +167,7 @@
 			children = (
 				0999EFD52C2D996300CAAE98 /* DiaryStruct.swift */,
 				0999EFD72C2D9AF300CAAE98 /* DiaryModel.swift */,
+				093B84422C534FC50017FD94 /* CoredataManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -165,6 +175,8 @@
 		09A070512C14525900FFA98E = {
 			isa = PBXGroup;
 			children = (
+				093B846A2C56C5630017FD94 /* Diary+CoreDataClass.swift */,
+				093B846B2C56C5630017FD94 /* Diary+CoreDataProperties.swift */,
 				09A0705C2C14525900FFA98E /* ThreeShots */,
 				09A0705B2C14525900FFA98E /* Products */,
 				A431379CA1D03DBB9FBC124B /* Pods */,
@@ -185,6 +197,7 @@
 			children = (
 				0960985A2C23C2B1008E8992 /* App */,
 				09A070612C14525900FFA98E /* ViewController.swift */,
+				093B843B2C53468A0017FD94 /* DiaryDataModel.xcdatamodeld */,
 				098BF54B2C2909E800182E3D /* Extensions.swift */,
 				098BF54C2C2909E800182E3D /* Enums.swift */,
 				045687CF2C3B8EED005AEB6E /* UDI */,
@@ -334,20 +347,24 @@
 				098BF5482C2909C500182E3D /* CalendarView.swift in Sources */,
 				096098552C22DB66008E8992 /* TestView.swift in Sources */,
 				0999EFD82C2D9AF300CAAE98 /* DiaryModel.swift in Sources */,
+				093B846C2C56C5630017FD94 /* Diary+CoreDataClass.swift in Sources */,
+				093B846D2C56C5630017FD94 /* Diary+CoreDataProperties.swift in Sources */,
 				04E4C3232C3CE76D009A5DD4 /* AddPhotoBoxViewController.swift in Sources */,
 				09A070622C14525900FFA98E /* ViewController.swift in Sources */,
 				093B84382C50C6950017FD94 /* EditDiaryView.swift in Sources */,
 				0999EFD62C2D996300CAAE98 /* DiaryStruct.swift in Sources */,
-				04E4C31F2C3BBB19009A5DD4 /* ModalViewController.swift in Sources */,
+				04E4C31F2C3BBB19009A5DD4 /* AddPhotoView.swift in Sources */,
 				098BF5502C290ADC00182E3D /* MainView.swift in Sources */,
 				098BF54D2C2909E800182E3D /* Extensions.swift in Sources */,
 				098BF5552C290B3900182E3D /* PhotoView.swift in Sources */,
 				098BF54A2C2909C500182E3D /* MonthView.swift in Sources */,
 				0999EFDA2C2DA2E200CAAE98 /* DailyViewCell.swift in Sources */,
 				093B843A2C50CAEA0017FD94 /* ModalFormView.swift in Sources */,
+				093B843D2C53468A0017FD94 /* DiaryDataModel.xcdatamodeld in Sources */,
 				09A0705E2C14525900FFA98E /* AppDelegate.swift in Sources */,
 				098BF54E2C2909E800182E3D /* Enums.swift in Sources */,
 				098BF5492C2909C500182E3D /* SmallDiaryView.swift in Sources */,
+				093B84432C534FC50017FD94 /* CoredataManager.swift in Sources */,
 				09A070602C14525900FFA98E /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -563,6 +580,21 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		093B843B2C53468A0017FD94 /* DiaryDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				093B844C2C554D420017FD94 /* DiaryDataModelv2.xcdatamodel */,
+				093B843C2C53468A0017FD94 /* DiaryDataModel.xcdatamodel */,
+			);
+			currentVersion = 093B843C2C53468A0017FD94 /* DiaryDataModel.xcdatamodel */;
+			name = DiaryDataModel.xcdatamodeld;
+			path = "/Users/woong/Library/Mobile Documents/com~apple~CloudDocs/공부/swift/포폴/ThreeShots/ThreeShots/ThreeShots/DiaryDataModel.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 09A070522C14525900FFA98E /* Project object */;
 }
