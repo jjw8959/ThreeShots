@@ -28,7 +28,7 @@ final class MonthView: UIViewController {
         smallDiaryView.didMove(toParent: self)
         addConstraints()
         
-        let currentDateString = Date().toString(dateFormat: "yyyy.MM.dd")
+        let currentDateString = Date().toString()
         smallDiaryView.selectedDateInput.onNext(currentDateString)
         
         calendarView.selectedDateString

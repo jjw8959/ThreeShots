@@ -63,8 +63,7 @@ extension CalendarView: UICalendarViewDelegate, UICalendarSelectionSingleDateDel
     func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
         selection.setSelected(dateComponents, animated: true)
         selectedDate = dateComponents
-        selectedDateString.accept(selectedDate?.date?.toString(dateFormat: "yyyy.MM.dd") ?? "fail")
-
+        selectedDateString.accept(selectedDate?.date?.toString() ?? "fail")
     }
     
 }
