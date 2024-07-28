@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 extension Date {
-    func toString(dateFormat format: String = "yyyy-MM-dd") -> String {
+    func toString(dateFormat format: String = "yyyy.MM.dd") -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
         return dateFormatter.string(from: self)
