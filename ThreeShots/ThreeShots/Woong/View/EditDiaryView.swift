@@ -43,11 +43,11 @@ final class EditDiaryView: UIViewController {
         
         contentsField.delegate = self
         
+        let result = coredata.loadData(date: dateString)
+        
         // 데이터있으면
-        if coredata.loadData(date: dateString).date != "" {
+        if result.date != "" {
             // TODO: 이미지 불러와서 미리 채우기
-            let result = coredata.loadData(date: dateString)
-            
             contentsField.text = result.contents
             threePicsView.firstImageView.image = result.firstImage
             threePicsView.secondImageView.image = result.secondImage
@@ -109,7 +109,6 @@ final class EditDiaryView: UIViewController {
         contentsField.layer.borderColor = UIColor.gray.cgColor
         contentsField.layer.cornerRadius = CGFloat(10)
         contentsField.font = .systemFont(ofSize: 20)
-//        contentsField.textAlignment = .
     }
     
     private func translatesAuth() {
@@ -191,7 +190,7 @@ final class EditDiaryView: UIViewController {
                 cantSaveAlert.addAction(cancelAction)
                 present(cantSaveAlert, animated: true)
             } else {
-                coredata.saveData(date: Date().toString(dateFormat: "yyyy.MM.dd"), content: contentsField.text ?? "",
+                coredata.saveData(date: dateString, content: contentsField.text ?? "",
                                   firstImage: ((threePicsView.firstImageView.image) ?? UIImage(named: "gray"))!,
                                   secondImage: ((threePicsView.secondImageView.image) ?? UIImage(named: "gray"))!,
                                   thirdImage: ((threePicsView.thirdImageView.image) ?? UIImage(named: "gray"))!)
