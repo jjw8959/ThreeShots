@@ -5,7 +5,9 @@
         <attribute name="date" optional="YES" attributeType="String"/>
         <attribute name="firstImage" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="month" optional="YES" attributeType="String"/>
         <attribute name="secondImage" optional="YES" attributeType="String"/>
         <attribute name="thirdImage" optional="YES" attributeType="String"/>
+        <attribute name="year" optional="YES" attributeType="String"/>
     </entity>
 </model>
