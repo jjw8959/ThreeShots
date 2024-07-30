@@ -31,9 +31,23 @@ final class MonthView: UIViewController {
         let currentDateString = Date().toString()
         smallDiaryView.selectedDateInput.onNext(currentDateString)
         
+        let currentMonthString = Date().toString(dateFormat: "MM")
+        let currentYearString = Date().toString(dateFormat: "yyyy")
+        
+        calendarView.setAndReloadDate(year: currentYearString, month: currentMonthString, date: "")
+        
+        
         calendarView.selectedDateString
             .bind(to: smallDiaryView.selectedDateInput)
             .disposed(by: disposeBag)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let currentMonthString = Date().toString(dateFormat: "MM")
+        let currentYearString = Date().toString(dateFormat: "yyyy")
+        
+        calendarView.setAndReloadDate(year: currentYearString, month: currentMonthString, date: "")
     }
     
     private func addConstraints() {
