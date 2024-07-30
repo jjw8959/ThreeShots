@@ -15,10 +15,13 @@ final class SmallDiaryView: UIViewController {
     var selectedDateInput = PublishSubject<String>()
     let disposeBag = DisposeBag()
     
-    var dateString: String? = "24.06.20"
-//    var textContents: String? = "난 알아요 이밤이 흐르고 흐르고,aa난 알아요 이밤이 흐르고 흐르고,난 알아요 이밤이 흐르고 흐르고,난 알아요 이밤이 흐르고 흐르고,난 알아요 이밤이 흐르고 흐르고,난 알아요 이밤이 흐르고 흐르고,난 알아요 이밤이 흐르고 흐르고,난 알아요 이밤이 흐르고 흐르고,난 알아요 이밤이 흐르고 흐르고,난 알아요 이밤이 흐르고 흐르고,난 알아요 이밤이 흐르고 흐르고,난 알아요 이밤이 흐르고 흐르고,"
+    var dateString: String? = Date().toString() {
+        didSet {
+            dateLabel.text = dateString
+        }
+    }
+   
     var textContents: String?
-    var faceEnum: FaceEnum? = .bad
     
     // 날짜용 레이블
     var dateLabel: UILabel = {
@@ -40,19 +43,11 @@ final class SmallDiaryView: UIViewController {
         return view
     }()
     
-    //  이모지용 이미지뷰
-    var emoImageView: UIImageView = {
-        let view = UIImageView()
-        view.contentMode = .scaleAspectFit
-        view.frame.size = CGSize(width: 50, height: 50)
-        return view
-    }()
-    
     //  일기내용 레이블
     // TODO: 내용 3줄, scroll 불가
-    var diaryLabel: UILabel = {
+    var contentsLabel: UILabel = {
         let view = UILabel()
-//        view.textColor = .black // 수정필
+        //        view.textColor = .black // 수정필
         view.numberOfLines = 3
         view.font = UIFont.systemFont(ofSize: 20)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -71,16 +66,14 @@ final class SmallDiaryView: UIViewController {
             .disposed(by: disposeBag)
         
         if textContents != nil {
-            diaryLabel.text = textContents
+            contentsLabel.text = textContents
         }
         addSubViews()
         addConstraints()
     }
     
     private func addSubViews() {
-        
-        addButton.addTarget(self, action: #selector(showModalButtonTapped), for: .touchUpInside)
-
+        addButton.addTarget(self, action: #selector(addDiaryButtonTapped), for: .touchUpInside)
         if textContents == nil {
             // TODO: 플러스 버튼이랑 날짜만 있는거
             self.view.addSubview(dateLabel)
@@ -88,8 +81,7 @@ final class SmallDiaryView: UIViewController {
         } else {
             // TODO: 해당 컨텐츠 보여주기
             self.view.addSubview(dateLabel)
-            self.view.addSubview(emoImageView)
-            self.view.addSubview(diaryLabel)
+            self.view.addSubview(contentsLabel)
         }
     }
     
@@ -112,21 +104,19 @@ final class SmallDiaryView: UIViewController {
                 dateLabel.topAnchor.constraint(equalTo: self.view.topAnchor),
                 dateLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
                 
-                emoImageView.topAnchor.constraint(equalTo: self.view.topAnchor),
-                emoImageView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-                
-                diaryLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 10),
-                diaryLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-                diaryLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+                contentsLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 10),
+                contentsLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                contentsLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             ]
             NSLayoutConstraint.activate(filledConstraint)
         }
     }
     
-    @objc func showModalButtonTapped() {
-        let secondViewController = ModalViewController()
-        secondViewController.modalPresentationStyle = .pageSheet
-        secondViewController.dateString = dateLabel.text!
-        present(secondViewController, animated: true, completion: nil)
+    @objc func addDiaryButtonTapped() {
+        let rootVC = EditDiaryView() // 사진뷰가 아니라 내용수정뷰로 바꿔야함
+        let nc = UINavigationController(rootViewController: rootVC)
+        nc.modalPresentationStyle = .fullScreen
+        rootVC.dateString = dateLabel.text!
+        present(nc, animated: true)
     }
 }
