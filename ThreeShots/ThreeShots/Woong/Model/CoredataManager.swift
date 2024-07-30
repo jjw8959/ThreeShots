@@ -18,23 +18,61 @@ class CoredataManager {
     
     // 이미지 저장경로 url로 따오기
     func saveData(date: String, content: String, firstImage: UIImage, secondImage: UIImage, thirdImage: UIImage) {
-        let newDiary = NSEntityDescription.insertNewObject(forEntityName: "Diary", into: context)
-        newDiary.setValue(date, forKey: "date")
-        newDiary.setValue(content, forKey: "content")
-        
-        if let firstImagePath = saveImageToDisk(image: firstImage, imageName: "firstImage", date: date) {
-            newDiary.setValue(firstImagePath, forKey: "firstImage")
-        }
-        
-        if let secondImagePath = saveImageToDisk(image: secondImage, imageName: "secondImage", date: date) {
-            newDiary.setValue(secondImagePath, forKey: "secondImage")
-        }
-        
-        if let thirdImagePath = saveImageToDisk(image: thirdImage, imageName: "thirdImage", date: date) {
-            newDiary.setValue(thirdImagePath, forKey: "thirdImage")
-        }
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Diary")
+        request.predicate = NSPredicate(format: "date = %@", date)
         
         do {
+            let data = try context.fetch(request)
+            if let existingDiary = data.first as? NSManagedObject {
+                // 기존 데이터가 있으면 업데이트
+                existingDiary.setValue(content, forKey: "content")
+                
+                saveImageToDisk(image: firstImage, imageName: "firstImage", date: date)
+                let firstImagePath = date + "_" + "firstImage.jpg"
+                existingDiary.setValue(firstImagePath, forKey: "firstImage")
+                
+                saveImageToDisk(image: secondImage, imageName: "secondImage", date: date)
+                let secondImagePath = date + "_" + "secondImage.jpg"
+                existingDiary.setValue(secondImagePath, forKey: "secondImage")
+                
+                saveImageToDisk(image: thirdImage, imageName: "thirdImage", date: date)
+                let thirdImagePath = date + "_" + "thirdImage.jpg"
+                existingDiary.setValue(thirdImagePath, forKey: "thirdImage")
+                
+                let month = date.substring(from: 5, to: 6)
+                existingDiary.setValue(month, forKey: "month")
+                
+                let year = date.substring(from: 0, to: 3)
+                existingDiary.setValue(year, forKey: "year")
+                print(year)
+                
+            } else {
+                // 기존 데이터가 없으면 새로 추가
+                let newDiary = NSEntityDescription.insertNewObject(forEntityName: "Diary", into: context)
+                newDiary.setValue(date, forKey: "date")
+                newDiary.setValue(content, forKey: "content")
+                print("saveData", content)
+                
+                saveImageToDisk(image: firstImage, imageName: "firstImage", date: date)
+                let firstImagePath = date + "_" + "firstImage.jpg"
+                newDiary.setValue(firstImagePath, forKey: "firstImage")
+                
+                saveImageToDisk(image: secondImage, imageName: "secondImage", date: date)
+                let secondImagePath = date + "_" + "secondImage.jpg"
+                newDiary.setValue(secondImagePath, forKey: "secondImage")
+                
+                saveImageToDisk(image: thirdImage, imageName: "thirdImage", date: date)
+                let thirdImagePath = date + "_" + "thirdImage.jpg"
+                newDiary.setValue(thirdImagePath, forKey: "thirdImage")
+                
+                let month = date.substring(from: 5, to: 6)
+                newDiary.setValue(month, forKey: "month")
+                
+                let year = date.substring(from: 0, to: 3)
+                newDiary.setValue(year, forKey: "year")
+                
+            }
+            
             try context.save()
             print("저장 성공")
         } catch {
@@ -42,7 +80,6 @@ class CoredataManager {
         }
     }
     
-    // 이게 최종 메서드, 위의 load는 지우기
     func loadData(date: String) -> (date: String,
                                     contents: String,
                                     firstImage: UIImage?,
@@ -75,20 +112,42 @@ class CoredataManager {
         return (date, contents, firstImage, secondImage, thirdImage)
     }
     
-    func updateData() {
+    func loadMonthData(year: String, month: String) -> [(dateString: String, texts: String, firstImage: UIImage?, secondImage: UIImage?, thirdImage: UIImage?)] {
+        print("실행됨")
+        
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Diary")
-        request.predicate = NSPredicate(format: "content", "아 놀구 십따")
+        
+        let yearPredicate = NSPredicate(format: "year == %@", year)
+        let monthPredicate = NSPredicate(format: "month == %@", month)
+        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [yearPredicate, monthPredicate])
+        
+        request.predicate = predicate
+        
+        var data: [NSFetchRequestResult]?
         
         do {
-            let data = try context.fetch(request)
-            if let result = data.first as? NSManagedObject {
-                let contents = result.value(forKey: "content") as? String ?? ""
-            }
-            
-            try context.save()
+            data = try context.fetch(request)
         } catch {
-            print("update Failed")
+            print("에러로 실행됨")
+            print(error.localizedDescription)
+            return []
         }
+        var results: [(dateString: String, texts: String, firstImage: UIImage?, secondImage: UIImage?, thirdImage: UIImage?)] = []
+        
+        for result in data as! [NSManagedObject] {
+            let texts = result.value(forKey: "content") as? String ?? ""
+            let firstImagePath = result.value(forKey: "firstImage") as? String ?? ""
+            let secondImagePath = result.value(forKey: "secondImage") as? String ?? ""
+            let thirdImagePath = result.value(forKey: "thirdImage") as? String ?? ""
+            let dateString = result.value(forKey: "date") as? String ?? ""
+            
+            let firstImage = loadImageFromDisk(path: firstImagePath)
+            let secondImage = loadImageFromDisk(path: secondImagePath)
+            let thirdImage = loadImageFromDisk(path: thirdImagePath)
+            
+            results.append((dateString, texts, firstImage, secondImage, thirdImage))
+        }
+        return results
     }
     
     func deleteData(date: String) {
@@ -138,23 +197,20 @@ class CoredataManager {
     }
     
     // 해당위치에 이미지를 저장함.
-    func saveImageToDisk(image: UIImage, imageName name: String, date: String) -> String? {
+    func saveImageToDisk(image: UIImage, imageName name: String, date: String) {
         let fileURL = getDocumentDir().appendingPathComponent("\(date)_\(name).jpg")
         if let data = image.jpegData(compressionQuality: 0.5) {
             do {
                 try data.write(to: fileURL)
-//                print("Image saved to: \(fileURL.path)")  // 디버깅용 출력
-                return fileURL.path
             } catch {
                 print("Failed to write image data to disk: \(error)")
             }
         }
-        return nil
     }
     
     func loadImageFromDisk(path: String) -> UIImage? {
-        print("Loading image from: \(path)")
-        if let imageData = try? Data(contentsOf: URL(fileURLWithPath: path)) {
+        let fileURL = getDocumentDir().appendingPathComponent(path)
+        if let imageData = try? Data(contentsOf:  fileURL) {
             return UIImage(data: imageData)
         }
         return nil
