@@ -56,10 +56,6 @@ class AddPhotoView: UIViewController {
             let firstImage = self.addPhotoBoxVC.imageViews[0].image
             let secondImage = self.addPhotoBoxVC.imageViews[1].image
             let thirdImage = self.addPhotoBoxVC.imageViews[2].image
-
-            print("First Image: \(String(describing: firstImage))")
-            print("Second Image: \(String(describing: secondImage))")
-            print("Third Image: \(String(describing: thirdImage))")
             
             editDiaryView.threePicsView.firstImageView.image = self.addPhotoBoxVC.imageViews[0].image
             editDiaryView.threePicsView.secondImageView.image = self.addPhotoBoxVC.imageViews[1].image
