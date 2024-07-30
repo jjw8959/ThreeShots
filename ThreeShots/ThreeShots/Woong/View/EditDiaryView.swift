@@ -51,9 +51,9 @@ final class EditDiaryView: UIViewController {
         } else { // 데이터 없으면
             contentsField.text = "아직 작성된 일기가 없어요..."
             contentsField.textColor = .placeholderText
-            threePicsView.firstImage = "gray"
-            threePicsView.secondImage = "gray"
-            threePicsView.thirdImage = "gray"
+            threePicsView.firstImageView.image = UIImage(named: "gray")
+            threePicsView.secondImageView.image = UIImage(named: "gray")
+            threePicsView.thirdImageView.image = UIImage(named: "gray")
             
             checker = 0
             print("데이터 없음")
@@ -171,7 +171,10 @@ final class EditDiaryView: UIViewController {
     @objc
     func doneButtonTapped() {
         
-        if threePicsView.firstImage == "gray" && threePicsView.secondImage == "gray" && threePicsView.thirdImage == "gray" && threePicsView.secondImage == "gray" && contentsField.text == "아직 작성된 일기가 없어요..." {
+        if threePicsView.firstImageView == UIImage(named: "gray") &&
+            threePicsView.secondImageView == UIImage(named: "gray") &&
+            threePicsView.thirdImageView == UIImage(named: "gray") ||
+            contentsField.text == "아직 작성된 일기가 없어요..." {
             let cantSaveAlert = UIAlertController(title: "이런", message: "아무런 내용이 없어요", preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: "돌아가기", style: .cancel)
             cantSaveAlert.addAction(cancelAction)

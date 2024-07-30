@@ -63,7 +63,9 @@ final class DetailView: UIViewController {
         addSubViews()
         addConstraints()
         
-        if threePicsView.firstImage != "gray" && threePicsView.secondImage != "gray" && threePicsView.thirdImage != "gray" {
+        if threePicsView.firstImageView.image != UIImage(named: "gray")
+            && threePicsView.secondImageView != UIImage(named: "gray")
+            && threePicsView.thirdImageView != UIImage(named: "gray") {
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapPicture(_:)))
             threePicsView.addGestureRecognizer(tapGesture)
         }
