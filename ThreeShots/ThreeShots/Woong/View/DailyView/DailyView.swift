@@ -53,7 +53,7 @@ extension DailyView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as? DailyViewCell else { return UITableViewCell() }
         
-        cell.dateLabel.text = Date().toStringDate()
+        cell.dateLabel.text = Date().toString(dateFormat: "dd일")
         cell.bestImageView.image = UIImage(named: "mock1")
         cell.expressionImageView.image = UIImage(systemName: "sun.max")
         
