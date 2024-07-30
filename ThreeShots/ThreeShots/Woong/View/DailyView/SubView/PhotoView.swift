@@ -14,7 +14,7 @@ final class PhotoView: UIView {
         view.image = UIImage(named: "mock1")
         view.clipsToBounds = true
         view.contentMode = .scaleAspectFill
-        view.layer.cornerRadius = 10
+//        view.layer.cornerRadius = 10
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -24,7 +24,7 @@ final class PhotoView: UIView {
         view.image = UIImage(named: "mock2")
         view.clipsToBounds = true
         view.contentMode = .scaleAspectFill
-        view.layer.cornerRadius = 10
+//        view.layer.cornerRadius = 10
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -34,13 +34,16 @@ final class PhotoView: UIView {
         view.image = UIImage(named: "mock3")
         view.clipsToBounds = true
         view.contentMode = .scaleAspectFill
-        view.layer.cornerRadius = 10
+//        view.layer.cornerRadius = 10
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.layer.cornerRadius = 10
+        self.layer.masksToBounds = true
+        
         addSubviews()
         addConstraints()
     }
@@ -76,37 +79,6 @@ final class PhotoView: UIView {
             thirdImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5),
             thirdImageView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
         ])
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
-        
-        guard let touch = touches.first else { return }
-        let location = touch.location(in: self)
-        
-        if firstImageView.frame.contains(location) {
-            firstImageViewTapped()
-        }
-        
-        if secondImageView.frame.contains(location) {
-            secondImageViewTapped()
-        }
-        
-        if thirdImageView.frame.contains(location) {
-            thirdImageViewTapped()
-        }
-    }
-    
-    private func firstImageViewTapped() {
-        print("firstImageView Tapped in PhotoView")
-    }
-    
-    private func secondImageViewTapped() {
-        print("secondImageViewTapped Tapped in PhotoView")
-    }
-    
-    private func thirdImageViewTapped() {
-        print("secondImageViewTapped Tapped in PhotoView")
     }
 }
 

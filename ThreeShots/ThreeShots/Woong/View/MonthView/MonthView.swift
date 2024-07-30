@@ -7,13 +7,15 @@
 
 import UIKit
 
+import RxSwift
+import RxCocoa
+
 final class MonthView: UIViewController {
     
     let calendarView = CalendarView()
-    
     let smallDiaryView = SmallDiaryView()
     
-    var date: String?
+    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,12 +23,31 @@ final class MonthView: UIViewController {
         addChild(calendarView)
         view.addSubview(calendarView.view)
         calendarView.didMove(toParent: self)
-        
         addChild(smallDiaryView)
         view.addSubview(smallDiaryView.view)
         smallDiaryView.didMove(toParent: self)
-        
         addConstraints()
+        
+        let currentDateString = Date().toString()
+        smallDiaryView.selectedDateInput.onNext(currentDateString)
+        
+        let currentMonthString = Date().toString(dateFormat: "MM")
+        let currentYearString = Date().toString(dateFormat: "yyyy")
+        
+        calendarView.setAndReloadDate(year: currentYearString, month: currentMonthString, date: "")
+        
+        
+        calendarView.selectedDateString
+            .bind(to: smallDiaryView.selectedDateInput)
+            .disposed(by: disposeBag)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let currentMonthString = Date().toString(dateFormat: "MM")
+        let currentYearString = Date().toString(dateFormat: "yyyy")
+        
+        calendarView.setAndReloadDate(year: currentYearString, month: currentMonthString, date: "")
     }
     
     private func addConstraints() {
@@ -37,12 +58,12 @@ final class MonthView: UIViewController {
             calendarView.view.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 16),
             calendarView.view.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             calendarView.view.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            calendarView.view.heightAnchor.constraint(equalToConstant: self.view.frame.height / 7 * 5),
+            calendarView.view.heightAnchor.constraint(equalToConstant: self.view.frame.height / 7 * 4),
             
             smallDiaryView.view.topAnchor.constraint(equalTo: calendarView.view.bottomAnchor, constant: 16),
             smallDiaryView.view.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             smallDiaryView.view.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            smallDiaryView.view.heightAnchor.constraint(equalToConstant: self.view.frame.height / 7 * 2)
+            smallDiaryView.view.heightAnchor.constraint(equalToConstant: self.view.frame.height / 7 * 3)
         ])
         
     }
