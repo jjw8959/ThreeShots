@@ -12,14 +12,8 @@ import RxSwift
 import RxCocoa
 
 final class EditDiaryView: UIViewController {
-    //    TODO: 다이어리 추가 및 수정시에 현재 뷰 하나로 활용할 수 있도록 제작.
-    
-    //    TODO: 현재 이미지 없으면 이미지대신 +버튼, 있으면 photoview를 이용. 터치하면 이미지 고르는 화면으로 넘기기
-    
-    
-    //    TODO: 현재 내용 없으면 빈 에디터, 있으면 그 내용으로 채워진 에디터
-    //    let toolbar = UIToolbar()
-    var checker = 0 // 0이면 데이터 빈거 1이면 데이터 있는거, 추후 삭제 필.
+    var checker = 0 // 0이면 데이터 빈거 1이면 데이터 있는거
+    var calendarViewController: CalendarView?
     
     var result: [NSFetchRequestResult]?
     
@@ -39,8 +33,6 @@ final class EditDiaryView: UIViewController {
         
         title = dateString
         
-//        coredata.resetCoreData()
-        
         contentsField.delegate = self
         
         let result = coredata.loadData(date: dateString)
@@ -55,7 +47,7 @@ final class EditDiaryView: UIViewController {
             print("데이터 있음")
             print(result.date)
             checker = 1
-        
+            
         } else { // 데이터 없으면
             contentsField.text = "아직 작성된 일기가 없어요..."
             contentsField.textColor = .placeholderText
@@ -104,7 +96,6 @@ final class EditDiaryView: UIViewController {
         addPicsButton.tintColor = .white
         addPicsButton.addTarget(self, action: #selector(tappedImageEditButton), for: .touchUpInside)
         
-//        contentsField.becomeFirstResponder() // 처음에 포커스를 여기에 주는게 맞을지 고려해보기
         contentsField.layer.borderWidth = CGFloat(2)
         contentsField.layer.borderColor = UIColor.gray.cgColor
         contentsField.layer.cornerRadius = CGFloat(10)
@@ -159,7 +150,7 @@ final class EditDiaryView: UIViewController {
                 contentsField.leadingAnchor.constraint(equalTo: threePicsView.leadingAnchor),
                 contentsField.trailingAnchor.constraint(equalTo: threePicsView.trailingAnchor),
                 contentsField.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: 16)
-            
+                
             ])
         }
         
@@ -179,28 +170,26 @@ final class EditDiaryView: UIViewController {
     
     @objc
     func doneButtonTapped() {
-        // TODO: 파일매니저로 이미지 저장 및 해당 경로를 db로 저장
-        // TODO: 저장시에 데이터 아무것도 없으면 저장 안되도록 alert 띄우기
-//        if checker == 0{
-        if true {
-            if threePicsView.firstImage == "gray" && threePicsView.secondImage == "gray" && threePicsView.thirdImage == "gray" && threePicsView.secondImage == "gray" && contentsField.text == "아직 작성된 일기가 없어요..." {
-                //alert
-                let cantSaveAlert = UIAlertController(title: "이런", message: "아무런 내용이 없어요", preferredStyle: .alert)
-                let cancelAction = UIAlertAction(title: "돌아가기", style: .cancel)
-                cantSaveAlert.addAction(cancelAction)
-                present(cantSaveAlert, animated: true)
-            } else {
-                coredata.saveData(date: dateString, content: contentsField.text ?? "",
-                                  firstImage: ((threePicsView.firstImageView.image) ?? UIImage(named: "gray"))!,
-                                  secondImage: ((threePicsView.secondImageView.image) ?? UIImage(named: "gray"))!,
-                                  thirdImage: ((threePicsView.thirdImageView.image) ?? UIImage(named: "gray"))!)
-                print("저장ㄱㄱ")
-                dismiss(animated: true, completion: nil)
-            }
-        } else {
-            // 이거 왜있지? 일단 위에것만 갖고하면 될거같음.
-        }
         
+        if threePicsView.firstImage == "gray" && threePicsView.secondImage == "gray" && threePicsView.thirdImage == "gray" && threePicsView.secondImage == "gray" && contentsField.text == "아직 작성된 일기가 없어요..." {
+            let cantSaveAlert = UIAlertController(title: "이런", message: "아무런 내용이 없어요", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "돌아가기", style: .cancel)
+            cantSaveAlert.addAction(cancelAction)
+            present(cantSaveAlert, animated: true)
+        } else {
+            coredata.saveData(date: dateString, content: contentsField.text ?? "",
+                              firstImage: ((threePicsView.firstImageView.image) ?? UIImage(named: "gray"))!,
+                              secondImage: ((threePicsView.secondImageView.image) ?? UIImage(named: "gray"))!,
+                              thirdImage: ((threePicsView.thirdImageView.image) ?? UIImage(named: "gray"))!)
+            
+            if let calendarVC = calendarViewController {
+                if let date = dateString.toDate() {
+                    calendarVC.reloadDateView(date: date)
+                }
+            }
+            
+            dismiss(animated: true)
+        }
     }
     
     @objc
@@ -209,6 +198,8 @@ final class EditDiaryView: UIViewController {
     }
     
 }
+
+// MARK: UITextViewDelegate
 
 extension EditDiaryView: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
