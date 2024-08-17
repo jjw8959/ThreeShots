@@ -12,7 +12,7 @@ final class EditDiaryView: UIViewController, UITextViewDelegate, ThreePictureVie
     
     let coredata = DataManager.shared
     
-    var dateString: String?
+    var dateString: String = ""
     
     var diary: Diary?
     
@@ -23,9 +23,10 @@ final class EditDiaryView: UIViewController, UITextViewDelegate, ThreePictureVie
     
     var contentField = UITextView()
     
-    init(_ diary: Diary?) {
+    init(_ diary: Diary?, date: String) {
         super.init(nibName: nil, bundle: nil)
         self.diary = diary
+        self.dateString = date
     }
     
     required init?(coder: NSCoder) {
@@ -36,7 +37,7 @@ final class EditDiaryView: UIViewController, UITextViewDelegate, ThreePictureVie
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         
-        navigationController?.isNavigationBarHidden = false
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         
         contentField.delegate = self
         threePicsView.delegate = self
@@ -144,9 +145,6 @@ final class EditDiaryView: UIViewController, UITextViewDelegate, ThreePictureVie
 ////                calendarViewController!.reloadDateView(date: date)
 //                delegate?.sendData(date: dateString)
 //            }
-            guard let dateString = dateString else { return }
-            
-            
             
             if diary != nil {
                 diary = Diary(date: dateString, year: dateString.substring(from: 2, to: 3), month: dateString.substring(from: 5, to: 6), content: contentField.text, firstImage: threePicsView.firstImageView.image, secondImage: threePicsView.secondImageView.image, thirdImage: threePicsView.thirdImageView.image)
