@@ -50,7 +50,7 @@ final class EditDiaryView: UIViewController, UITextViewDelegate, ThreePictureVie
     
     private func setViews() {
         //    MARK: 네비게이션바
-        let saveButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(saveButtonTapped))
+        let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonTapped))
         saveButton.image = UIImage(systemName: "square.and.arrow.down")
         saveButton.title = "Save"
         
@@ -68,6 +68,8 @@ final class EditDiaryView: UIViewController, UITextViewDelegate, ThreePictureVie
             threePicsView.secondImageView.image = diary?.secondImage
             threePicsView.thirdImageView.image = diary?.thirdImage
             addPicsButton.addTarget(self, action: #selector(tappedImageEditButton), for: .touchUpInside)
+            contentField.font = UIFont.systemFont(ofSize: 16)
+            
         } else {    // 데이터 없을때
             let imageConfig = UIImage.SymbolConfiguration(pointSize: 24)
             let configuredImage = UIImage(systemName: "plus", withConfiguration: imageConfig)
@@ -77,7 +79,7 @@ final class EditDiaryView: UIViewController, UITextViewDelegate, ThreePictureVie
             addPicsButton.tintColor = .white
             addPicsButton.addTarget(self, action: #selector(tappedImageEditButton), for: .touchUpInside)
             contentField.text = "아직 작성된 일기가 없어요..."
-            contentField.font = UIFont.systemFont(ofSize: 20)
+            contentField.font = UIFont.systemFont(ofSize: 16)
         }
     }
     
@@ -101,7 +103,7 @@ final class EditDiaryView: UIViewController, UITextViewDelegate, ThreePictureVie
             addPicsButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16),
             addPicsButton.heightAnchor.constraint(equalTo: safeArea.heightAnchor, multiplier: 0.3),
             
-            contentField.topAnchor.constraint(equalTo: addPicsButton.bottomAnchor),
+            contentField.topAnchor.constraint(equalTo: addPicsButton.bottomAnchor, constant: 16),
             contentField.leadingAnchor.constraint(equalTo: addPicsButton.leadingAnchor),
             contentField.trailingAnchor.constraint(equalTo: addPicsButton.trailingAnchor),
             contentField.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
@@ -131,7 +133,6 @@ final class EditDiaryView: UIViewController, UITextViewDelegate, ThreePictureVie
             cantSaveAlert.addAction(cancelAction)
             present(cantSaveAlert, animated: true)
         } else {
-            
 //            coredata.saveData(date: dateString, content: contentField.text ?? "",
 //                              firstImage: (threePicsView.firstImageView.image),
 //                              secondImage: (threePicsView.secondImageView.image),
@@ -143,10 +144,22 @@ final class EditDiaryView: UIViewController, UITextViewDelegate, ThreePictureVie
 ////                calendarViewController!.reloadDateView(date: date)
 //                delegate?.sendData(date: dateString)
 //            }
+            guard let dateString = dateString else { return }
             
             
-            let detailView = DetailView(diary, date: diary!.date)
             
+            if diary != nil {
+                diary = Diary(date: dateString, year: dateString.substring(from: 2, to: 3), month: dateString.substring(from: 5, to: 6), content: contentField.text, firstImage: threePicsView.firstImageView.image, secondImage: threePicsView.secondImageView.image, thirdImage: threePicsView.thirdImageView.image)
+                coredata.updateData(userDiary: diary!)
+                print("update")
+            } else {
+                diary = Diary(date: dateString, year: dateString.substring(from: 2, to: 3), month: dateString.substring(from: 5, to: 6), content: contentField.text, firstImage: threePicsView.firstImageView.image, secondImage: threePicsView.secondImageView.image, thirdImage: threePicsView.thirdImageView.image)
+                coredata.saveData(userDiary: diary!)
+                print("save")
+            }
+            
+            
+            let detailView = DetailView(diary, date: dateString)
             navigationController?.pushViewController(detailView, animated: true)
             
         }
@@ -177,6 +190,6 @@ final class EditDiaryView: UIViewController, UITextViewDelegate, ThreePictureVie
     
 }
 
-#Preview {
-    EditDiaryView()
-}
+//#Preview {
+//    EditDiaryView()
+//}

@@ -21,6 +21,9 @@ final class DetailView: UIViewController {
         super.init(nibName: nil, bundle: nil)
         self.diary = diary
         self.dateString = date
+//        print("DetailView init")
+//        
+        print(diary)
     }
     
     required init?(coder: NSCoder) {
@@ -33,33 +36,43 @@ final class DetailView: UIViewController {
         threePicsView.delegate = self
         
         self.navigationController?.title = dateString
-        
+        self.view.backgroundColor = .systemBackground
         
         setViews()
-        
+        addViews()
+        addConstraints()
     }
     
     private func setViews() {
         threePicsView.translatesAutoresizingMaskIntoConstraints = false
         contentLabel.translatesAutoresizingMaskIntoConstraints = false
         
+        threePicsView.firstImageView.image = diary?.firstImage
+        threePicsView.secondImageView.image = diary?.secondImage
+        threePicsView.thirdImageView.image = diary?.thirdImage
+        
         contentLabel.font = UIFont.systemFont(ofSize: 16)
         contentLabel.numberOfLines = 0
+        contentLabel.sizeToFit()
         contentLabel.text = self.diary?.content
     }
     
-    private func setConstraints() {
+    private func addViews() {
+        self.view.addSubview(threePicsView)
+        self.view.addSubview(contentLabel)
+    }
+    
+    private func addConstraints() {
         let safeArea = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
             threePicsView.topAnchor.constraint(equalTo: safeArea.topAnchor),
             threePicsView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
-            threePicsView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: 16),
+            threePicsView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16),
             threePicsView.heightAnchor.constraint(equalTo: safeArea.heightAnchor, multiplier: 0.3),
             
-            contentLabel.topAnchor.constraint(equalTo: threePicsView.bottomAnchor),
+            contentLabel.topAnchor.constraint(equalTo: threePicsView.bottomAnchor, constant: 20),
             contentLabel.leadingAnchor.constraint(equalTo: threePicsView.leadingAnchor),
             contentLabel.trailingAnchor.constraint(equalTo: threePicsView.trailingAnchor),
-            contentLabel.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
         ])
     }
     

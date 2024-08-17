@@ -28,7 +28,7 @@ final class MonthView: UIViewController {
     
     let contentsLabel = UILabel()
     
-    lazy var selectedDateString = selectedDate?.date?.toString()
+    lazy var selectedDateString = Calendar.current.date(from: selectedDate!)?.toString()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,15 +37,21 @@ final class MonthView: UIViewController {
         
         dateLabel.text = Date().toString()
         
-        monthDiary = coredata.loadMonthData(year: Date().toString(dateFormat: "yy"),
-                               month: Date().toString(dateFormat: "MM"))
+//        coredata.resetCoreData()
         
         setCalendarView()
         setSummaryView()
         
         applyConstraints()
-        
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        monthDiary = coredata.loadMonthData(year: Date().toString(dateFormat: "yy"),
+                               month: Date().toString(dateFormat: "MM"))
+    }
+    
+    
     
     func setCalendarView() {
         calendarView.translatesAutoresizingMaskIntoConstraints = false
@@ -128,11 +134,11 @@ final class MonthView: UIViewController {
         //        rootVC.dateString = dateLabel.text!
         //        present(nc, animated: true)
         //        editVC.diary = Diary(date: Date().toString(), year: "a", month: "a", content: "aaa", firstImage: UIImage(named: "gray"), secondImage: UIImage(named: "gray"), thirdImage: UIImage(named: "gray"))
-        let specificDiary = monthDiary?.first { $0.date == selectedDate?.date?.toString() }
+        let specificDiary = monthDiary?.first{ $0.date == selectedDateString }
         
         let editVC = EditDiaryView(specificDiary)
         editVC.dateString = Calendar.current.date(from: selectedDate!)?.toString()
-
+        print(coredata.getAppDir())
         navigationController?.pushViewController(editVC, animated: true)
     }
     
@@ -140,10 +146,12 @@ final class MonthView: UIViewController {
 
 extension MonthView: UICalendarViewDelegate, UICalendarSelectionSingleDateDelegate {
     func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
+        
+        //    TODO: 날짜 선택했을때 월이나 년도가 바뀌면 monthDiary 다시 불러오는거 구현하기
         selection.setSelected(dateComponents, animated: true)
         selectedDate = dateComponents
         selectedDate?.timeZone = TimeZone.autoupdatingCurrent
-        selectedDateString = selectedDate?.date?.toString()
+        selectedDateString = (selectedDate?.date?.toString())!
         dateLabel.text = selectedDateString
     }
     

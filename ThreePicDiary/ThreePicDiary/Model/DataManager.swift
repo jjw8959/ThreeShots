@@ -30,8 +30,8 @@ final class DataManager {
         saveImage(date: userDiary.date, image: userDiary.secondImage, name: "secondImage")
         saveImage(date: userDiary.date, image: userDiary.thirdImage, name: "thirdImage")
         diarys.firstImage = "\(userDiary.date)_firstImage.jpeg"
-        diarys.secondImage = "\(userDiary.date)_firstImage.jpeg"
-        diarys.thirdImage = "\(userDiary.date)_firstImage.jpeg"
+        diarys.secondImage = "\(userDiary.date)_secondImage.jpeg"
+        diarys.thirdImage = "\(userDiary.date)_thirdImage.jpeg"
         
         do {
             try context.save()
@@ -126,9 +126,30 @@ final class DataManager {
 //        var data: [NSfetchrequest]?
 //        
 //    }
+    //    MARK: 데이터 리셋
+    func resetCoreData() {
+        let persistentContainer = appDelegate.persistentContainer
+        let coordinator = persistentContainer.persistentStoreCoordinator
+        
+        for store in coordinator.persistentStores {
+            if let storeURL = store.url {
+                do {
+                    try coordinator.destroyPersistentStore(at: storeURL, ofType: store.type, options: nil)
+                } catch {
+                    print("Failed to destroy persistent store: \(error)")
+                }
+            }
+        }
+        
+        persistentContainer.loadPersistentStores { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        }
+    }
     
     func updateData(userDiary: Diary) {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Diary")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: diaryEntity)
         request.predicate = NSPredicate(format: "date = %@", userDiary.date)
         
         do {
@@ -136,6 +157,8 @@ final class DataManager {
             if let existingDiary = data.first as? NSManagedObject {
                 existingDiary.setValue(userDiary.date, forKey: "date")
                 existingDiary.setValue(userDiary.content, forKey: "content")
+                existingDiary.setValue(userDiary.year, forKey: "year")
+                existingDiary.setValue(userDiary.month, forKey: "month")
                 
                 saveImage(date: userDiary.date, image: userDiary.firstImage, name: "firstImage")
                 existingDiary.setValue("\(userDiary.date)_firstImage.jpeg", forKey: "firstImage")
@@ -151,7 +174,7 @@ final class DataManager {
     
 //    MARK: 이미지 저장 관련
     
-    private func getAppDir() -> URL {
+    func getAppDir() -> URL {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     }
     
@@ -167,6 +190,8 @@ final class DataManager {
                     print("이미지 저장 실패")
                 }
             }
+        } else {
+            print("image is nil")
         }
     }
     
