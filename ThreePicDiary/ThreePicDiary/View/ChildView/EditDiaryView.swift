@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-final class EditDiaryView: UIViewController, UITextViewDelegate, ThreePictureViewDelegate {
+final class EditDiaryView: UIViewController, ThreePictureViewDelegate {
     
     let coredata = DataManager.shared
     
@@ -70,7 +70,6 @@ final class EditDiaryView: UIViewController, UITextViewDelegate, ThreePictureVie
             threePicsView.thirdImageView.image = diary?.thirdImage
             addPicsButton.addTarget(self, action: #selector(tappedImageEditButton), for: .touchUpInside)
             contentField.font = UIFont.systemFont(ofSize: 16)
-            
         } else {    // 데이터 없을때
             let imageConfig = UIImage.SymbolConfiguration(pointSize: 24)
             let configuredImage = UIImage(systemName: "plus", withConfiguration: imageConfig)
@@ -80,6 +79,7 @@ final class EditDiaryView: UIViewController, UITextViewDelegate, ThreePictureVie
             addPicsButton.tintColor = .white
             addPicsButton.addTarget(self, action: #selector(tappedImageEditButton), for: .touchUpInside)
             contentField.text = "아직 작성된 일기가 없어요..."
+            contentField.textColor = .placeholderText
             contentField.font = UIFont.systemFont(ofSize: 16)
         }
     }
@@ -186,6 +186,21 @@ final class EditDiaryView: UIViewController, UITextViewDelegate, ThreePictureVie
         
     }
     
+}
+
+extension EditDiaryView: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        guard textView.textColor == .placeholderText else { return }
+        textView.textColor = .label
+        textView.text = nil
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "아직 작성된 일기가 없어요..."
+            textView.textColor = .placeholderText
+        }
+    }
 }
 
 //#Preview {
