@@ -1,0 +1,453 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0904ACED2C65D0FE000EB100 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0904ACEC2C65D0FE000EB100 /* Extensions.swift */; };
+		0904ACEF2C65D771000EB100 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0904ACEE2C65D771000EB100 /* DataManager.swift */; };
+		0904ACF12C6A542D000EB100 /* DiaryStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0904ACF02C6A542D000EB100 /* DiaryStruct.swift */; };
+		091F84792C607D9100FD8EE1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091F84782C607D9100FD8EE1 /* AppDelegate.swift */; };
+		091F847B2C607D9100FD8EE1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091F847A2C607D9100FD8EE1 /* SceneDelegate.swift */; };
+		091F847D2C607D9100FD8EE1 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091F847C2C607D9100FD8EE1 /* MainView.swift */; };
+		091F84832C607D9100FD8EE1 /* ThreePicDiary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 091F84812C607D9100FD8EE1 /* ThreePicDiary.xcdatamodeld */; };
+		091F84852C607D9200FD8EE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 091F84842C607D9200FD8EE1 /* Assets.xcassets */; };
+		091F84882C607D9200FD8EE1 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 091F84872C607D9200FD8EE1 /* Base */; };
+		091F84902C60C84A00FD8EE1 /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091F848F2C60C84A00FD8EE1 /* MonthView.swift */; };
+		091F84922C60C85200FD8EE1 /* DailyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091F84912C60C85200FD8EE1 /* DailyView.swift */; };
+		09AE8E5A2C6DE254008F8740 /* EditDiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AE8E592C6DE254008F8740 /* EditDiaryView.swift */; };
+		09AE8E5C2C6DE25C008F8740 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AE8E5B2C6DE25C008F8740 /* DetailView.swift */; };
+		09AE8E5E2C6DE2B4008F8740 /* ThreePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AE8E5D2C6DE2B4008F8740 /* ThreePictureView.swift */; };
+		09AE8E652C6E3877008F8740 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AE8E642C6E3877008F8740 /* Protocols.swift */; };
+		09EB6A502C6F88E100E4D496 /* AddPhotoBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EB6A4E2C6F88E100E4D496 /* AddPhotoBoxViewController.swift */; };
+		09EB6A512C6F88E100E4D496 /* AddPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EB6A4F2C6F88E100E4D496 /* AddPhotoView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0904ACEC2C65D0FE000EB100 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		0904ACEE2C65D771000EB100 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		0904ACF02C6A542D000EB100 /* DiaryStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryStruct.swift; sourceTree = "<group>"; };
+		091F84752C607D9100FD8EE1 /* ThreePicDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThreePicDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		091F84782C607D9100FD8EE1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		091F847A2C607D9100FD8EE1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		091F847C2C607D9100FD8EE1 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		091F84822C607D9100FD8EE1 /* ThreePicDiary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ThreePicDiary.xcdatamodel; sourceTree = "<group>"; };
+		091F84842C607D9200FD8EE1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		091F84872C607D9200FD8EE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		091F84892C607D9200FD8EE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		091F848F2C60C84A00FD8EE1 /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
+		091F84912C60C85200FD8EE1 /* DailyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyView.swift; sourceTree = "<group>"; };
+		09AE8E592C6DE254008F8740 /* EditDiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDiaryView.swift; sourceTree = "<group>"; };
+		09AE8E5B2C6DE25C008F8740 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		09AE8E5D2C6DE2B4008F8740 /* ThreePictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreePictureView.swift; sourceTree = "<group>"; };
+		09AE8E642C6E3877008F8740 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		09EB6A4E2C6F88E100E4D496 /* AddPhotoBoxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPhotoBoxViewController.swift; sourceTree = "<group>"; };
+		09EB6A4F2C6F88E100E4D496 /* AddPhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPhotoView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		091F84722C607D9100FD8EE1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		091F846C2C607D9100FD8EE1 = {
+			isa = PBXGroup;
+			children = (
+				091F84772C607D9100FD8EE1 /* ThreePicDiary */,
+				091F84762C607D9100FD8EE1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		091F84762C607D9100FD8EE1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				091F84752C607D9100FD8EE1 /* ThreePicDiary.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		091F84772C607D9100FD8EE1 /* ThreePicDiary */ = {
+			isa = PBXGroup;
+			children = (
+				09AE8E5F2C6DE2FC008F8740 /* App */,
+				09AE8E632C6DE35A008F8740 /* Model */,
+				09AE8E612C6DE31C008F8740 /* View */,
+				091F84842C607D9200FD8EE1 /* Assets.xcassets */,
+				091F84862C607D9200FD8EE1 /* LaunchScreen.storyboard */,
+				091F84812C607D9100FD8EE1 /* ThreePicDiary.xcdatamodeld */,
+				091F84892C607D9200FD8EE1 /* Info.plist */,
+			);
+			path = ThreePicDiary;
+			sourceTree = "<group>";
+		};
+		09AE8E5F2C6DE2FC008F8740 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				091F84782C607D9100FD8EE1 /* AppDelegate.swift */,
+				091F847A2C607D9100FD8EE1 /* SceneDelegate.swift */,
+				0904ACEC2C65D0FE000EB100 /* Extensions.swift */,
+				09AE8E642C6E3877008F8740 /* Protocols.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		09AE8E602C6DE311008F8740 /* ChildView */ = {
+			isa = PBXGroup;
+			children = (
+				091F848F2C60C84A00FD8EE1 /* MonthView.swift */,
+				091F84912C60C85200FD8EE1 /* DailyView.swift */,
+				09AE8E592C6DE254008F8740 /* EditDiaryView.swift */,
+				09EB6A4E2C6F88E100E4D496 /* AddPhotoBoxViewController.swift */,
+				09EB6A4F2C6F88E100E4D496 /* AddPhotoView.swift */,
+				09AE8E5B2C6DE25C008F8740 /* DetailView.swift */,
+				09AE8E622C6DE336008F8740 /* SubView */,
+				09AE8E5D2C6DE2B4008F8740 /* ThreePictureView.swift */,
+			);
+			path = ChildView;
+			sourceTree = "<group>";
+		};
+		09AE8E612C6DE31C008F8740 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				091F847C2C607D9100FD8EE1 /* MainView.swift */,
+				09AE8E602C6DE311008F8740 /* ChildView */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		09AE8E622C6DE336008F8740 /* SubView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SubView;
+			sourceTree = "<group>";
+		};
+		09AE8E632C6DE35A008F8740 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0904ACEE2C65D771000EB100 /* DataManager.swift */,
+				0904ACF02C6A542D000EB100 /* DiaryStruct.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		091F84742C607D9100FD8EE1 /* ThreePicDiary */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 091F848C2C607D9200FD8EE1 /* Build configuration list for PBXNativeTarget "ThreePicDiary" */;
+			buildPhases = (
+				091F84712C607D9100FD8EE1 /* Sources */,
+				091F84722C607D9100FD8EE1 /* Frameworks */,
+				091F84732C607D9100FD8EE1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ThreePicDiary;
+			productName = ThreePicDiary;
+			productReference = 091F84752C607D9100FD8EE1 /* ThreePicDiary.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		091F846D2C607D9100FD8EE1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					091F84742C607D9100FD8EE1 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+				};
+			};
+			buildConfigurationList = 091F84702C607D9100FD8EE1 /* Build configuration list for PBXProject "ThreePicDiary" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 091F846C2C607D9100FD8EE1;
+			productRefGroup = 091F84762C607D9100FD8EE1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				091F84742C607D9100FD8EE1 /* ThreePicDiary */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		091F84732C607D9100FD8EE1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				091F84852C607D9200FD8EE1 /* Assets.xcassets in Resources */,
+				091F84882C607D9200FD8EE1 /* Base in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		091F84712C607D9100FD8EE1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0904ACF12C6A542D000EB100 /* DiaryStruct.swift in Sources */,
+				09EB6A502C6F88E100E4D496 /* AddPhotoBoxViewController.swift in Sources */,
+				091F84922C60C85200FD8EE1 /* DailyView.swift in Sources */,
+				091F847D2C607D9100FD8EE1 /* MainView.swift in Sources */,
+				091F84902C60C84A00FD8EE1 /* MonthView.swift in Sources */,
+				09AE8E5E2C6DE2B4008F8740 /* ThreePictureView.swift in Sources */,
+				091F84792C607D9100FD8EE1 /* AppDelegate.swift in Sources */,
+				09EB6A512C6F88E100E4D496 /* AddPhotoView.swift in Sources */,
+				09AE8E5C2C6DE25C008F8740 /* DetailView.swift in Sources */,
+				091F847B2C607D9100FD8EE1 /* SceneDelegate.swift in Sources */,
+				091F84832C607D9100FD8EE1 /* ThreePicDiary.xcdatamodeld in Sources */,
+				09AE8E652C6E3877008F8740 /* Protocols.swift in Sources */,
+				0904ACEF2C65D771000EB100 /* DataManager.swift in Sources */,
+				09AE8E5A2C6DE254008F8740 /* EditDiaryView.swift in Sources */,
+				0904ACED2C65D0FE000EB100 /* Extensions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		091F84862C607D9200FD8EE1 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				091F84872C607D9200FD8EE1 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		091F848A2C607D9200FD8EE1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		091F848B2C607D9200FD8EE1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		091F848D2C607D9200FD8EE1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ThreePicDiary/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tistory.chokotingchock.ThreePicDiary;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		091F848E2C607D9200FD8EE1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ThreePicDiary/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tistory.chokotingchock.ThreePicDiary;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		091F84702C607D9100FD8EE1 /* Build configuration list for PBXProject "ThreePicDiary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				091F848A2C607D9200FD8EE1 /* Debug */,
+				091F848B2C607D9200FD8EE1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		091F848C2C607D9200FD8EE1 /* Build configuration list for PBXNativeTarget "ThreePicDiary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				091F848D2C607D9200FD8EE1 /* Debug */,
+				091F848E2C607D9200FD8EE1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		091F84812C607D9100FD8EE1 /* ThreePicDiary.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				091F84822C607D9100FD8EE1 /* ThreePicDiary.xcdatamodel */,
+			);
+			currentVersion = 091F84822C607D9100FD8EE1 /* ThreePicDiary.xcdatamodel */;
+			path = ThreePicDiary.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 091F846D2C607D9100FD8EE1 /* Project object */;
+}
