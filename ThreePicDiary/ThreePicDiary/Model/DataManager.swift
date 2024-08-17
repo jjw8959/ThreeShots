@@ -117,6 +117,23 @@ final class DataManager {
     //    TODO: update
     
     //    TODO: delete
+    func deleteData(diary: Diary) {
+        let date = diary.date
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: diaryEntity)
+        request.predicate = NSPredicate(format: "date = %@", date)
+        
+        do {
+            let result = try context.fetch(request)
+            for data in result as! [NSManagedObject] {
+                context.delete(data)
+                print("삭제 실행됨")
+            }
+            try context.save()
+            print("삭제후 저장 실행됨")
+        } catch {
+            print("삭제 실패")
+        }
+    }
     
     
 //    func loadData(date: String) -> (date: String, content: String, firstImage: UIImage, secondImage: UIImage, thirdImage: UIImage) {
