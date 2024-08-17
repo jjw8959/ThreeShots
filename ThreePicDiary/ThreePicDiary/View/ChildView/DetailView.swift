@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import CoreData
 
 final class DetailView: UIViewController {
+    
+    let coredata = DataManager.shared
     
     var dateString = ""
     
@@ -21,9 +24,6 @@ final class DetailView: UIViewController {
         super.init(nibName: nil, bundle: nil)
         self.diary = diary
         self.dateString = date
-//        print("DetailView init")
-//        
-        print(diary)
     }
     
     required init?(coder: NSCoder) {
@@ -32,10 +32,15 @@ final class DetailView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = dateString
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         
         threePicsView.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        self.navigationController?.title = dateString
         self.view.backgroundColor = .systemBackground
         
         setViews()
@@ -44,6 +49,36 @@ final class DetailView: UIViewController {
     }
     
     private func setViews() {
+        //    MARK: navigationbar
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(closeButtonTapped))
+        
+        navigationItem.leftBarButtonItem = backButton
+        
+        let menuHandler: UIActionHandler = { action in
+            if action.title == "edit" {
+                self.editButtonTapped()
+            } else {
+                self.deleteButtonTapped()
+            }
+        }
+        var barButtonMenu = UIMenu()
+        if diary != nil {
+            barButtonMenu = UIMenu(title: "menu", children: [
+                UIAction(title: "edit", image: UIImage(systemName: "pencil"), handler: menuHandler),
+                UIAction(title: "delete", image: UIImage(systemName: "trash"), handler: menuHandler)
+            ])
+        } else {
+            barButtonMenu = UIMenu(title: "menu", children: [
+                UIAction(title: "edit", image: UIImage(systemName: "pencil"), handler: menuHandler)
+            ])
+        }
+        
+        
+        let menuButton = UIBarButtonItem(title: "menu", image: UIImage(systemName: "ellipsis"),target: self, action: nil)
+        
+        navigationItem.rightBarButtonItem = menuButton
+        navigationItem.rightBarButtonItem?.menu = barButtonMenu
+        
         threePicsView.translatesAutoresizingMaskIntoConstraints = false
         contentLabel.translatesAutoresizingMaskIntoConstraints = false
         
@@ -74,6 +109,23 @@ final class DetailView: UIViewController {
             contentLabel.leadingAnchor.constraint(equalTo: threePicsView.leadingAnchor),
             contentLabel.trailingAnchor.constraint(equalTo: threePicsView.trailingAnchor),
         ])
+    }
+    @objc
+    func closeButtonTapped() {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
+    func editButtonTapped() {
+        let editView = EditDiaryView(diary, date: dateString)
+        editView.dateString = dateString
+        navigationController?.pushViewController(editView, animated: true)
+    }
+    
+    func deleteButtonTapped() {
+        if let diary = diary {
+            coredata.deleteData(diary: diary)
+            self.navigationController?.popToRootViewController(animated: true)
+        }
     }
     
 }
