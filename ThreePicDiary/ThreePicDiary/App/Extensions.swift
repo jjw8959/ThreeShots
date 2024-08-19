@@ -9,17 +9,18 @@ import Foundation
 
 extension Date {
     func toString(dateFormat format: String = "yyyy.MM.dd") -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format
-        return dateFormatter.string(from: self)
+        let df = DateFormatter()
+        df.timeZone = Calendar.current.timeZone
+        df.dateFormat = format
+        return df.string(from: self)
     }
 }
 
 extension String {
-    func toDate() -> Date? {
+    func toDate(dateFormat format: String = "yyyy.MM.dd") -> Date? {
         let df = DateFormatter()
-        df.timeZone = TimeZone.autoupdatingCurrent
-        df.dateFormat = "yyyy.MM.dd"
+        df.timeZone = TimeZone.current
+        df.dateFormat = format
         if let date = df.date(from: self) {
             return date
         } else {
