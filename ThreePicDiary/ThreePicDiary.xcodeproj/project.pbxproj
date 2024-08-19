@@ -109,7 +109,6 @@
 				09EB6A4E2C6F88E100E4D496 /* AddPhotoBoxViewController.swift */,
 				09EB6A4F2C6F88E100E4D496 /* AddPhotoView.swift */,
 				09AE8E5B2C6DE25C008F8740 /* DetailView.swift */,
-				09AE8E622C6DE336008F8740 /* SubView */,
 				09AE8E5D2C6DE2B4008F8740 /* ThreePictureView.swift */,
 			);
 			path = ChildView;
@@ -122,13 +121,6 @@
 				09AE8E602C6DE311008F8740 /* ChildView */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		09AE8E622C6DE336008F8740 /* SubView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = SubView;
 			sourceTree = "<group>";
 		};
 		09AE8E632C6DE35A008F8740 /* Model */ = {
