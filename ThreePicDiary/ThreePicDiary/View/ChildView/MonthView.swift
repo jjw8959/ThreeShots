@@ -150,14 +150,14 @@ final class MonthView: UIViewController {
     
     @objc
     func editDiaryButtonTapped() {
-        let specificDiary = monthDiary?.first{ $0.date == selectedDateString }
+        specificDiary = monthDiary?.first{ $0.date == selectedDateString }
         let editVC = EditDiaryView(specificDiary, date: selectedDateString!)
         navigationController?.pushViewController(editVC, animated: true)
     }
     
     @objc
     func showDiaryButtonTapped() {
-        let specificDiary = monthDiary?.first{ $0.date == selectedDateString }
+        specificDiary = monthDiary?.first{ $0.date == selectedDateString }
         let detailVC = DetailView(specificDiary, date: selectedDateString!)
         navigationController?.pushViewController(detailVC, animated: true)
     }
@@ -175,7 +175,7 @@ extension MonthView: UICalendarViewDelegate, UICalendarSelectionSingleDateDelega
         
         //    TODO: 날짜 선택했을때 월이나 년도가 바뀌면 monthDiary 다시 불러오는거 구현하기
         
-        let specificDiary = monthDiary?.first{ $0.date == selectedDateString }
+        specificDiary = monthDiary?.first{ $0.date == selectedDateString }
         if specificDiary != nil { // 데이터 있으면
             contentsLabel.text = specificDiary?.content
             editDiaryButton.isHidden = true
@@ -199,30 +199,25 @@ extension MonthView: UICalendarViewDelegate, UICalendarSelectionSingleDateDelega
         
         let dateString = calendar.date(from: dateComponents)?.toString()
         if monthDiary?.contains(where: { $0.date == dateString }) == true {
-            return .customView {
-                self.specificDiary = self.monthDiary?.first{ $0.date == dateString }
-                let decoView = UIImageView()
-                decoView.translatesAutoresizingMaskIntoConstraints = false
-                decoView.contentMode = .scaleAspectFill
-                decoView.clipsToBounds = true
-                NSLayoutConstraint.activate([
-                    decoView.widthAnchor.constraint(equalToConstant: 20),
-                    decoView.heightAnchor.constraint(equalToConstant: 20),
-                    
-                    
-                ])
-                
-                if let superview = decoView.superview {
-                    print("실행되나?")
-                    NSLayoutConstraint.activate([
-                        decoView.centerXAnchor.constraint(equalTo: decoView.superview!.centerXAnchor),
-                        decoView.centerYAnchor.constraint(equalTo: decoView.superview!.centerYAnchor),
-                    ])
-                }
-                
-                decoView.image = self.specificDiary?.firstImage
-                return decoView
-            }
+            self.specificDiary = self.monthDiary?.first{ $0.date == dateString }
+            return .default(color: .systemYellow, size: .medium)
+//            return .image(UIImage(systemName: "pencil.line"), size: .small)
+//            return .image(self.specificDiary?.firstImage, size: .large)
+//            return .customView {
+//
+//                    let decoView = UIImageView()
+//
+//                    decoView.translatesAutoresizingMaskIntoConstraints = false
+//                    decoView.contentMode = .scaleAspectFill
+//                    decoView.clipsToBounds = true
+//                    NSLayoutConstraint.activate([
+//                        decoView.widthAnchor.constraint(equalToConstant: self.view.frame.width / 7 ),
+//    //                    decoView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 1/7),
+//                        decoView.heightAnchor.constraint(equalToConstant: self.calendarView.frame.height / 10),
+//                    ])
+//                    decoView.image = self.specificDiary?.firstImage
+//                    return decoView
+//                }
         }
         
         return nil
