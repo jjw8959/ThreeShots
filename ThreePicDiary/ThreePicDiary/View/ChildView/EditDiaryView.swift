@@ -68,7 +68,7 @@ final class EditDiaryView: UIViewController, ThreePictureViewDelegate {
             threePicsView.firstImageView.image = diary?.firstImage
             threePicsView.secondImageView.image = diary?.secondImage
             threePicsView.thirdImageView.image = diary?.thirdImage
-            addPicsButton.addTarget(self, action: #selector(tappedImageEditButton), for: .touchUpInside)
+            addPicsButton.addTarget(self, action: #selector(imageEditButtonTapped), for: .touchUpInside)
             contentField.font = UIFont.systemFont(ofSize: 16)
         } else {    // 데이터 없을때
             let imageConfig = UIImage.SymbolConfiguration(pointSize: 24)
@@ -77,7 +77,7 @@ final class EditDiaryView: UIViewController, ThreePictureViewDelegate {
             addPicsButton.backgroundColor = .systemGray
             addPicsButton.layer.cornerRadius = CGFloat(10)
             addPicsButton.tintColor = .white
-            addPicsButton.addTarget(self, action: #selector(tappedImageEditButton), for: .touchUpInside)
+            addPicsButton.addTarget(self, action: #selector(imageEditButtonTapped), for: .touchUpInside)
             contentField.text = "아직 작성된 일기가 없어요..."
             contentField.textColor = .placeholderText
             contentField.font = UIFont.systemFont(ofSize: 16)
@@ -113,7 +113,7 @@ final class EditDiaryView: UIViewController, ThreePictureViewDelegate {
     }
     
     @objc
-    func tappedImageEditButton() {
+    func imageEditButtonTapped() {
         let imageEditView = AddPhotoView()
         
         imageEditView.dataSendClosure = { images in
