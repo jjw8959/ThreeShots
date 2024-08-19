@@ -1,6 +1,0 @@
-framework module Pods_ThreeShots {
-  umbrella header "Pods-ThreeShots-umbrella.h"
-
-  export *
-  module * { export * }
-}
