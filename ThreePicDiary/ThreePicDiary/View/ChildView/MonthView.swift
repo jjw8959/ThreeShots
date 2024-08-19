@@ -14,11 +14,15 @@ final class MonthView: UIViewController {
     
     var monthDiary: [Diary]?
     
+    var specificDiary: Diary?
+    
     let calendarView = UICalendarView()
     
     let summaryView = UIView()
     
-    var selectedDate: DateComponents? = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: Date())
+    let calendar = Calendar.current
+    
+    lazy var selectedDate: DateComponents? = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: Date())
     
     let textContents: String? = nil
     
@@ -30,7 +34,9 @@ final class MonthView: UIViewController {
     
     let contentsLabel = UILabel()
     
-    lazy var selectedDateString = Calendar.current.date(from: selectedDate!)?.toString()
+    lazy var selectedDateString = calendar.date(from: selectedDate!)?.toString()
+    
+    var dateSelection: UICalendarSelectionSingleDate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +49,7 @@ final class MonthView: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        dateLabel.text = Date().toString()
+        dateLabel.text = selectedDateString
         
         monthDiary = coredata.loadMonthData(year: Date().toString(dateFormat: "yy"),
                                month: Date().toString(dateFormat: "MM"))
@@ -54,14 +60,12 @@ final class MonthView: UIViewController {
         addConstraints()
     }
     
-    
-    
     func setCalendarView() {
         calendarView.translatesAutoresizingMaskIntoConstraints = false
         calendarView.wantsDateDecorations = true
         
         calendarView.delegate = self
-        let dateSelection = UICalendarSelectionSingleDate(delegate: self)
+        dateSelection = UICalendarSelectionSingleDate(delegate: self)
         calendarView.selectionBehavior = dateSelection
         dateSelection.setSelected(selectedDate, animated: true)
         
@@ -90,22 +94,7 @@ final class MonthView: UIViewController {
         contentsLabel.font = UIFont.systemFont(ofSize: 16)
         contentsLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        let specificDiary = monthDiary?.first{ $0.date == selectedDateString }
-        if specificDiary != nil {
-            contentsLabel.text = specificDiary?.content
-            editDiaryButton.isHidden = true
-            showDiaryButton.isHidden = false
-            contentsLabel.setNeedsDisplay()
-            editDiaryButton.setNeedsDisplay()
-            showDiaryButton.setNeedsDisplay()
-        } else {
-            contentsLabel.text = specificDiary?.content
-            editDiaryButton.isHidden = false
-            showDiaryButton.isHidden = true
-            contentsLabel.setNeedsDisplay()
-            editDiaryButton.setNeedsDisplay()
-            showDiaryButton.setNeedsDisplay()
-        }
+        modifySummaryView()
     }
     
     private func addViews() {
@@ -122,7 +111,7 @@ final class MonthView: UIViewController {
             calendarView.topAnchor.constraint(equalTo: safeArea.topAnchor),
             calendarView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
             calendarView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16),
-            calendarView.heightAnchor.constraint(equalToConstant: self.view.frame.height / 7 * 4),
+            calendarView.heightAnchor.constraint(equalTo: safeArea.heightAnchor, multiplier: 7/9),
             
             dateLabel.topAnchor.constraint(equalTo: calendarView.bottomAnchor, constant: 10),
             dateLabel.leadingAnchor.constraint(equalTo: calendarView.leadingAnchor),
@@ -138,6 +127,25 @@ final class MonthView: UIViewController {
             contentsLabel.trailingAnchor.constraint(equalTo: calendarView.trailingAnchor),
 //            contentsLabel.heightAnchor.constraint(equalToConstant: self.view.frame.height / 7 * 3),
         ])
+    }
+    
+    func modifySummaryView() {
+        specificDiary = monthDiary?.first{ $0.date == selectedDateString }
+        if specificDiary != nil {
+            contentsLabel.text = specificDiary?.content
+            editDiaryButton.isHidden = true
+            showDiaryButton.isHidden = false
+            contentsLabel.setNeedsDisplay()
+            editDiaryButton.setNeedsDisplay()
+            showDiaryButton.setNeedsDisplay()
+        } else {
+            contentsLabel.text = specificDiary?.content
+            editDiaryButton.isHidden = false
+            showDiaryButton.isHidden = true
+            contentsLabel.setNeedsDisplay()
+            editDiaryButton.setNeedsDisplay()
+            showDiaryButton.setNeedsDisplay()
+        }
     }
     
     @objc
@@ -162,10 +170,11 @@ extension MonthView: UICalendarViewDelegate, UICalendarSelectionSingleDateDelega
         selection.setSelected(dateComponents, animated: true)
         selectedDate = dateComponents
         selectedDate?.timeZone = TimeZone.autoupdatingCurrent
-        selectedDateString = (selectedDate?.date?.toString())!
+        selectedDateString = calendar.date(from: selectedDate!)?.toString()
         dateLabel.text = selectedDateString
         
         //    TODO: 날짜 선택했을때 월이나 년도가 바뀌면 monthDiary 다시 불러오는거 구현하기
+        
         let specificDiary = monthDiary?.first{ $0.date == selectedDateString }
         if specificDiary != nil { // 데이터 있으면
             contentsLabel.text = specificDiary?.content
@@ -187,26 +196,61 @@ extension MonthView: UICalendarViewDelegate, UICalendarSelectionSingleDateDelega
     }
     
     func calendarView(_ calendarView: UICalendarView, decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration? {
-//        guard let monthResult = monthResult else { return nil }
-//        
-//        let calendar = Calendar.current
-//        // 현재 일자를 문자열로 변환
-//        let dateString = calendar.date(from: dateComponents)?.toString(dateFormat: "yyyy-MM-dd")
-//        
-//        // monthResult에서 일치하는 날짜 찾기
-//        if let dateString = dateString, monthResult.contains(where: { $0.dateString == dateString }) {
-//            // 해당 일자에 맞는 데이터가 있을 경우 😀 이모지를 표시하는 레이블을 만듭니다.
-//            return .customView {
-//                let decorationLabel = UILabel()
-//                decorationLabel.text = "😀"
-//                decorationLabel.font = UIFont.systemFont(ofSize: 20) // 원하는 크기로 설정
-//                decorationLabel.textAlignment = .center
-//                return decorationLabel
-//            }
-//        }
-//        
-//        return nil
+        
+        let dateString = calendar.date(from: dateComponents)?.toString()
+        if monthDiary?.contains(where: { $0.date == dateString }) == true {
+            return .customView {
+                self.specificDiary = self.monthDiary?.first{ $0.date == dateString }
+                let decoView = UIImageView()
+                decoView.translatesAutoresizingMaskIntoConstraints = false
+                decoView.contentMode = .scaleAspectFill
+                decoView.clipsToBounds = true
+                NSLayoutConstraint.activate([
+                    decoView.widthAnchor.constraint(equalToConstant: 20),
+                    decoView.heightAnchor.constraint(equalToConstant: 20),
+                    
+                    
+                ])
+                
+                if let superview = decoView.superview {
+                    print("실행되나?")
+                    NSLayoutConstraint.activate([
+                        decoView.centerXAnchor.constraint(equalTo: decoView.superview!.centerXAnchor),
+                        decoView.centerYAnchor.constraint(equalTo: decoView.superview!.centerYAnchor),
+                    ])
+                }
+                
+                decoView.image = self.specificDiary?.firstImage
+                return decoView
+            }
+        }
+        
         return nil
     }
     
+    func calendarView(_ calendarView: UICalendarView, didChangeVisibleDateComponentsFrom previousDateComponents: DateComponents) {
+        
+        let changedDateMonth = "\(calendarView.visibleDateComponents.year!).\(calendarView.visibleDateComponents.month!).01".toDate()
+        guard let date = changedDateMonth else {
+            print("date = changedDateMonth 옵셔널 해제 안됨")
+            return
+        }
+        
+        var selectedDateComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+        selectedDateComponents.hour = 0
+        selectedDateComponents.minute = 0
+        selectedDateComponents.second = 0
+        
+        selectedDate = selectedDateComponents
+        guard let selectedDate = selectedDate else { return }
+        selectedDateString = calendar.date(from: selectedDate)?.toString()
+        dateLabel.text = selectedDateString
+        
+        monthDiary = coredata.loadMonthData(year: calendar.date(from: selectedDate)!.toString(dateFormat: "yy"),
+                               month: calendar.date(from: selectedDate)!.toString(dateFormat: "MM"))//selectedDate로 바꾸기
+        
+        dateSelection(dateSelection, didSelectDate: selectedDate)
+        
+        modifySummaryView()
+    }
 }
