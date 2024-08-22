@@ -18,6 +18,8 @@ final class DataManager {
     
     let diaryEntity = "Diarys"
     
+    private var offset = 0
+    
     //    MARK: create
     func saveData(userDiary: Diary) {
         let diarys = Diarys(context: context)
@@ -70,12 +72,11 @@ final class DataManager {
     
     func loadMonthData(year: String, month: String) -> [Diary]? {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: diaryEntity)
-        
         let yearPredicate = NSPredicate(format: "year = %@", year)
         let monthPredicate = NSPredicate(format: "month = %@", month)
         let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [yearPredicate, monthPredicate])
-        
         request.predicate = compoundPredicate
+        
         do {
             let data = try context.fetch(request)
             var results: [Diary] = []
@@ -94,6 +95,42 @@ final class DataManager {
                 let thirdImage = loadImage(path: thirdImagePath)
                 results.append(Diary(date: date, year: year, month: month, content: content, firstImage: firstImage, secondImage: secondImage, thirdImage: thirdImage))
             }
+            return results
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        return nil
+    }
+    //  TODO: 페이징처리를 위한 메서드 만들기
+    func loadDailyData() -> [Diary]? {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: diaryEntity)
+        let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
+        request.sortDescriptors = [sortDescriptor]
+        request.fetchLimit = 15
+        request.fetchOffset = offset
+        
+        
+        do {
+            let datas = try context.fetch(request)
+            var results: [Diary] = []
+            
+            for data in datas as! [NSManagedObject] {
+                let date = data.value(forKey: "date") as! String
+                let year = data.value(forKey: "year") as! String
+                let month = data.value(forKey: "month") as! String
+                let content = data.value(forKey: "content") as! String
+                let firstImagePath = data.value(forKey: "firstImage") as! String
+                let secondImagePath = data.value(forKey: "secondImage") as! String
+                let thirdImagePath = data.value(forKey: "thirdImage") as! String
+                
+                let firstImage = loadImage(path: firstImagePath)
+                let secondImage = loadImage(path: secondImagePath)
+                let thirdImage = loadImage(path: thirdImagePath)
+                results.append(Diary(date: date, year: year, month: month, content: content, firstImage: firstImage, secondImage: secondImage, thirdImage: thirdImage))
+            }
+            
+            offset += results.count
             return results
         } catch {
             print(error.localizedDescription)
@@ -127,7 +164,7 @@ final class DataManager {
         }
     }
     
-    //    TODO: delete
+    //    TODO: delete메서드에 fileManager를 통해서 db만이 아니라 실제 이미지 파일도 삭제하도록 구현하기.
     func deleteData(diary: Diary) {
         let date = diary.date
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: diaryEntity)
