@@ -39,53 +39,36 @@ final class DataManager {
             context.rollback()
             print(error.localizedDescription)
         }
-//        if let entity = NSEntityDescription.entity(forEntityName: diaryEntity, in: context) {
-//            let managedObject = NSManagedObject(entity: entity, insertInto: context)
-//            managedObject.setValue(userDiary.date, forKey: "date")
-//            managedObject.setValue(userDiary.content, forKey: "content")
-//            
-//            saveImage(date: userDiary.date, image: userDiary.firstImage, name: "firstImage")
-//            managedObject.setValue("\(userDiary.date)_firstImage.jpeg", forKey: "firstImage")
-//            saveImage(date: userDiary.date, image: userDiary.secondImage, name: "secondImage")
-//            managedObject.setValue("\(userDiary.date)_secondImage.jpeg", forKey: "secondImage")
-//            saveImage(date: userDiary.date, image: userDiary.thirdImage, name: "thirdImage")
-//            managedObject.setValue("\(userDiary.date)_thirdImage.jpeg", forKey: "thirdImage")
-//            
-//            do {
-//                try context.save()
-//            } catch {
-//                // TODO: 에러핸들링 적용해보기
-//                print("saveContext 실패\(error.localizedDescription)")
-//            }
-//        }
     }
     
     //    TODO: read
-    func loadData(date: String) -> Diary {
+    func loadData(date: String) -> Diary? {
         let request = NSFetchRequest<NSManagedObject>(entityName: diaryEntity)
         request.predicate = NSPredicate(format: "date = %@", date)
         
-//        do {
-//            let data = try? context.fetch(request)
-//        } catch {
-//            print(error.localizedDescription)
-//        }
-        let data = try? context.fetch(request)
-        guard let result = data?.first as? NSManagedObject else {
-            return Diary(date: "", year: "", month: "", content: "아직 일기가 없어요...", firstImage: nil, secondImage: nil, thirdImage: nil)
+        do {
+            let data = try context.fetch(request)
+            
+            guard let result = data.first else {
+                return Diary(date: "", year: "", month: "", content: "아직 일기가 없어요...", firstImage: nil, secondImage: nil, thirdImage: nil)
+            }
+            
+            let temp = Diary(date: result.value(forKey: "date") as! String,
+                             year: result.value(forKey: "year") as! String,
+                             month: result.value(forKey: "month") as! String,
+                             content: result.value(forKey: "content") as? String,
+                             firstImage: result.value(forKey: "firstImage") as? UIImage,
+                             secondImage: result.value(forKey: "secondImage") as? UIImage,
+                             thirdImage: result.value(forKey: "thirdImage") as? UIImage)
+            return temp
+        } catch {
+            print(error.localizedDescription)
         }
         
-        let temp = Diary(date: result.value(forKey: "date") as! String,
-                         year: result.value(forKey: "year") as! String,
-                         month: result.value(forKey: "month") as! String,
-                         content: result.value(forKey: "content") as? String,
-                         firstImage: result.value(forKey: "firstImage") as? UIImage,
-                         secondImage: result.value(forKey: "secondImage") as? UIImage,
-                         thirdImage: result.value(forKey: "thirdImage") as? UIImage)
-        return temp
+        return nil
     }
     
-    func loadMonthData(year: String, month: String) -> [Diary] {
+    func loadMonthData(year: String, month: String) -> [Diary]? {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: diaryEntity)
         
         let yearPredicate = NSPredicate(format: "year = %@", year)
@@ -93,78 +76,33 @@ final class DataManager {
         let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [yearPredicate, monthPredicate])
         
         request.predicate = compoundPredicate
-        let data = try? context.fetch(request)
-        
-        var results: [Diary] = []
-        
-        for result in data as! [NSManagedObject] {
-            let date = result.value(forKey: "date") as! String
-            let year = result.value(forKey: "year") as! String
-            let month = result.value(forKey: "month") as! String
-            let content = result.value(forKey: "content") as! String
-            let firstImagePath = result.value(forKey: "firstImage") as! String
-            let secondImagePath = result.value(forKey: "secondImage") as! String
-            let thirdImagePath = result.value(forKey: "thirdImage") as! String
+        do {
+            let data = try context.fetch(request)
+            var results: [Diary] = []
             
-            let firstImage = loadImage(path: firstImagePath)
-            let secondImage = loadImage(path: secondImagePath)
-            let thirdImage = loadImage(path: thirdImagePath)
-            results.append(Diary(date: date, year: year, month: month, content: content, firstImage: firstImage, secondImage: secondImage, thirdImage: thirdImage))
+            for result in data as! [NSManagedObject] {
+                let date = result.value(forKey: "date") as! String
+                let year = result.value(forKey: "year") as! String
+                let month = result.value(forKey: "month") as! String
+                let content = result.value(forKey: "content") as! String
+                let firstImagePath = result.value(forKey: "firstImage") as! String
+                let secondImagePath = result.value(forKey: "secondImage") as! String
+                let thirdImagePath = result.value(forKey: "thirdImage") as! String
+                
+                let firstImage = loadImage(path: firstImagePath)
+                let secondImage = loadImage(path: secondImagePath)
+                let thirdImage = loadImage(path: thirdImagePath)
+                results.append(Diary(date: date, year: year, month: month, content: content, firstImage: firstImage, secondImage: secondImage, thirdImage: thirdImage))
+            }
+            return results
+        } catch {
+            print(error.localizedDescription)
         }
-        return results
+        
+        return nil
     }
     
     //    TODO: update
-    
-    //    TODO: delete
-    func deleteData(diary: Diary) {
-        let date = diary.date
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: diaryEntity)
-        request.predicate = NSPredicate(format: "date = %@", date)
-        
-        do {
-            let result = try context.fetch(request)
-            for data in result as! [NSManagedObject] {
-                context.delete(data)
-                print("삭제 실행됨")
-            }
-            try context.save()
-            print("삭제후 저장 실행됨")
-        } catch {
-            print("삭제 실패")
-        }
-    }
-    
-    
-//    func loadData(date: String) -> (date: String, content: String, firstImage: UIImage, secondImage: UIImage, thirdImage: UIImage) {
-//        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Diary")
-//        request.predicate = NSPredicate(format: "date = %@", date)
-//        
-//        var data: [NSfetchrequest]?
-//        
-//    }
-    //    MARK: 데이터 리셋
-    func resetCoreData() {
-        let persistentContainer = appDelegate.persistentContainer
-        let coordinator = persistentContainer.persistentStoreCoordinator
-        
-        for store in coordinator.persistentStores {
-            if let storeURL = store.url {
-                do {
-                    try coordinator.destroyPersistentStore(at: storeURL, ofType: store.type, options: nil)
-                } catch {
-                    print("Failed to destroy persistent store: \(error)")
-                }
-            }
-        }
-        
-        persistentContainer.loadPersistentStores { (storeDescription, error) in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        }
-    }
-    
     func updateData(userDiary: Diary) {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: diaryEntity)
         request.predicate = NSPredicate(format: "date = %@", userDiary.date)
@@ -188,6 +126,49 @@ final class DataManager {
             print(error.localizedDescription)
         }
     }
+    
+    //    TODO: delete
+    func deleteData(diary: Diary) {
+        let date = diary.date
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: diaryEntity)
+        request.predicate = NSPredicate(format: "date = %@", date)
+        
+        do {
+            let result = try context.fetch(request)
+            for data in result as! [NSManagedObject] {
+                context.delete(data)
+                print("삭제 실행됨")
+            }
+            try context.save()
+            print("삭제후 저장 실행됨")
+        } catch {
+            print("삭제 실패")
+        }
+    }
+  
+    //    MARK: 데이터 리셋
+    func resetCoreData() {
+        let persistentContainer = appDelegate.persistentContainer
+        let coordinator = persistentContainer.persistentStoreCoordinator
+        
+        for store in coordinator.persistentStores {
+            if let storeURL = store.url {
+                do {
+                    try coordinator.destroyPersistentStore(at: storeURL, ofType: store.type, options: nil)
+                } catch {
+                    print("Failed to destroy persistent store: \(error)")
+                }
+            }
+        }
+        
+        persistentContainer.loadPersistentStores { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        }
+    }
+    
+    
     
 //    MARK: 이미지 저장 관련
     
