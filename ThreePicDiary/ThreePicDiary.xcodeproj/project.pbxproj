@@ -18,6 +18,7 @@
 		091F84882C607D9200FD8EE1 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 091F84872C607D9200FD8EE1 /* Base */; };
 		091F84902C60C84A00FD8EE1 /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091F848F2C60C84A00FD8EE1 /* MonthView.swift */; };
 		091F84922C60C85200FD8EE1 /* DailyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091F84912C60C85200FD8EE1 /* DailyView.swift */; };
+		096A5E872C75B736007A5C06 /* DailyViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096A5E862C75B736007A5C06 /* DailyViewCell.swift */; };
 		09AE8E5A2C6DE254008F8740 /* EditDiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AE8E592C6DE254008F8740 /* EditDiaryView.swift */; };
 		09AE8E5C2C6DE25C008F8740 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AE8E5B2C6DE25C008F8740 /* DetailView.swift */; };
 		09AE8E5E2C6DE2B4008F8740 /* ThreePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AE8E5D2C6DE2B4008F8740 /* ThreePictureView.swift */; };
@@ -40,12 +41,14 @@
 		091F84892C607D9200FD8EE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		091F848F2C60C84A00FD8EE1 /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
 		091F84912C60C85200FD8EE1 /* DailyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyView.swift; sourceTree = "<group>"; };
+		096A5E862C75B736007A5C06 /* DailyViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyViewCell.swift; sourceTree = "<group>"; };
 		09AE8E592C6DE254008F8740 /* EditDiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDiaryView.swift; sourceTree = "<group>"; };
 		09AE8E5B2C6DE25C008F8740 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		09AE8E5D2C6DE2B4008F8740 /* ThreePictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreePictureView.swift; sourceTree = "<group>"; };
 		09AE8E642C6E3877008F8740 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		09EB6A4E2C6F88E100E4D496 /* AddPhotoBoxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPhotoBoxViewController.swift; sourceTree = "<group>"; };
 		09EB6A4F2C6F88E100E4D496 /* AddPhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPhotoView.swift; sourceTree = "<group>"; };
+		09F34FBA2C772F3D00515389 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +108,7 @@
 			children = (
 				091F848F2C60C84A00FD8EE1 /* MonthView.swift */,
 				091F84912C60C85200FD8EE1 /* DailyView.swift */,
+				096A5E862C75B736007A5C06 /* DailyViewCell.swift */,
 				09AE8E592C6DE254008F8740 /* EditDiaryView.swift */,
 				09EB6A4E2C6F88E100E4D496 /* AddPhotoBoxViewController.swift */,
 				09EB6A4F2C6F88E100E4D496 /* AddPhotoView.swift */,
@@ -169,11 +173,12 @@
 			};
 			buildConfigurationList = 091F84702C607D9100FD8EE1 /* Build configuration list for PBXProject "ThreePicDiary" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = ko;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = 091F846C2C607D9100FD8EE1;
 			productRefGroup = 091F84762C607D9100FD8EE1 /* Products */;
@@ -214,6 +219,7 @@
 				091F847B2C607D9100FD8EE1 /* SceneDelegate.swift in Sources */,
 				091F84832C607D9100FD8EE1 /* ThreePicDiary.xcdatamodeld in Sources */,
 				09AE8E652C6E3877008F8740 /* Protocols.swift in Sources */,
+				096A5E872C75B736007A5C06 /* DailyViewCell.swift in Sources */,
 				0904ACEF2C65D771000EB100 /* DataManager.swift in Sources */,
 				09AE8E5A2C6DE254008F8740 /* EditDiaryView.swift in Sources */,
 				0904ACED2C65D0FE000EB100 /* Extensions.swift in Sources */,
@@ -227,6 +233,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				091F84872C607D9200FD8EE1 /* Base */,
+				09F34FBA2C772F3D00515389 /* ko */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -239,6 +246,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -302,6 +310,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
