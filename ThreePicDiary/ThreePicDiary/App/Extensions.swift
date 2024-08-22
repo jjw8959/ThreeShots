@@ -5,12 +5,13 @@
 //  Created by woong on 8/9/24.
 //
 
-import Foundation
+import UIKit
 
 extension Date {
     func toString(dateFormat format: String = "yyyy.MM.dd") -> String {
         let df = DateFormatter()
         df.timeZone = Calendar.current.timeZone
+        df.locale = Locale.autoupdatingCurrent
         df.dateFormat = format
         return df.string(from: self)
     }
@@ -20,6 +21,7 @@ extension String {
     func toDate(dateFormat format: String = "yyyy.MM.dd") -> Date? {
         let df = DateFormatter()
         df.timeZone = TimeZone.current
+        df.locale = Locale.autoupdatingCurrent
         df.dateFormat = format
         if let date = df.date(from: self) {
             return date
@@ -38,5 +40,13 @@ extension String {
         let endIndex = index(self.startIndex, offsetBy: to + 1) // '+1'이 있는 이유: endIndex는 문자열의 마지막 그 다음을 가리키기 때문
         
         return String(self[startIndex ..< endIndex])
+    }
+}
+
+extension UIFont {
+    // 폰트에 weight를 적용하는 메서드 확장
+    func withWeight(_ weight: UIFont.Weight) -> UIFont {
+        let descriptor = self.fontDescriptor.addingAttributes([.traits: [UIFontDescriptor.TraitKey.weight: weight]])
+        return UIFont(descriptor: descriptor, size: 0) // size 0은 기본 사이즈를 유지한다는 의미
     }
 }
