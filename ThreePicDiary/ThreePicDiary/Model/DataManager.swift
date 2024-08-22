@@ -172,7 +172,7 @@ final class DataManager {
     
 //    MARK: 이미지 저장 관련
     
-    func getAppDir() -> URL {
+    private func getAppDir() -> URL {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     }
     
