@@ -32,6 +32,7 @@ final class DailyView: UIViewController {
     
     private func setView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.separatorStyle = .none
         view.addSubview(tableView)
         
         let safeArea = view.safeAreaLayoutGuide
