@@ -16,7 +16,7 @@ final class MonthView: UIViewController {
     
     var specificDiary: Diary?
     
-    var calendarView = UICalendarView()
+    let calendarView = UICalendarView()
     
     let summaryView = UIView()
     
@@ -53,11 +53,8 @@ final class MonthView: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         dateLabel.text = selectedDateString
-        print("monthDiary 불러오기전")
         monthDiary = coredata.loadMonthData(year: calendar.date(from: selectedDate!)!.toString(dateFormat: "yy"),
                                             month: calendar.date(from: selectedDate!)!.toString(dateFormat: "MM"))
-        print("\n")
-        print("monthDiary 불러온후")
         
         reloadCalendarView()
     }
@@ -127,7 +124,6 @@ final class MonthView: UIViewController {
             contentsLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 16),
             contentsLabel.leadingAnchor.constraint(equalTo: calendarView.leadingAnchor),
             contentsLabel.trailingAnchor.constraint(equalTo: calendarView.trailingAnchor),
-//            contentsLabel.heightAnchor.constraint(equalToConstant: self.view.frame.height / 7 * 3),
         ])
     }
     
