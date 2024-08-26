@@ -44,20 +44,19 @@ final class MonthView: UIViewController {
         view.backgroundColor = .systemBackground
         
 //        coredata.resetCoreData()
-        
+        setCalendarView()
+        setSummaryView()
+        addViews()
+        addConstraints()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         dateLabel.text = selectedDateString
+        monthDiary = coredata.loadMonthData(year: calendar.date(from: selectedDate!)!.toString(dateFormat: "yy"),
+                                            month: calendar.date(from: selectedDate!)!.toString(dateFormat: "MM"))
         
-        monthDiary = coredata.loadMonthData(year: Date().toString(dateFormat: "yy"),
-                               month: Date().toString(dateFormat: "MM"))
-        
-        setCalendarView()
-        setSummaryView()
-        addViews()
-        addConstraints()
+        reloadCalendarView()
     }
     
     func setCalendarView() {
@@ -125,7 +124,6 @@ final class MonthView: UIViewController {
             contentsLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 16),
             contentsLabel.leadingAnchor.constraint(equalTo: calendarView.leadingAnchor),
             contentsLabel.trailingAnchor.constraint(equalTo: calendarView.trailingAnchor),
-//            contentsLabel.heightAnchor.constraint(equalToConstant: self.view.frame.height / 7 * 3),
         ])
     }
     
@@ -146,6 +144,14 @@ final class MonthView: UIViewController {
             editDiaryButton.setNeedsDisplay()
             showDiaryButton.setNeedsDisplay()
         }
+    }
+    
+    func reloadCalendarView() {
+        dateSelection(dateSelection, didSelectDate: selectedDate)
+        let dateComponents = calendar.dateComponents([.day, .month, .year], from: (selectedDateString?.toDate())!)
+        print(dateComponents)
+        calendarView.reloadDecorations(forDateComponents: [dateComponents], animated: true)
+        modifySummaryView()
     }
     
     @objc
@@ -196,11 +202,11 @@ extension MonthView: UICalendarViewDelegate, UICalendarSelectionSingleDateDelega
     }
     
     func calendarView(_ calendarView: UICalendarView, decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration? {
-        
         let dateString = calendar.date(from: dateComponents)?.toString()
         if monthDiary?.contains(where: { $0.date == dateString }) == true {
             self.specificDiary = self.monthDiary?.first{ $0.date == dateString }
             return .default(color: .systemYellow, size: .medium)
+            // 나중에 쓸지도 몰라서 일단 주석처리로 남겨둠...
 //            return .image(UIImage(systemName: "pencil.line"), size: .small)
 //            return .image(self.specificDiary?.firstImage, size: .large)
 //            return .customView {
