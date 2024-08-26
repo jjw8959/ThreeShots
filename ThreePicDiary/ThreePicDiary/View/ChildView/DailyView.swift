@@ -107,6 +107,11 @@ extension DailyView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // TODO: 누르면 디테일뷰로 넘기기
+        let date = diarys?[indexPath.row].date
+        let detailView = DetailView(diarys?[indexPath.row], date: date!)
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        navigationController?.pushViewController(detailView, animated: true)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
