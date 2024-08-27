@@ -171,9 +171,20 @@ final class DataManager {
         request.predicate = NSPredicate(format: "date = %@", date)
         
         do {
-            let result = try context.fetch(request)
-            for data in result as! [NSManagedObject] {
-                context.delete(data)
+            let data = try context.fetch(request)
+            if let targetDiary = data.first as? NSManagedObject {
+                if let firstImage = targetDiary.value(forKey: "firstImage") {
+                    deleteImage(path: firstImage as! String)
+                }
+                if let firstImage = targetDiary.value(forKey: "secondImage") {
+                    deleteImage(path: firstImage as! String)
+                }
+                if let firstImage = targetDiary.value(forKey: "thirdImage") {
+                    deleteImage(path: firstImage as! String)
+                }
+            }
+            for temp in data as! [NSManagedObject] {
+                context.delete(temp)
                 print("삭제 실행됨")
             }
             try context.save()
@@ -235,5 +246,14 @@ final class DataManager {
         let imageURL = getAppDir().appending(path: path)
         guard let image = try? Data(contentsOf: imageURL) else { return UIImage(named: "gray") }
         return UIImage(data: image)
+    }
+    
+    private func deleteImage(path: String) {
+        let imageURL = getAppDir().appending(path: path)
+        do {
+            try FileManager.default.removeItem(at: imageURL)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 }
