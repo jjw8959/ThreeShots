@@ -49,7 +49,7 @@ final class DetailView: UIViewController {
     }
     
     private func setViews() {
-        //    MARK: navigationbar
+        
         let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(closeButtonTapped))
         
         navigationItem.leftBarButtonItem = backButton
@@ -110,8 +110,8 @@ final class DetailView: UIViewController {
             contentLabel.trailingAnchor.constraint(equalTo: threePicsView.trailingAnchor),
         ])
     }
-    @objc
-    func closeButtonTapped() {
+    
+    @objc func closeButtonTapped() {
         self.navigationController?.popToRootViewController(animated: true)
     }
     

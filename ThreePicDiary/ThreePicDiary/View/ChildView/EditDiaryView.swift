@@ -51,6 +51,10 @@ final class EditDiaryView: UIViewController, ThreePictureViewDelegate {
     
     private func setViews() {
         //    MARK: 네비게이션바
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(closeButtonTapped))
+        
+        navigationItem.leftBarButtonItem = backButton
+        
         let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonTapped))
         saveButton.image = UIImage(systemName: "square.and.arrow.down")
         saveButton.title = "Save"
@@ -126,6 +130,11 @@ final class EditDiaryView: UIViewController, ThreePictureViewDelegate {
     }
     
     @objc
+    func closeButtonTapped() {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
+    @objc
     func saveButtonTapped() {
         
         if threePicsView.firstImageView == UIImage(named: "gray") || contentField.text == "아직 작성된 일기가 없어요..." {
@@ -134,17 +143,6 @@ final class EditDiaryView: UIViewController, ThreePictureViewDelegate {
             cantSaveAlert.addAction(cancelAction)
             present(cantSaveAlert, animated: true)
         } else {
-//            coredata.saveData(date: dateString, content: contentField.text ?? "",
-//                              firstImage: (threePicsView.firstImageView.image),
-//                              secondImage: (threePicsView.secondImageView.image),
-//                              thirdImage: (threePicsView.thirdImageView.image)
-//            
-//            
-//            if let date = dateString.toDate() {
-//                print("date")
-////                calendarViewController!.reloadDateView(date: date)
-//                delegate?.sendData(date: dateString)
-//            }
             
             if diary != nil {
                 diary = Diary(date: dateString, year: dateString.substring(from: 2, to: 3), month: dateString.substring(from: 5, to: 6), content: contentField.text, firstImage: threePicsView.firstImageView.image, secondImage: threePicsView.secondImageView.image, thirdImage: threePicsView.thirdImageView.image)

@@ -149,7 +149,6 @@ final class MonthView: UIViewController {
     func reloadCalendarView() {
         dateSelection(dateSelection, didSelectDate: selectedDate)
         let dateComponents = calendar.dateComponents([.day, .month, .year], from: (selectedDateString?.toDate())!)
-        print(dateComponents)
         calendarView.reloadDecorations(forDateComponents: [dateComponents], animated: true)
         modifySummaryView()
     }

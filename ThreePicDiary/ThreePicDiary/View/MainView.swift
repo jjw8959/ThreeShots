@@ -13,6 +13,8 @@ class MainView: UIViewController {
     
     private let underLineView = UIView()
     
+    private let settingButton = UIButton()
+    
     let monthView = MonthView()
     
     let dailyView = DailyView()
@@ -22,6 +24,7 @@ class MainView: UIViewController {
         view.backgroundColor = .systemBackground
         
         setSegmentControl()
+        setSettingButton()
         addViews()
         addConstraints()
         dailyView.view.isHidden = true
@@ -29,6 +32,14 @@ class MainView: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
+    }
+    
+    private func setSettingButton() {
+        settingButton.setImage(UIImage(systemName: "gear"), for: .normal)
+        settingButton.addTarget(self, action: #selector(tapSetting), for: .touchUpInside)
+        settingButton.tintColor = .black
+        
+        settingButton.translatesAutoresizingMaskIntoConstraints = false
     }
 
     private func setSegmentControl() {
@@ -57,6 +68,7 @@ class MainView: UIViewController {
     }
     
     private func addViews() {
+        view.addSubview(settingButton)
         view.addSubview(segmentControl)
         view.addSubview(underLineView)
         
@@ -76,6 +88,9 @@ class MainView: UIViewController {
         dailyView.view.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
+            settingButton.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            settingButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
+            
             segmentControl.topAnchor.constraint(equalTo: safeArea.topAnchor),
             segmentControl.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
             segmentControl.widthAnchor.constraint(equalTo: safeArea.widthAnchor, multiplier: 0.4),
@@ -100,8 +115,7 @@ class MainView: UIViewController {
     
     // MARK: segment functions
     
-    @objc
-    private func changeUnderLinePosition(_ segment: UISegmentedControl) {
+    @objc private func changeUnderLinePosition(_ segment: UISegmentedControl) {
         let halfWidth = segmentControl.frame.width / 2
         let xPosition = segmentControl.frame.origin.x + (halfWidth * CGFloat(segmentControl.selectedSegmentIndex))
         
@@ -110,8 +124,7 @@ class MainView: UIViewController {
         }
     }
     
-    @objc
-    private func didMoveUnderLine(_ segment: UISegmentedControl) {
+    @objc private func didMoveUnderLine(_ segment: UISegmentedControl) {
         switch segment.selectedSegmentIndex {
         case 0:
             monthView.view.isHidden = false
@@ -122,6 +135,10 @@ class MainView: UIViewController {
         default:
             break
         }
+    }
+    
+    @objc private func tapSetting() {
+        navigationController?.pushViewController(SettingView(), animated: true)
     }
 
 }
