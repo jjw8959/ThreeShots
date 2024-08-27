@@ -30,8 +30,9 @@ class MainView: UIViewController {
         dailyView.view.isHidden = true
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.isNavigationBarHidden = true
+    override func viewDidLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        changeUnderLinePosition(segmentControl)
     }
     
     private func setSettingButton() {
@@ -119,6 +120,7 @@ class MainView: UIViewController {
         let halfWidth = segmentControl.frame.width / 2
         let xPosition = segmentControl.frame.origin.x + (halfWidth * CGFloat(segmentControl.selectedSegmentIndex))
         
+        print(xPosition)
         UIView.animate(withDuration: 0.2) {
             self.underLineView.frame.origin.x = xPosition
         }

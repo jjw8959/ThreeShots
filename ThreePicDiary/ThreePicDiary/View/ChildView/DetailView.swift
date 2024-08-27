@@ -65,7 +65,7 @@ final class DetailView: UIViewController {
         if diary != nil {
             barButtonMenu = UIMenu(title: "menu", children: [
                 UIAction(title: "edit", image: UIImage(systemName: "pencil"), handler: menuHandler),
-                UIAction(title: "delete", image: UIImage(systemName: "trash"), handler: menuHandler)
+                UIAction(title: "delete", image: UIImage(systemName: "trash")?.withTintColor(.red, renderingMode: .alwaysOriginal), handler: menuHandler)
             ])
         } else {
             barButtonMenu = UIMenu(title: "menu", children: [
@@ -123,8 +123,16 @@ final class DetailView: UIViewController {
     
     func deleteButtonTapped() {
         if let diary = diary {
-            coredata.deleteData(diary: diary)
-            self.navigationController?.popToRootViewController(animated: true)
+            let deleteAlert = UIAlertController(title: "이런", message: "정말로 일기를 지우실건가요?", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "돌아가기", style: .cancel)
+            let deleteAction = UIAlertAction(title: "지우기", style: .destructive) { _ in
+                self.coredata.deleteData(diary: diary)
+                self.navigationController?.popToRootViewController(animated: true)
+            }
+            deleteAlert.addAction(cancelAction)
+            deleteAlert.addAction(deleteAction)
+            present(deleteAlert, animated: true)
+            
         }
     }
     

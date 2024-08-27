@@ -131,13 +131,24 @@ final class EditDiaryView: UIViewController, ThreePictureViewDelegate {
     
     @objc
     func closeButtonTapped() {
-        self.navigationController?.popToRootViewController(animated: true)
+        if threePicsView.firstImageView.image != UIImage(named: "gray") || contentField.text != "아직 작성된 일기가 없어요..." {
+            let cancelAlert = UIAlertController(title: "이런", message: "지금 나가면 작성중인 일기가 사라져요.", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "돌아가기", style: .cancel)
+            let deleteAction = UIAlertAction(title: "나가기", style: .destructive) { _ in
+                self.navigationController?.popToRootViewController(animated: true)
+            }
+            cancelAlert.addAction(cancelAction)
+            cancelAlert.addAction(deleteAction)
+            present(cancelAlert, animated: true)
+        } else {
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+        
     }
     
     @objc
     func saveButtonTapped() {
-        
-        if threePicsView.firstImageView == UIImage(named: "gray") || contentField.text == "아직 작성된 일기가 없어요..." {
+        if threePicsView.firstImageView.image == UIImage(named: "gray") || contentField.text == "아직 작성된 일기가 없어요..." {
             let cantSaveAlert = UIAlertController(title: "이런", message: "아무런 내용이 없어요", preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: "돌아가기", style: .cancel)
             cantSaveAlert.addAction(cancelAction)
@@ -162,7 +173,6 @@ final class EditDiaryView: UIViewController, ThreePictureViewDelegate {
     }
     
     func setPictures() {
-//        if diary != nil {
         if diary?.firstImage != nil {
             threePicsView.firstImageView.image = diary?.firstImage
         } else {
@@ -180,7 +190,6 @@ final class EditDiaryView: UIViewController, ThreePictureViewDelegate {
         } else {
             threePicsView.thirdImageView.image = UIImage(named: "gray")
         }
-//        }
         
     }
     

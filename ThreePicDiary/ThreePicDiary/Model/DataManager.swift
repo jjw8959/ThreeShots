@@ -18,7 +18,7 @@ final class DataManager {
     
     let diaryEntity = "Diarys"
     
-    private var offset = 0
+    var offset = 0
     
     //    MARK: create
     func saveData(userDiary: Diary) {
