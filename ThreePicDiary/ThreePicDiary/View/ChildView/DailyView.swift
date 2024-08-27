@@ -22,6 +22,8 @@ final class DailyView: UIViewController {
     
     let cellName = "DailyViewCell"
     
+    let noDataLabel = UILabel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,36 +31,71 @@ final class DailyView: UIViewController {
         tableView.delegate = self
         tableView.register(DailyViewCell.self, forCellReuseIdentifier: cellName)
         
-        diarys = coredata.loadDailyData()
-        
         setView()
+        
+        removeShadow()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if !self.view.isHidden {
-            coredata.offset = 0
-            diarys = coredata.loadDailyData()
+        coredata.offset = 0
+        diarys = coredata.loadDailyData()
+        tableView.reloadData()
+        
+        if diarys?.isEmpty ?? true {
+            noDataLabel.isHidden = false
+            tableView.isHidden = true
+        } else {
+            noDataLabel.isHidden = true
+            tableView.isHidden = false
         }
     }
     
     private func setView() {
+        noDataLabel.translatesAutoresizingMaskIntoConstraints = false
+        noDataLabel.text = "아직 작성된 일기가 없어요..."
+        noDataLabel.font = UIFont.preferredFont(forTextStyle: .title1)
+        noDataLabel.textAlignment = .center
+        noDataLabel.textColor = .black
+        view.addSubview(noDataLabel)
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
         view.addSubview(tableView)
         
         let safeArea = view.safeAreaLayoutGuide
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: safeArea.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
-        ])
+        if diarys?.isEmpty ?? true {
+            NSLayoutConstraint.activate([
+                
+                tableView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+                tableView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+                tableView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+                tableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
+                noDataLabel.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
+                noDataLabel.centerYAnchor.constraint(equalTo: safeArea.centerYAnchor)
+            ])
+        } else {
+            NSLayoutConstraint.activate([
+                
+            ])
+        }
         
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 100))
         footerView.backgroundColor = .clear
         tableView.tableFooterView = footerView
         
+    }
+    
+    private func removeShadow() {
+        tableView.layer.shadowOpacity = 0
+        tableView.layer.shadowColor = UIColor.clear.cgColor
+        tableView.layer.shadowOffset = .zero
+        tableView.layer.shadowRadius = 0
+        
+        noDataLabel.layer.shadowOpacity = 0
+        noDataLabel.layer.shadowColor = UIColor.clear.cgColor
+        noDataLabel.layer.shadowOffset = .zero
+        noDataLabel.layer.shadowRadius = 0
     }
     
     @objc
