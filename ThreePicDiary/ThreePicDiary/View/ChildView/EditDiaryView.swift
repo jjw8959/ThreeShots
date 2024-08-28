@@ -175,20 +175,14 @@ final class EditDiaryView: UIViewController, ThreePictureViewDelegate {
     func setPictures() {
         if diary?.firstImage != nil {
             threePicsView.firstImageView.image = diary?.firstImage
-        } else {
-            threePicsView.firstImageView.image = UIImage(named: "gray")
         }
         
         if diary?.secondImage != nil {
             threePicsView.secondImageView.image = diary?.secondImage
-        } else {
-            threePicsView.secondImageView.image = UIImage(named: "gray")
         }
         
         if diary?.thirdImage != nil {
             threePicsView.thirdImageView.image = diary?.thirdImage
-        } else {
-            threePicsView.thirdImageView.image = UIImage(named: "gray")
         }
         
     }
