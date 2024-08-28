@@ -32,6 +32,7 @@ class MainView: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewWillLayoutSubviews()
+        navigationController?.setNavigationBarHidden(true, animated: true)
         changeUnderLinePosition(segmentControl)
     }
     
@@ -120,7 +121,6 @@ class MainView: UIViewController {
         let halfWidth = segmentControl.frame.width / 2
         let xPosition = segmentControl.frame.origin.x + (halfWidth * CGFloat(segmentControl.selectedSegmentIndex))
         
-        print(xPosition)
         UIView.animate(withDuration: 0.2) {
             self.underLineView.frame.origin.x = xPosition
         }
