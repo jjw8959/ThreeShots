@@ -21,6 +21,7 @@
 		096A5E872C75B736007A5C06 /* DailyViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096A5E862C75B736007A5C06 /* DailyViewCell.swift */; };
 		097248DF2C7C311D00D8B58B /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097248DE2C7C311D00D8B58B /* SettingView.swift */; };
 		097248E22C7C54B000D8B58B /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 097248E12C7C54B000D8B58B /* UserNotifications.framework */; };
+		097248E42C7E0C8600D8B58B /* ImageOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097248E32C7E0C8600D8B58B /* ImageOverlayView.swift */; };
 		09AE8E5A2C6DE254008F8740 /* EditDiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AE8E592C6DE254008F8740 /* EditDiaryView.swift */; };
 		09AE8E5C2C6DE25C008F8740 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AE8E5B2C6DE25C008F8740 /* DetailView.swift */; };
 		09AE8E5E2C6DE2B4008F8740 /* ThreePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AE8E5D2C6DE2B4008F8740 /* ThreePictureView.swift */; };
@@ -46,6 +47,7 @@
 		096A5E862C75B736007A5C06 /* DailyViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyViewCell.swift; sourceTree = "<group>"; };
 		097248DE2C7C311D00D8B58B /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		097248E12C7C54B000D8B58B /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		097248E32C7E0C8600D8B58B /* ImageOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageOverlayView.swift; sourceTree = "<group>"; };
 		09AE8E592C6DE254008F8740 /* EditDiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDiaryView.swift; sourceTree = "<group>"; };
 		09AE8E5B2C6DE25C008F8740 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		09AE8E5D2C6DE2B4008F8740 /* ThreePictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreePictureView.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 		09AE8E602C6DE311008F8740 /* ChildView */ = {
 			isa = PBXGroup;
 			children = (
+				097248E32C7E0C8600D8B58B /* ImageOverlayView.swift */,
 				091F848F2C60C84A00FD8EE1 /* MonthView.swift */,
 				091F84912C60C85200FD8EE1 /* DailyView.swift */,
 				096A5E862C75B736007A5C06 /* DailyViewCell.swift */,
@@ -239,6 +242,7 @@
 				09AE8E5A2C6DE254008F8740 /* EditDiaryView.swift in Sources */,
 				0904ACED2C65D0FE000EB100 /* Extensions.swift in Sources */,
 				097248DF2C7C311D00D8B58B /* SettingView.swift in Sources */,
+				097248E42C7E0C8600D8B58B /* ImageOverlayView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

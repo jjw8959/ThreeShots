@@ -244,7 +244,7 @@ final class DataManager {
     private func loadImage(path: String) -> UIImage? {
         let path = path
         let imageURL = getAppDir().appending(path: path)
-        guard let image = try? Data(contentsOf: imageURL) else { return UIImage(named: "gray") }
+        guard let image = try? Data(contentsOf: imageURL) else { return nil }
         return UIImage(data: image)
     }
     

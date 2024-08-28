@@ -78,6 +78,3 @@ final class ThreePictureView: UIView {
     
 }
 
-#Preview {
-    ThreePictureView()
-}
