@@ -49,6 +49,8 @@ final class DetailView: UIViewController {
     }
     
     private func setViews() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapPicture))
+        threePicsView.addGestureRecognizer(tapGesture)
         
         let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(closeButtonTapped))
         
@@ -111,7 +113,8 @@ final class DetailView: UIViewController {
         ])
     }
     
-    @objc func closeButtonTapped() {
+    @objc
+    func closeButtonTapped() {
         self.navigationController?.popToRootViewController(animated: true)
     }
     
@@ -134,6 +137,27 @@ final class DetailView: UIViewController {
             present(deleteAlert, animated: true)
             
         }
+    }
+    
+    @objc
+    private func tapPicture(_ gesture: UITapGestureRecognizer) {
+        let firstImageView = threePicsView.firstImageView
+        let secondImageView = threePicsView.secondImageView
+        let thirdImageView = threePicsView.thirdImageView
+        
+        var imageViews: [UIImageView] = []
+        imageViews.append(firstImageView)
+        
+        if secondImageView.image != nil {
+            imageViews.append(secondImageView)
+        }
+        if thirdImageView.image != nil {
+            imageViews.append(thirdImageView)
+        }
+        
+        let pageViewController = ImageOverlayView(imageViews)
+        pageViewController.modalPresentationStyle = .fullScreen
+        present(pageViewController, animated: true)
     }
     
 }
