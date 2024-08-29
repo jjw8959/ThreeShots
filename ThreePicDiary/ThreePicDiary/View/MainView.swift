@@ -29,11 +29,9 @@ class MainView: UIViewController {
         addConstraints()
         dailyView.view.isHidden = true
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewWillLayoutSubviews()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
-        changeUnderLinePosition(segmentControl)
     }
     
     private func setSettingButton() {
@@ -62,7 +60,6 @@ class MainView: UIViewController {
         segmentControl.setDividerImage(UIImage(), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
         
         segmentControl.addTarget(self, action: #selector(changeUnderLinePosition), for: .valueChanged)
-        segmentControl.addTarget(self, action: #selector(didMoveUnderLine), for: .valueChanged)
         segmentControl.translatesAutoresizingMaskIntoConstraints = false
         
         underLineView.backgroundColor = .black
@@ -124,9 +121,7 @@ class MainView: UIViewController {
         UIView.animate(withDuration: 0.2) {
             self.underLineView.frame.origin.x = xPosition
         }
-    }
-    
-    @objc private func didMoveUnderLine(_ segment: UISegmentedControl) {
+        
         switch segment.selectedSegmentIndex {
         case 0:
             monthView.view.isHidden = false
