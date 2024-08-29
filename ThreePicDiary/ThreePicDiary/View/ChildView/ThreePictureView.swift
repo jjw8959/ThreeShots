@@ -25,8 +25,6 @@ final class ThreePictureView: UIView {
         layer.masksToBounds = true
         
         setViews()
-        addViews()
-        addConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -36,6 +34,9 @@ final class ThreePictureView: UIView {
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
         delegate?.setPictures()
+        
+        addViews()
+        addConstraints()
     }
     
     private func setViews() {
@@ -50,30 +51,61 @@ final class ThreePictureView: UIView {
     }
     
     private func addViews() {
-        self.addSubview(firstImageView)
-        self.addSubview(secondImageView)
-        self.addSubview(thirdImageView)
+        if secondImageView.image == nil && thirdImageView.image == nil {
+            self.addSubview(firstImageView)
+        } else if thirdImageView.image == nil {
+            self.addSubview(firstImageView)
+            self.addSubview(secondImageView)
+        } else {
+            self.addSubview(firstImageView)
+            self.addSubview(secondImageView)
+            self.addSubview(thirdImageView)
+        }
+        
     }
     
     private func addConstraints() {
-        NSLayoutConstraint.activate([
-            firstImageView.topAnchor.constraint(equalTo: self.topAnchor),
-            firstImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            firstImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            firstImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5),
+        if secondImageView.image == nil && thirdImageView.image == nil {
+            NSLayoutConstraint.activate([
+                firstImageView.topAnchor.constraint(equalTo: self.topAnchor),
+                firstImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+                firstImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+                firstImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            ])
+        } else if thirdImageView.image == nil {
+            NSLayoutConstraint.activate([
+                firstImageView.topAnchor.constraint(equalTo: self.topAnchor),
+                firstImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+                firstImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+                firstImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5),
+                
+                secondImageView.topAnchor.constraint(equalTo: self.topAnchor),
+                secondImageView.leadingAnchor.constraint(equalTo: firstImageView.trailingAnchor),
+                secondImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+                secondImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            ])
             
-            secondImageView.topAnchor.constraint(equalTo: self.topAnchor),
-            secondImageView.leadingAnchor.constraint(equalTo: firstImageView.trailingAnchor),
-            secondImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            secondImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5),
-            secondImageView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
-            
-            thirdImageView.topAnchor.constraint(equalTo: secondImageView.bottomAnchor),
-            thirdImageView.leadingAnchor.constraint(equalTo: secondImageView.leadingAnchor),
-            thirdImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            thirdImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5),
-            thirdImageView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
-        ])
+        } else {
+            NSLayoutConstraint.activate([
+                firstImageView.topAnchor.constraint(equalTo: self.topAnchor),
+                firstImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+                firstImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+                firstImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5),
+                
+                secondImageView.topAnchor.constraint(equalTo: self.topAnchor),
+                secondImageView.leadingAnchor.constraint(equalTo: firstImageView.trailingAnchor),
+                secondImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+                secondImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5),
+                secondImageView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
+                
+                thirdImageView.topAnchor.constraint(equalTo: secondImageView.bottomAnchor),
+                thirdImageView.leadingAnchor.constraint(equalTo: secondImageView.leadingAnchor),
+                thirdImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+                thirdImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5),
+                thirdImageView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
+            ])
+        }
+       
     }
     
 }
