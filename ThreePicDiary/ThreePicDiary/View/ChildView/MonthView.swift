@@ -73,12 +73,11 @@ final class MonthView: UIViewController {
     
     func setSummaryView() {
         
-        dateLabel.textColor = .black
         dateLabel.font = UIFont.systemFont(ofSize: 17)
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         
         editDiaryButton.setImage(UIImage(systemName: "pencil.line"), for: .normal)
-        editDiaryButton.tintColor = .black
+        editDiaryButton.tintColor = .white
         editDiaryButton.addTarget(self, action: #selector(editDiaryButtonTapped), for: .touchUpInside)
         editDiaryButton.translatesAutoresizingMaskIntoConstraints = false
         

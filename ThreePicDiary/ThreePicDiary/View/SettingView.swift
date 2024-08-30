@@ -72,25 +72,6 @@ final class SettingView : UIViewController {
     }
     
     @objc
-    private func requestPictureNoti(time: Date) {
-        
-        let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: time)
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: true)
-        
-        let content = UNMutableNotificationContent()
-        content.title = "사진 알림"
-        content.body = "사진을 찍어주세요!"
-        content.sound = .default
-        
-        let request = UNNotificationRequest(identifier: "pictureNotification", content: content, trigger: trigger)
-        
-        UNUserNotificationCenter.current().add(request) { error in
-            guard let error = error else { return }
-            print(error.localizedDescription)
-        }
-    }
-    
-    @objc
     private func requestDiaryNoti() {
         let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: diaryTime)
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: true)
@@ -109,6 +90,31 @@ final class SettingView : UIViewController {
     }
     
     @objc
+    private func requestPictureNoti(times: [Date]) {
+        let content = UNMutableNotificationContent()
+        content.title = "사진 알림"
+        content.body = "사진을 찍어주세요!"
+        content.sound = .default
+        
+        for time in times {
+            let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: time)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+            
+            let request = UNNotificationRequest(identifier: "pictureNotification_\(dateComponents.hour ?? 0)_\(dateComponents.minute ?? 0)", content: content, trigger: trigger)
+            
+            UNUserNotificationCenter.current().add(request) { error in
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+        
+        
+    }
+    
+    
+    
+    @objc
     private func closeButtonTapped() {
         self.navigationController?.popToRootViewController(animated: true)
     }
@@ -120,9 +126,7 @@ final class SettingView : UIViewController {
         UserDefaults.standard.setValue(picTimes[1], forKey: "secondPicTime")
         UserDefaults.standard.setValue(picTimes[2], forKey: "thirdPicTime")
         requestDiaryNoti()
-        requestPictureNoti(time: picTimes[0])
-        requestPictureNoti(time: picTimes[1])
-        requestPictureNoti(time: picTimes[2])
+        requestPictureNoti(times: [picTimes[0], picTimes[1], picTimes[2]])
         
         self.navigationController?.popToRootViewController(animated: true)
     }
@@ -163,7 +167,7 @@ extension SettingView: UITableViewDelegate, UITableViewDataSource {
                 cell.contentConfiguration = content
                 
                 let toggleSwitch = UISwitch()
-                toggleSwitch.setOn(isDiaryAlertOn, animated: true) // TODO: 토글상태 userdefaults에 저장하고 그걸 기본상태로 만들기
+                toggleSwitch.setOn(isDiaryAlertOn, animated: true)
                 toggleSwitch.tag = indexPath.row
                 toggleSwitch.addTarget(self, action: #selector(toggleDiaryAlert), for: .valueChanged)
                 cell.accessoryView = toggleSwitch
@@ -200,7 +204,7 @@ extension SettingView: UITableViewDelegate, UITableViewDataSource {
                 cell.contentConfiguration = content
                 
                 let toggleSwitch = UISwitch()
-                toggleSwitch.setOn(isPictureAlertOn, animated: true) // TODO: 토글상태 userdefaults에 저장하고 그걸 기본상태로 만들기
+                toggleSwitch.setOn(isPictureAlertOn, animated: true)
                 toggleSwitch.tag = indexPath.row
                 toggleSwitch.addTarget(self, action: #selector(togglePictureAlert), for: .valueChanged)
                 cell.accessoryView = toggleSwitch
@@ -288,13 +292,12 @@ extension SettingView: UITableViewDelegate, UITableViewDataSource {
     
     @objc
     func setDiaryTime(_ sender: UIDatePicker) {
-        let selectedIndex = sender.tag // 배열 인덱스
-        diaryTime = sender.date // 선택한 시간 저장
+        diaryTime = sender.date
     }
     
     @objc
     func setPicTimes(_ sender: UIDatePicker) {
-        let selectedIndex = sender.tag // 배열 인덱스
-        picTimes[selectedIndex] = sender.date // 선택한 시간 저장
+        let selectedIndex = sender.tag
+        picTimes[selectedIndex] = sender.date
     }
 }

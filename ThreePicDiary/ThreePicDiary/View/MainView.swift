@@ -53,7 +53,7 @@ class MainView: UIViewController {
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)], for: .normal)
         
         segmentControl.setTitleTextAttributes([
-            NSAttributedString.Key.foregroundColor: UIColor.black,
+            NSAttributedString.Key.foregroundColor: UIColor.white,
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)], for: .selected)
         segmentControl.selectedSegmentTintColor = .clear
         segmentControl.setBackgroundImage(UIImage(), for: .normal, barMetrics: .default)
@@ -62,7 +62,7 @@ class MainView: UIViewController {
         segmentControl.addTarget(self, action: #selector(changeUnderLinePosition), for: .valueChanged)
         segmentControl.translatesAutoresizingMaskIntoConstraints = false
         
-        underLineView.backgroundColor = .black
+        underLineView.backgroundColor = .white
         underLineView.translatesAutoresizingMaskIntoConstraints = false
     }
     
