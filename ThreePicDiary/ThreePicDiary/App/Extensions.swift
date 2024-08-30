@@ -35,18 +35,15 @@ extension String {
             return ""
         }
         
-        // Index 값 획득
         let startIndex = index(self.startIndex, offsetBy: from)
-        let endIndex = index(self.startIndex, offsetBy: to + 1) // '+1'이 있는 이유: endIndex는 문자열의 마지막 그 다음을 가리키기 때문
+        let endIndex = index(self.startIndex, offsetBy: to + 1)
         
         return String(self[startIndex ..< endIndex])
     }
 }
 
 extension UIFont {
-    // 폰트에 weight를 적용하는 메서드 확장
     func withWeight(_ weight: UIFont.Weight) -> UIFont {
         let descriptor = self.fontDescriptor.addingAttributes([.traits: [UIFontDescriptor.TraitKey.weight: weight]])
-        return UIFont(descriptor: descriptor, size: 0) // size 0은 기본 사이즈를 유지한다는 의미
-    }
+        return UIFont(descriptor: descriptor, size: 0)    }
 }

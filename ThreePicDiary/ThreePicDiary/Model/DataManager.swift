@@ -20,7 +20,6 @@ final class DataManager {
     
     var offset = 0
     
-    //    MARK: create
     func saveData(userDiary: Diary) {
         let diarys = Diarys(context: context)
         diarys.date = userDiary.date
@@ -43,7 +42,6 @@ final class DataManager {
         }
     }
     
-    //    TODO: read
     func loadData(date: String) -> Diary? {
         let request = NSFetchRequest<NSManagedObject>(entityName: diaryEntity)
         request.predicate = NSPredicate(format: "date = %@", date)
@@ -102,7 +100,7 @@ final class DataManager {
         
         return nil
     }
-    //  TODO: 페이징처리를 위한 메서드 만들기
+    
     func loadDailyData() -> [Diary]? {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: diaryEntity)
         let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
@@ -139,7 +137,6 @@ final class DataManager {
         return nil
     }
     
-    //    TODO: update
     func updateData(userDiary: Diary) {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: diaryEntity)
         request.predicate = NSPredicate(format: "date = %@", userDiary.date)
@@ -164,7 +161,6 @@ final class DataManager {
         }
     }
     
-    //    TODO: delete메서드에 fileManager를 통해서 db만이 아니라 실제 이미지 파일도 삭제하도록 구현하기.
     func deleteData(diary: Diary) {
         let date = diary.date
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: diaryEntity)
@@ -194,7 +190,6 @@ final class DataManager {
         }
     }
   
-    //    MARK: 데이터 리셋
     func resetCoreData() {
         let persistentContainer = appDelegate.persistentContainer
         let coordinator = persistentContainer.persistentStoreCoordinator
@@ -216,8 +211,6 @@ final class DataManager {
         }
     }
     
-    
-    
 //    MARK: 이미지 저장 관련
     
     private func getAppDir() -> URL {
@@ -232,7 +225,6 @@ final class DataManager {
                 do {
                     try image.write(to: imageURL)
                 } catch {
-                    // TODO: 에러핸들링 적용해보기
                     print("이미지 저장 실패")
                 }
             }
