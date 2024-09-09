@@ -21,6 +21,8 @@ class MainView: UIViewController {
     
     private var backgroundLayer: CALayer!
     
+    var xPosition: CGFloat = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,6 +40,16 @@ class MainView: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let halfWidth = segmentControl.frame.width / 2
+        xPosition = segmentControl.frame.origin.x + (halfWidth * CGFloat(segmentControl.selectedSegmentIndex))
+        
+        underLineView.frame.origin.x = xPosition
+    }
+
     
     private func setupBackgroundLayer() {
         backgroundLayer = CALayer()
@@ -132,10 +144,10 @@ class MainView: UIViewController {
     
     @objc private func changeUnderLinePosition(_ segment: UISegmentedControl) {
         let halfWidth = segmentControl.frame.width / 2
-        let xPosition = segmentControl.frame.origin.x + (halfWidth * CGFloat(segmentControl.selectedSegmentIndex))
+        xPosition = segmentControl.frame.origin.x + (halfWidth * CGFloat(segmentControl.selectedSegmentIndex))
         
         UIView.animate(withDuration: 0.2) {
-            self.underLineView.frame.origin.x = xPosition
+            self.underLineView.frame.origin.x = self.xPosition
         }
         
         switch segment.selectedSegmentIndex {
