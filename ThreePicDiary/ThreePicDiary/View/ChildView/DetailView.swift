@@ -20,6 +20,8 @@ final class DetailView: UIViewController {
     
     var diary: Diary?
     
+    private var backgroundLayer: CALayer!
+    
     init(_ diary: Diary?, date: String) {
         super.init(nibName: nil, bundle: nil)
         self.diary = diary
@@ -41,11 +43,24 @@ final class DetailView: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.view.backgroundColor = .systemBackground
-        
+        setupBackgroundLayer()
+        changeBackground()
         setViews()
         addViews()
         addConstraints()
+    }
+    
+    private func setupBackgroundLayer() {
+        backgroundLayer = CALayer()
+        backgroundLayer.contents = UIImage(named: "background")?.cgImage
+        backgroundLayer.frame = view.bounds
+        view.layer.insertSublayer(backgroundLayer, at: 0)
+    }
+    
+    private func changeBackground() {
+        registerForTraitChanges([UITraitUserInterfaceStyle.self]) { (self: Self, previousTraitCollection: UITraitCollection) in
+            self.backgroundLayer.contents = UIImage(named: "background")?.cgImage
+        }
     }
     
     private func setViews() {

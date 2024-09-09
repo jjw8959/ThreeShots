@@ -23,6 +23,8 @@ final class EditDiaryView: UIViewController, ThreePictureViewDelegate {
     
     var contentField = UITextView()
     
+    private var backgroundLayer: CALayer!
+    
     init(_ diary: Diary?, date: String) {
         super.init(nibName: nil, bundle: nil)
         self.diary = diary
@@ -35,7 +37,6 @@ final class EditDiaryView: UIViewController, ThreePictureViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
         
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
@@ -44,9 +45,24 @@ final class EditDiaryView: UIViewController, ThreePictureViewDelegate {
         
         self.navigationItem.title = dateString
         
+        setupBackgroundLayer()
+        changeBackground()
         setViews()
         addViews()
         addConstraints()
+    }
+    
+    private func setupBackgroundLayer() {
+        backgroundLayer = CALayer()
+        backgroundLayer.contents = UIImage(named: "background")?.cgImage
+        backgroundLayer.frame = view.bounds
+        view.layer.insertSublayer(backgroundLayer, at: 0)
+    }
+    
+    private func changeBackground() {
+        registerForTraitChanges([UITraitUserInterfaceStyle.self]) { (self: Self, previousTraitCollection: UITraitCollection) in
+            self.backgroundLayer.contents = UIImage(named: "background")?.cgImage
+        }
     }
     
     private func setViews() {

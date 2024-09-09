@@ -20,7 +20,6 @@ class AddPhotoView: UIViewController {
         super.viewDidLoad()
         
         title = dateString
-        view.backgroundColor = .white
         
         let backButton = UIBarButtonItem(title: "back", image: UIImage(systemName: "chevron.left"), target: self, action: #selector(cancelButtonTapped))
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))

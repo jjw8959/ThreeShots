@@ -41,9 +41,6 @@ final class MonthView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemBackground
-        
-//        coredata.resetCoreData()
         setCalendarView()
         setSummaryView()
         addViews()
@@ -77,16 +74,16 @@ final class MonthView: UIViewController {
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         
         editDiaryButton.setImage(UIImage(systemName: "pencil.line"), for: .normal)
-        editDiaryButton.tintColor = .white
+        editDiaryButton.tintColor = .label
         editDiaryButton.addTarget(self, action: #selector(editDiaryButtonTapped), for: .touchUpInside)
         editDiaryButton.translatesAutoresizingMaskIntoConstraints = false
         
         showDiaryButton.setImage(UIImage(systemName: "book"), for: .normal)
-        showDiaryButton.tintColor = .black
+        showDiaryButton.tintColor = .label
         showDiaryButton.addTarget(self, action: #selector(showDiaryButtonTapped), for: .touchUpInside)
         showDiaryButton.translatesAutoresizingMaskIntoConstraints = false
         
-        contentsLabel.textColor = .black
+        contentsLabel.textColor = .label
         contentsLabel.numberOfLines = 3
         contentsLabel.sizeToFit()
         contentsLabel.font = UIFont.systemFont(ofSize: 16)

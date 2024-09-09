@@ -19,9 +19,13 @@ class MainView: UIViewController {
     
     let dailyView = DailyView()
     
+    private var backgroundLayer: CALayer!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        
+        setupBackgroundLayer()
+        changeBackground()
         
         setSegmentControl()
         setSettingButton()
@@ -29,21 +33,33 @@ class MainView: UIViewController {
         addConstraints()
         dailyView.view.isHidden = true
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
+    private func setupBackgroundLayer() {
+        backgroundLayer = CALayer()
+        backgroundLayer.contents = UIImage(named: "background")?.cgImage
+        backgroundLayer.frame = view.bounds
+        view.layer.insertSublayer(backgroundLayer, at: 0)
+    }
+    
+    private func changeBackground() {
+        registerForTraitChanges([UITraitUserInterfaceStyle.self]) { (self: Self, previousTraitCollection: UITraitCollection) in
+            self.backgroundLayer.contents = UIImage(named: "background")?.cgImage
+        }
+    }
+    
     private func setSettingButton() {
         settingButton.setImage(UIImage(systemName: "gear"), for: .normal)
         settingButton.addTarget(self, action: #selector(tapSetting), for: .touchUpInside)
-        settingButton.tintColor = .black
-        
+        settingButton.tintColor = .label
         settingButton.translatesAutoresizingMaskIntoConstraints = false
     }
 
     private func setSegmentControl() {
-        
         segmentControl.insertSegment(withTitle: "Month", at: 0, animated: true)
         segmentControl.insertSegment(withTitle: "Day", at: 1, animated: true)
         segmentControl.selectedSegmentIndex = 0
@@ -53,7 +69,7 @@ class MainView: UIViewController {
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)], for: .normal)
         
         segmentControl.setTitleTextAttributes([
-            NSAttributedString.Key.foregroundColor: UIColor.white,
+            NSAttributedString.Key.foregroundColor: UIColor.label,
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)], for: .selected)
         segmentControl.selectedSegmentTintColor = .clear
         segmentControl.setBackgroundImage(UIImage(), for: .normal, barMetrics: .default)
@@ -62,7 +78,7 @@ class MainView: UIViewController {
         segmentControl.addTarget(self, action: #selector(changeUnderLinePosition), for: .valueChanged)
         segmentControl.translatesAutoresizingMaskIntoConstraints = false
         
-        underLineView.backgroundColor = .white
+        underLineView.backgroundColor = .label
         underLineView.translatesAutoresizingMaskIntoConstraints = false
     }
     
