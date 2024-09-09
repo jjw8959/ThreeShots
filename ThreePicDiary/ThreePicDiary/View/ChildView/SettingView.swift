@@ -24,6 +24,8 @@ final class SettingView : UIViewController {
     
     var picTimes = [Date(), Date(), Date()]
     
+    var themeSelection = 0
+    
     private var backgroundLayer: CALayer!
     
     override func viewDidLoad() {
@@ -36,6 +38,7 @@ final class SettingView : UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         isDiaryAlertOn = UserDefaults.standard.bool(forKey: diaryAlertStatus)
         isPictureAlertOn = UserDefaults.standard.bool(forKey: pictureAlertStatus)
+        themeSelection = UserDefaults.standard.integer(forKey: "themeSelection")
         
         diaryTime = UserDefaults.standard.object(forKey: "diaryTime") as? Date ?? Date()
         picTimes[0] = UserDefaults.standard.object(forKey: "firstPicTime") as? Date ?? Date()
@@ -171,6 +174,7 @@ final class SettingView : UIViewController {
         UserDefaults.standard.setValue(picTimes[0], forKey: "firstPicTime")
         UserDefaults.standard.setValue(picTimes[1], forKey: "secondPicTime")
         UserDefaults.standard.setValue(picTimes[2], forKey: "thirdPicTime")
+        
         requestDiaryNoti()
         requestPictureNoti(times: [picTimes[0], picTimes[1], picTimes[2]])
         
@@ -180,18 +184,20 @@ final class SettingView : UIViewController {
 
 extension SettingView: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
+            return 1
+        case 1:
             if isDiaryAlertOn {
                 return 2
             } else {
                 return 1
             }
-        case 1:
+        case 2:
             if isPictureAlertOn {
                 return 4
             } else {
@@ -203,8 +209,22 @@ extension SettingView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+            var content = cell.defaultContentConfiguration()
+            let themeTitleString = "화면 모드"
+            content.text = themeTitleString
+            cell.contentConfiguration = content
+            
+            let toggleItems = ["시스템", "라이트", "다크"]
+            let toggleSegment = UISegmentedControl(items: toggleItems)
+            toggleSegment.selectedSegmentIndex = themeSelection
+            
+            toggleSegment.addTarget(self, action: #selector(toggleSelection), for: .valueChanged)
+            cell.accessoryView = toggleSegment
+            
+            return cell
+        } else if indexPath.section == 1 {
             if indexPath.row == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
                 var content = cell.defaultContentConfiguration()
@@ -241,7 +261,7 @@ extension SettingView: UITableViewDelegate, UITableViewDataSource {
                 return cell
                 
             }
-        } else if indexPath.section == 1 {
+        } else if indexPath.section == 2 {
             if indexPath.row == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
                 var content = cell.defaultContentConfiguration()
@@ -290,15 +310,16 @@ extension SettingView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        var alerTimeString = ""
-        var alertPictureString = ""
+//        var themeString = "화면 모드"
+        let alerTimeString = "일기 알림"
+        let alertPictureString = "사진 알림"
         
         switch section {
         case 0:
-            alerTimeString = "일기 알림"
-            return alerTimeString
+            return ""
         case 1:
-            alertPictureString = "사진 알림"
+            return alerTimeString
+        case 2:
             return alertPictureString
         default:
             return ""
@@ -306,22 +327,46 @@ extension SettingView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        let diaryText = "일기를 쓰고싶은 시간을 정해 주세요."
+        let picText = "사진을 찍고싶은 시간을 정해 주세요."
+        
         switch section {
         case 0:
-            let text = "일기를 쓰고싶은 시간을 정해 주세요."
-            return text
+            return ""
         case 1:
-            let text = "사진을 찍고싶은 시간을 정해 주세요."
-            return text
+            return diaryText
+        case 2:
+            return picText
         default:
             return ""
         }
     }
     
     @objc
+    func toggleSelection(segment: UISegmentedControl) {
+        let sceneDelegate = UIApplication.shared.connectedScenes
+            .first?.delegate as? SceneDelegate
+
+        switch segment.selectedSegmentIndex {
+        case 0:
+            sceneDelegate?.window?.overrideUserInterfaceStyle = .unspecified
+        case 1:
+            sceneDelegate?.window?.overrideUserInterfaceStyle = .light
+        case 2:
+            sceneDelegate?.window?.overrideUserInterfaceStyle = .dark
+        default:
+            break
+        }
+
+        themeSelection = segment.selectedSegmentIndex
+        UserDefaults.standard.setValue(themeSelection, forKey: "themeSelection")
+    }
+
+    
+    @objc
     func toggleDiaryAlert() {
         isDiaryAlertOn.toggle()
-        UserDefaults.standard.set(isDiaryAlertOn, forKey: diaryAlertStatus)
+        UserDefaults.standard.setValue(isDiaryAlertOn, forKey: diaryAlertStatus)
         
         let indexSet = IndexSet(integer: 0)
         tableView.reloadSections(indexSet, with: .automatic)
@@ -333,7 +378,7 @@ extension SettingView: UITableViewDelegate, UITableViewDataSource {
     @objc
     func togglePictureAlert() {
         isPictureAlertOn.toggle()
-        UserDefaults.standard.set(isPictureAlertOn, forKey: pictureAlertStatus)
+        UserDefaults.standard.setValue(isPictureAlertOn, forKey: pictureAlertStatus)
         
         let indexSet = IndexSet(integer: 1)
         tableView.reloadSections(indexSet, with: .automatic)
