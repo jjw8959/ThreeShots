@@ -47,10 +47,17 @@ final class SettingView : UIViewController {
         
         let viewTitle = "설정"
         self.title = viewTitle
+        let preferredSize = UIFont.preferredFont(forTextStyle: .title3)
+        let fontSize = preferredSize.pointSize
+        self.navigationController?.navigationBar.titleTextAttributes = [
+            .font: UIFont(name: "HakgyoansimGeurimilgiTTF-R", size: fontSize)!
+        ]
         
         let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(closeButtonTapped))
         
         let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonTapped))
+        saveButton.setTitleTextAttributes([.font: UIFont(name: "HakgyoansimGeurimilgiTTF-R", size: UIFont.buttonFontSize)!], for: .normal)
+        saveButton.setTitleTextAttributes([.font: UIFont(name: "HakgyoansimGeurimilgiTTF-R", size: UIFont.buttonFontSize)!], for: .selected)
         
         navigationItem.leftBarButtonItem = backButton
         navigationItem.rightBarButtonItem = saveButton
@@ -214,11 +221,20 @@ extension SettingView: UITableViewDelegate, UITableViewDataSource {
             var content = cell.defaultContentConfiguration()
             let themeTitleString = "화면 모드"
             content.text = themeTitleString
+            let preferredSize = UIFont.preferredFont(forTextStyle: .headline)
+            let fontSize = preferredSize.pointSize
+            content.textProperties.font = UIFont(name: "HakgyoansimGeurimilgiTTF-R", size: fontSize)!
             cell.contentConfiguration = content
             
             let toggleItems = ["시스템", "라이트", "다크"]
             let toggleSegment = UISegmentedControl(items: toggleItems)
             toggleSegment.selectedSegmentIndex = themeSelection
+            let attributes: [NSAttributedString.Key: Any] = [
+                .font: UIFont(name: "HakgyoansimGeurimilgiTTF-R", size: UIFont.systemFontSize) as Any
+            ]
+            
+            toggleSegment.setTitleTextAttributes(attributes, for: .normal)
+            toggleSegment.setTitleTextAttributes(attributes, for: .selected)
             
             toggleSegment.addTarget(self, action: #selector(toggleSelection), for: .valueChanged)
             cell.accessoryView = toggleSegment
@@ -230,6 +246,9 @@ extension SettingView: UITableViewDelegate, UITableViewDataSource {
                 var content = cell.defaultContentConfiguration()
                 let diaryNotiTitleString = "일기 알림"
                 content.text = diaryNotiTitleString
+                let preferredSize = UIFont.preferredFont(forTextStyle: .headline)
+                let fontSize = preferredSize.pointSize
+                content.textProperties.font = UIFont(name: "HakgyoansimGeurimilgiTTF-R", size: fontSize)!
                 cell.contentConfiguration = content
                 
                 let toggleSwitch = UISwitch()
@@ -248,6 +267,9 @@ extension SettingView: UITableViewDelegate, UITableViewDataSource {
                 
                 let diaryNotiTimeString = "알림 시간"
                 content.text = diaryNotiTimeString
+                let preferredSize = UIFont.preferredFont(forTextStyle: .headline)
+                let fontSize = preferredSize.pointSize
+                content.textProperties.font = UIFont(name: "HakgyoansimGeurimilgiTTF-R", size: fontSize)!
                 cell.contentConfiguration = content
                 
                 let timePickerView = UIDatePicker()
@@ -267,6 +289,9 @@ extension SettingView: UITableViewDelegate, UITableViewDataSource {
                 var content = cell.defaultContentConfiguration()
                 let diaryNotiTitleString = "사진 알림"
                 content.text = diaryNotiTitleString
+                let preferredSize = UIFont.preferredFont(forTextStyle: .headline)
+                let fontSize = preferredSize.pointSize
+                content.textProperties.font = UIFont(name: "HakgyoansimGeurimilgiTTF-R", size: fontSize)!
                 cell.contentConfiguration = content
                 
                 let toggleSwitch = UISwitch()
@@ -290,10 +315,13 @@ extension SettingView: UITableViewDelegate, UITableViewDataSource {
                 default:
                     content.text = "알림 시간"
                 }
-                
+                let preferredSize = UIFont.preferredFont(forTextStyle: .headline)
+                let fontSize = preferredSize.pointSize
+                content.textProperties.font = UIFont(name: "HakgyoansimGeurimilgiTTF-R", size: fontSize)!
                 cell.contentConfiguration = content
                 
                 let timePickerView = UIDatePicker()
+                
                 timePickerView.preferredDatePickerStyle = .compact
                 timePickerView.datePickerMode = .time
                 timePickerView.date = picTimes[indexPath.row - 1]
@@ -308,44 +336,42 @@ extension SettingView: UITableViewDelegate, UITableViewDataSource {
         }
         return UITableViewCell()
     }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        var themeString = "화면 모드"
-        let alerTimeString = "일기 알림"
-        let alertPictureString = "사진 알림"
-        
-        switch section {
-        case 0:
-            return ""
-        case 1:
-            return alerTimeString
-        case 2:
-            return alertPictureString
-        default:
-            return ""
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        let diaryText = "일기를 쓰고싶은 시간을 정해 주세요."
-        let picText = "사진을 찍고싶은 시간을 정해 주세요."
-        
-        switch section {
-        case 0:
-            return ""
-        case 1:
-            return diaryText
-        case 2:
-            return picText
-        default:
-            return ""
-        }
-    }
+
+    // UI의 심미성부분에서 검토필요
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        let alerTimeString = "일기 알림"
+//        let alertPictureString = "사진 알림"
+//        
+//        switch section {
+//        case 0:
+//            return ""
+//        case 1:
+//            return alerTimeString
+//        case 2:
+//            return alertPictureString
+//        default:
+//            return ""
+//        }
+//    }
+//    
+//    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+//        let diaryText = "일기를 쓰고싶은 시간을 정해 주세요."
+//        let picText = "사진을 찍고싶은 시간을 정해 주세요."
+//        
+//        switch section {
+//        case 0:
+//            return ""
+//        case 1:
+//            return diaryText
+//        case 2:
+//            return picText
+//        default:
+//            return ""
+//        }
+//    }
     
     @objc
     func toggleSelection(segment: UISegmentedControl) {
-        let sceneDelegate = UIApplication.shared.connectedScenes
-            .first?.delegate as? SceneDelegate
 
         switch segment.selectedSegmentIndex {
         case 0:

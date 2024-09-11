@@ -76,13 +76,22 @@ class MainView: UIViewController {
         segmentControl.insertSegment(withTitle: "Day", at: 1, animated: true)
         segmentControl.selectedSegmentIndex = 0
         
+        let selectedSize = UIFont.preferredFont(forTextStyle: .title3)
+        let selectedFontSize = selectedSize.pointSize
+        
+        let unSelectedSize = UIFont.preferredFont(forTextStyle: .callout)
+        let unSelectedFontSize = unSelectedSize.pointSize
+        
+        // 평상시
         segmentControl.setTitleTextAttributes([
             NSAttributedString.Key.foregroundColor: UIColor.gray,
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)], for: .normal)
-        
+            NSAttributedString.Key.font: UIFont(name: "Hakgyoansim Geurimilgi TTF R", size: unSelectedFontSize) as Any]
+                                              ,for: .normal)
+            
+        // 선택시
         segmentControl.setTitleTextAttributes([
             NSAttributedString.Key.foregroundColor: UIColor.label,
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)], for: .selected)
+            NSAttributedString.Key.font: UIFont(name: "Hakgyoansim Geurimilgi TTF R", size: selectedFontSize) as Any], for: .selected)
         segmentControl.selectedSegmentTintColor = .clear
         segmentControl.setBackgroundImage(UIImage(), for: .normal, barMetrics: .default)
         segmentControl.setDividerImage(UIImage(), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)

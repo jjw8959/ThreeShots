@@ -54,7 +54,9 @@ final class DailyView: UIViewController {
     private func setView() {
         noDataLabel.translatesAutoresizingMaskIntoConstraints = false
         noDataLabel.text = "아직 작성된 일기가 없어요..."
-        noDataLabel.font = UIFont.preferredFont(forTextStyle: .title1)
+        let preferredSize = UIFont.preferredFont(forTextStyle: .title3)
+        let fontSize = preferredSize.pointSize
+        noDataLabel.font = UIFont(name: "HakgyoansimGeurimilgiTTF-R", size: fontSize)
         noDataLabel.textAlignment = .center
         noDataLabel.textColor = .label
         view.addSubview(noDataLabel)

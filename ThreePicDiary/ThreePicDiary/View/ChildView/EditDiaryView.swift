@@ -44,6 +44,11 @@ final class EditDiaryView: UIViewController, ThreePictureViewDelegate {
         threePicsView.delegate = self
         
         self.navigationItem.title = dateString
+        let preferredSize = UIFont.preferredFont(forTextStyle: .title3)
+        let fontSize = preferredSize.pointSize
+        self.navigationController?.navigationBar.titleTextAttributes = [
+            .font: UIFont(name: "HakgyoansimGeurimilgiTTF-R", size: fontSize)!
+        ]
         
         setupBackgroundLayer()
         changeBackground()
@@ -77,6 +82,11 @@ final class EditDiaryView: UIViewController, ThreePictureViewDelegate {
         
         navigationItem.rightBarButtonItem = saveButton
         
+        let preferredSize = UIFont.preferredFont(forTextStyle: .title2)
+        let fontSize = preferredSize.pointSize
+        contentField.font = UIFont(name: "HakgyoansimGeurimilgiTTF-R", size: fontSize)
+        contentField.backgroundColor = .clear
+        
         //    MARK: translates~ = false
         threePicsView.translatesAutoresizingMaskIntoConstraints = false
         addPicsButton.translatesAutoresizingMaskIntoConstraints = false
@@ -89,7 +99,6 @@ final class EditDiaryView: UIViewController, ThreePictureViewDelegate {
             threePicsView.secondImageView.image = diary?.secondImage
             threePicsView.thirdImageView.image = diary?.thirdImage
             addPicsButton.addTarget(self, action: #selector(imageEditButtonTapped), for: .touchUpInside)
-            contentField.font = UIFont.systemFont(ofSize: 16)
         } else {    // 데이터 없을때
             let imageConfig = UIImage.SymbolConfiguration(pointSize: 24)
             let configuredImage = UIImage(systemName: "plus", withConfiguration: imageConfig)
@@ -100,7 +109,6 @@ final class EditDiaryView: UIViewController, ThreePictureViewDelegate {
             addPicsButton.addTarget(self, action: #selector(imageEditButtonTapped), for: .touchUpInside)
             contentField.text = "아직 작성된 일기가 없어요..."
             contentField.textColor = .placeholderText
-            contentField.font = UIFont.systemFont(ofSize: 16)
         }
     }
     
