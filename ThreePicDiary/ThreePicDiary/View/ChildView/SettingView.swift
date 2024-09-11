@@ -368,11 +368,16 @@ extension SettingView: UITableViewDelegate, UITableViewDataSource {
         isDiaryAlertOn.toggle()
         UserDefaults.standard.setValue(isDiaryAlertOn, forKey: diaryAlertStatus)
         
-        let indexSet = IndexSet(integer: 0)
-        tableView.reloadSections(indexSet, with: .automatic)
-        if isDiaryAlertOn == false {
-            
+        tableView.beginUpdates()
+        
+        let indexPath = IndexPath(row: 1, section: 1)
+        if isDiaryAlertOn {
+            tableView.insertRows(at: [indexPath], with: .automatic)
+        } else {
+            tableView.deleteRows(at: [indexPath], with: .automatic)
         }
+        
+        tableView.endUpdates()
     }
     
     @objc
@@ -380,8 +385,16 @@ extension SettingView: UITableViewDelegate, UITableViewDataSource {
         isPictureAlertOn.toggle()
         UserDefaults.standard.setValue(isPictureAlertOn, forKey: pictureAlertStatus)
         
-        let indexSet = IndexSet(integer: 1)
-        tableView.reloadSections(indexSet, with: .automatic)
+        tableView.beginUpdates()
+        
+        let indexPaths = [IndexPath(row: 1, section: 2), IndexPath(row: 2, section: 2), IndexPath(row: 3, section: 2)]
+        if isPictureAlertOn {
+            tableView.insertRows(at: indexPaths, with: .automatic)
+        } else {
+            tableView.deleteRows(at: indexPaths, with: .automatic)
+        }
+        
+        tableView.endUpdates()
     }
     
     @objc
