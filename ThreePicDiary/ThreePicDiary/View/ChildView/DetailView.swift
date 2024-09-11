@@ -22,6 +22,8 @@ final class DetailView: UIViewController {
     
     private var backgroundLayer: CALayer!
     
+    let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+    
     init(_ diary: Diary?, date: String) {
         super.init(nibName: nil, bundle: nil)
         self.diary = diary
@@ -102,6 +104,14 @@ final class DetailView: UIViewController {
         
         navigationItem.rightBarButtonItem = menuButton
         navigationItem.rightBarButtonItem?.menu = barButtonMenu
+        
+        if sceneDelegate?.window?.traitCollection.userInterfaceStyle == .dark {
+            backButton.tintColor = .white
+            menuButton.tintColor = .white
+        } else {
+            backButton.tintColor = .black
+            menuButton.tintColor = .black
+        }
         
         threePicsView.translatesAutoresizingMaskIntoConstraints = false
         contentLabel.translatesAutoresizingMaskIntoConstraints = false

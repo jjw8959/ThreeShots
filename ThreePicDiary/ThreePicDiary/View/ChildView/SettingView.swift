@@ -64,6 +64,14 @@ final class SettingView : UIViewController {
         navigationItem.leftBarButtonItem = backButton
         navigationItem.rightBarButtonItem = saveButton
         
+        if sceneDelegate?.window?.traitCollection.userInterfaceStyle == .dark {
+            backButton.tintColor = .white
+            saveButton.tintColor = .white
+        } else {
+            backButton.tintColor = .black
+            saveButton.tintColor = .black
+        }
+        
         setTableView()
     }
     

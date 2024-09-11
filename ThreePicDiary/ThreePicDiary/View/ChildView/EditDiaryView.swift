@@ -25,6 +25,8 @@ final class EditDiaryView: UIViewController, ThreePictureViewDelegate {
     
     private var backgroundLayer: CALayer!
     
+    let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+    
     init(_ diary: Diary?, date: String) {
         super.init(nibName: nil, bundle: nil)
         self.diary = diary
@@ -74,13 +76,20 @@ final class EditDiaryView: UIViewController, ThreePictureViewDelegate {
         //    MARK: 네비게이션바
         let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(closeButtonTapped))
         
-        navigationItem.leftBarButtonItem = backButton
-        
         let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonTapped))
-        saveButton.image = UIImage(systemName: "square.and.arrow.down")
-        saveButton.title = "Save"
+        saveButton.setTitleTextAttributes([.font: UIFont(name: "HakgyoansimGeurimilgiTTF-R", size: UIFont.buttonFontSize)!], for: .normal)
+        saveButton.setTitleTextAttributes([.font: UIFont(name: "HakgyoansimGeurimilgiTTF-R", size: UIFont.buttonFontSize)!], for: .selected)
         
+        navigationItem.leftBarButtonItem = backButton
         navigationItem.rightBarButtonItem = saveButton
+        
+        if sceneDelegate?.window?.traitCollection.userInterfaceStyle == .dark {
+            backButton.tintColor = .white
+            saveButton.tintColor = .white
+        } else {
+            backButton.tintColor = .black
+            saveButton.tintColor = .black
+        }
         
         let preferredSize = UIFont.preferredFont(forTextStyle: .title2)
         let fontSize = preferredSize.pointSize
