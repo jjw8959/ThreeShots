@@ -28,6 +28,8 @@ final class SettingView : UIViewController {
     
     private var backgroundLayer: CALayer!
     
+    let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 //        view.backgroundColor = .systemBackground
