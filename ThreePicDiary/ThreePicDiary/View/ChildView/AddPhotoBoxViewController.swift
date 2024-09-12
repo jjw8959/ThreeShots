@@ -31,6 +31,8 @@ class AddPhotoBoxViewController: UIViewController, PHPickerViewControllerDelegat
         super.viewDidLoad()
         
         let safeArea = self.view.safeAreaLayoutGuide
+        
+        self.view.backgroundColor = .clear
 
         addPhotoBox.addTarget(self, action: #selector(pickPhotos), for: .touchUpInside)
         view.addSubview(addPhotoBox)

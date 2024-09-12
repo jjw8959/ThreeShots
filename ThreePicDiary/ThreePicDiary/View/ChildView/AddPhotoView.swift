@@ -16,6 +16,8 @@ class AddPhotoView: UIViewController {
     
     var dateString = " "
     
+    private var backgroundLayer: CALayer!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,6 +25,12 @@ class AddPhotoView: UIViewController {
         
         let backButton = UIBarButtonItem(title: "back", image: UIImage(systemName: "chevron.left"), target: self, action: #selector(cancelButtonTapped))
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
+        
+        doneButton.setTitleTextAttributes([.font: UIFont(name: "HakgyoansimGeurimilgiTTF-R", size: UIFont.buttonFontSize)!], for: .normal)
+        doneButton.setTitleTextAttributes([.font: UIFont(name: "HakgyoansimGeurimilgiTTF-R", size: UIFont.buttonFontSize)!], for: .selected)
+        
+        backButton.tintColor = .label
+        doneButton.tintColor = .label
         
         navigationItem.leftBarButtonItem = backButton
         navigationItem.rightBarButtonItem = doneButton
@@ -40,6 +48,22 @@ class AddPhotoView: UIViewController {
             addPhotoBoxVC.view.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             addPhotoBoxVC.view.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
         ])
+        
+        setupBackgroundLayer()
+        changeBackground()
+    }
+    
+    private func setupBackgroundLayer() {
+        backgroundLayer = CALayer()
+        backgroundLayer.contents = UIImage(named: "background")?.cgImage
+        backgroundLayer.frame = view.bounds
+        view.layer.insertSublayer(backgroundLayer, at: 0)
+    }
+    
+    private func changeBackground() {
+        registerForTraitChanges([UITraitUserInterfaceStyle.self]) { (self: Self, previousTraitCollection: UITraitCollection) in
+            self.backgroundLayer.contents = UIImage(named: "background")?.cgImage
+        }
     }
     
     @objc func cancelButtonTapped() {
