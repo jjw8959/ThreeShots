@@ -80,16 +80,11 @@ final class EditDiaryView: UIViewController, ThreePictureViewDelegate {
         saveButton.setTitleTextAttributes([.font: UIFont(name: "HakgyoansimGeurimilgiTTF-R", size: UIFont.buttonFontSize)!], for: .normal)
         saveButton.setTitleTextAttributes([.font: UIFont(name: "HakgyoansimGeurimilgiTTF-R", size: UIFont.buttonFontSize)!], for: .selected)
         
+        backButton.tintColor = .label
+        saveButton.tintColor = .label
+        
         navigationItem.leftBarButtonItem = backButton
         navigationItem.rightBarButtonItem = saveButton
-        
-        if sceneDelegate?.window?.traitCollection.userInterfaceStyle == .dark {
-            backButton.tintColor = .white
-            saveButton.tintColor = .white
-        } else {
-            backButton.tintColor = .black
-            saveButton.tintColor = .black
-        }
         
         let preferredSize = UIFont.preferredFont(forTextStyle: .title2)
         let fontSize = preferredSize.pointSize
@@ -112,7 +107,7 @@ final class EditDiaryView: UIViewController, ThreePictureViewDelegate {
             let imageConfig = UIImage.SymbolConfiguration(pointSize: 24)
             let configuredImage = UIImage(systemName: "plus", withConfiguration: imageConfig)
             addPicsButton.setImage(configuredImage, for: .normal)
-            addPicsButton.backgroundColor = .systemGray
+            addPicsButton.backgroundColor = .systemGray2
             addPicsButton.layer.cornerRadius = CGFloat(10)
             addPicsButton.tintColor = .white
             addPicsButton.addTarget(self, action: #selector(imageEditButtonTapped), for: .touchUpInside)

@@ -102,16 +102,11 @@ final class DetailView: UIViewController {
         
         let menuButton = UIBarButtonItem(title: "menu", image: UIImage(systemName: "ellipsis"),target: self, action: nil)
         
+        backButton.tintColor = .label
+        menuButton.tintColor = .label
+        
         navigationItem.rightBarButtonItem = menuButton
         navigationItem.rightBarButtonItem?.menu = barButtonMenu
-        
-        if sceneDelegate?.window?.traitCollection.userInterfaceStyle == .dark {
-            backButton.tintColor = .white
-            menuButton.tintColor = .white
-        } else {
-            backButton.tintColor = .black
-            menuButton.tintColor = .black
-        }
         
         threePicsView.translatesAutoresizingMaskIntoConstraints = false
         contentLabel.translatesAutoresizingMaskIntoConstraints = false

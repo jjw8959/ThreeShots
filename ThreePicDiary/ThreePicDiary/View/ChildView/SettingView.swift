@@ -32,12 +32,12 @@ final class SettingView : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        view.backgroundColor = .systemBackground
+        
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         
         setupBackgroundLayer()
         changeBackground()
         
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
         isDiaryAlertOn = UserDefaults.standard.bool(forKey: diaryAlertStatus)
         isPictureAlertOn = UserDefaults.standard.bool(forKey: pictureAlertStatus)
         themeSelection = UserDefaults.standard.integer(forKey: "themeSelection")
@@ -56,21 +56,16 @@ final class SettingView : UIViewController {
         ]
         
         let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(closeButtonTapped))
-        
         let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonTapped))
+        
         saveButton.setTitleTextAttributes([.font: UIFont(name: "HakgyoansimGeurimilgiTTF-R", size: UIFont.buttonFontSize)!], for: .normal)
         saveButton.setTitleTextAttributes([.font: UIFont(name: "HakgyoansimGeurimilgiTTF-R", size: UIFont.buttonFontSize)!], for: .selected)
         
+        backButton.tintColor = .label
+        saveButton.tintColor = .label
+        
         navigationItem.leftBarButtonItem = backButton
         navigationItem.rightBarButtonItem = saveButton
-        
-        if sceneDelegate?.window?.traitCollection.userInterfaceStyle == .dark {
-            backButton.tintColor = .white
-            saveButton.tintColor = .white
-        } else {
-            backButton.tintColor = .black
-            saveButton.tintColor = .black
-        }
         
         setTableView()
     }
@@ -385,24 +380,13 @@ extension SettingView: UITableViewDelegate, UITableViewDataSource {
 
         switch segment.selectedSegmentIndex {
         case 0:
-            sceneDelegate?.window?.overrideUserInterfaceStyle = UITraitCollection.current.userInterfaceStyle
-            print(0)
+            sceneDelegate?.window?.overrideUserInterfaceStyle = .unspecified
         case 1:
             sceneDelegate?.window?.overrideUserInterfaceStyle = .light
-            print(1)
         case 2:
             sceneDelegate?.window?.overrideUserInterfaceStyle = .dark
-            print(2)
         default:
             break
-        }
-        
-        if sceneDelegate?.window?.traitCollection.userInterfaceStyle == .dark {
-            navigationItem.leftBarButtonItem?.tintColor = .white
-            navigationItem.rightBarButtonItem?.tintColor = .white
-        } else {
-            navigationItem.leftBarButtonItem?.tintColor = .black
-            navigationItem.rightBarButtonItem?.tintColor = .black
         }
 
         themeSelection = segment.selectedSegmentIndex
