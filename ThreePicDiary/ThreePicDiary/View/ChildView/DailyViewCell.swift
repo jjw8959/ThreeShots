@@ -82,7 +82,7 @@ class DailyViewCell: UITableViewCell {
         firstImageView.clipsToBounds = true
         
         containerView.layer.cornerRadius = 10
-        containerView.layer.shadowColor = UIColor.gray.cgColor
+        containerView.layer.shadowColor = UIColor.systemGray.cgColor
         containerView.layer.shadowOpacity = 0.4
         containerView.layer.shadowOffset = CGSize(width: 1, height: 1)
         containerView.layer.shadowRadius = 5

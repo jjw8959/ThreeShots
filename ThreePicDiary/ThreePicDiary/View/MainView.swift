@@ -84,7 +84,7 @@ class MainView: UIViewController {
         
         // 평상시
         segmentControl.setTitleTextAttributes([
-            NSAttributedString.Key.foregroundColor: UIColor.gray,
+            NSAttributedString.Key.foregroundColor: UIColor.systemGray2,
             NSAttributedString.Key.font: UIFont(name: "Hakgyoansim Geurimilgi TTF R", size: unSelectedFontSize) as Any]
                                               ,for: .normal)
             
