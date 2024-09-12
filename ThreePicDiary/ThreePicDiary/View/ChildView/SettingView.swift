@@ -385,19 +385,29 @@ extension SettingView: UITableViewDelegate, UITableViewDataSource {
 
         switch segment.selectedSegmentIndex {
         case 0:
-            sceneDelegate?.window?.overrideUserInterfaceStyle = .unspecified
+            sceneDelegate?.window?.overrideUserInterfaceStyle = UITraitCollection.current.userInterfaceStyle
+            print(0)
         case 1:
             sceneDelegate?.window?.overrideUserInterfaceStyle = .light
+            print(1)
         case 2:
             sceneDelegate?.window?.overrideUserInterfaceStyle = .dark
+            print(2)
         default:
             break
+        }
+        
+        if sceneDelegate?.window?.traitCollection.userInterfaceStyle == .dark {
+            navigationItem.leftBarButtonItem?.tintColor = .white
+            navigationItem.rightBarButtonItem?.tintColor = .white
+        } else {
+            navigationItem.leftBarButtonItem?.tintColor = .black
+            navigationItem.rightBarButtonItem?.tintColor = .black
         }
 
         themeSelection = segment.selectedSegmentIndex
         UserDefaults.standard.setValue(themeSelection, forKey: "themeSelection")
     }
-
     
     @objc
     func toggleDiaryAlert() {
