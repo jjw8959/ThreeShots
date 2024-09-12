@@ -41,9 +41,6 @@ final class MonthView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemBackground
-        
-//        coredata.resetCoreData()
         setCalendarView()
         setSummaryView()
         addViews()
@@ -68,28 +65,53 @@ final class MonthView: UIViewController {
         calendarView.selectionBehavior = dateSelection
         dateSelection.setSelected(selectedDate, animated: true)
         
+        let preferredSize = UIFont.preferredFont(forTextStyle: .body)
+        let fontSize = preferredSize.pointSize
+        
+        changeCalendarFont(to: UIFont(name: "Hakgyoansim Geurimilgi TTF R", size: fontSize)!)
+        
+        
         view.addSubview(calendarView)
     }
     
+    private func changeCalendarFont(to font: UIFont) {
+        for subview in calendarView.subviews {
+            setFontForSubview(view: subview, font: font)
+        }
+    }
+    
+    private func setFontForSubview(view: UIView, font: UIFont) {
+        if let label = view as? UILabel {
+            label.font = font
+        } else {
+            for subview in view.subviews {
+                setFontForSubview(view: subview, font: font)
+            }
+        }
+    }
+    
     func setSummaryView() {
-        
-        dateLabel.font = UIFont.systemFont(ofSize: 17)
+        let preferredSize = UIFont.preferredFont(forTextStyle: .headline)
+        let fontSize = preferredSize.pointSize
+        dateLabel.font = UIFont(name: "HakgyoansimGeurimilgiTTF-R", size: fontSize)
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         
         editDiaryButton.setImage(UIImage(systemName: "pencil.line"), for: .normal)
-        editDiaryButton.tintColor = .white
+        editDiaryButton.tintColor = .label
         editDiaryButton.addTarget(self, action: #selector(editDiaryButtonTapped), for: .touchUpInside)
         editDiaryButton.translatesAutoresizingMaskIntoConstraints = false
         
         showDiaryButton.setImage(UIImage(systemName: "book"), for: .normal)
-        showDiaryButton.tintColor = .black
+        showDiaryButton.tintColor = .label
         showDiaryButton.addTarget(self, action: #selector(showDiaryButtonTapped), for: .touchUpInside)
         showDiaryButton.translatesAutoresizingMaskIntoConstraints = false
         
-        contentsLabel.textColor = .black
+        contentsLabel.textColor = .label
         contentsLabel.numberOfLines = 3
         contentsLabel.sizeToFit()
-        contentsLabel.font = UIFont.systemFont(ofSize: 16)
+        let preferredContentsSize = UIFont.preferredFont(forTextStyle: .title2)
+        let contentsFontSize = preferredContentsSize.pointSize
+        contentsLabel.font = UIFont(name: "HakgyoansimGeurimilgiTTF-R", size: contentsFontSize)
         contentsLabel.translatesAutoresizingMaskIntoConstraints = false
         
         modifySummaryView()
@@ -109,10 +131,10 @@ final class MonthView: UIViewController {
             calendarView.topAnchor.constraint(equalTo: safeArea.topAnchor),
             calendarView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
             calendarView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16),
-            calendarView.heightAnchor.constraint(equalTo: safeArea.heightAnchor, multiplier: 7/9),
+            calendarView.heightAnchor.constraint(equalTo: safeArea.heightAnchor, multiplier: 7/10),
             
-            dateLabel.topAnchor.constraint(equalTo: calendarView.bottomAnchor, constant: 10),
-            dateLabel.leadingAnchor.constraint(equalTo: calendarView.leadingAnchor),
+            dateLabel.topAnchor.constraint(equalTo: calendarView.bottomAnchor),
+            dateLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 28),
             
             showDiaryButton.topAnchor.constraint(equalTo: calendarView.bottomAnchor, constant: 10),
             showDiaryButton.trailingAnchor.constraint(equalTo: calendarView.trailingAnchor),
@@ -121,7 +143,7 @@ final class MonthView: UIViewController {
             editDiaryButton.trailingAnchor.constraint(equalTo: calendarView.trailingAnchor),
             
             contentsLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 16),
-            contentsLabel.leadingAnchor.constraint(equalTo: calendarView.leadingAnchor),
+            contentsLabel.leadingAnchor.constraint(equalTo: dateLabel.leadingAnchor),
             contentsLabel.trailingAnchor.constraint(equalTo: calendarView.trailingAnchor),
         ])
     }
@@ -195,8 +217,6 @@ extension MonthView: UICalendarViewDelegate, UICalendarSelectionSingleDateDelega
             editDiaryButton.setNeedsDisplay()
             showDiaryButton.setNeedsDisplay()
         }
-        
-        
     }
     
     func calendarView(_ calendarView: UICalendarView, decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration? {

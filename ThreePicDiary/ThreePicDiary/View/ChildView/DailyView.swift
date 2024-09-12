@@ -24,6 +24,8 @@ final class DailyView: UIViewController {
     
     let noDataLabel = UILabel()
     
+    private var backgroundLayer: CALayer!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,8 +34,6 @@ final class DailyView: UIViewController {
         tableView.register(DailyViewCell.self, forCellReuseIdentifier: cellName)
         
         setView()
-        
-        removeShadow()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,13 +54,17 @@ final class DailyView: UIViewController {
     private func setView() {
         noDataLabel.translatesAutoresizingMaskIntoConstraints = false
         noDataLabel.text = "아직 작성된 일기가 없어요..."
-        noDataLabel.font = UIFont.preferredFont(forTextStyle: .title1)
+        let preferredSize = UIFont.preferredFont(forTextStyle: .title3)
+        let fontSize = preferredSize.pointSize
+        noDataLabel.font = UIFont(name: "HakgyoansimGeurimilgiTTF-R", size: fontSize)
         noDataLabel.textAlignment = .center
-        noDataLabel.textColor = .black
+        noDataLabel.textColor = .label
         view.addSubview(noDataLabel)
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
+        tableView.backgroundColor = .clear
+        
         view.addSubview(tableView)
         
         let safeArea = view.safeAreaLayoutGuide
@@ -86,18 +90,6 @@ final class DailyView: UIViewController {
         
     }
     
-    private func removeShadow() {
-        tableView.layer.shadowOpacity = 0
-        tableView.layer.shadowColor = UIColor.clear.cgColor
-        tableView.layer.shadowOffset = .zero
-        tableView.layer.shadowRadius = 0
-        
-        noDataLabel.layer.shadowOpacity = 0
-        noDataLabel.layer.shadowColor = UIColor.clear.cgColor
-        noDataLabel.layer.shadowOffset = .zero
-        noDataLabel.layer.shadowRadius = 0
-    }
-    
     @objc
     func handleRefresh() {
         guard isBottomRefresh else {
@@ -116,8 +108,6 @@ final class DailyView: UIViewController {
             self.isBottomRefresh = false
         }
     }
-    
-    
 }
 
 extension DailyView: UITableViewDelegate, UITableViewDataSource {
@@ -134,6 +124,7 @@ extension DailyView: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as? DailyViewCell else { return UITableViewCell() }
         cell.dateString = diarys?[indexPath.row].date
         cell.firstImage = diarys?[indexPath.row].firstImage
+        cell.backgroundColor = .clear
         return cell
     }
     

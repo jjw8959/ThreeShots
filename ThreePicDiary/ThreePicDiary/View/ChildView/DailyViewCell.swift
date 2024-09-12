@@ -58,10 +58,14 @@ class DailyViewCell: UITableViewCell {
         monthLabel.textAlignment = .center
         dayLabel.textAlignment = .center
         dowLabel.textAlignment = .center
-        
-        monthLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-        dayLabel.font = UIFont.preferredFont(forTextStyle: .largeTitle).withWeight(.semibold)
-        dowLabel.font = UIFont.preferredFont(forTextStyle: .callout)
+
+        let calloutSize = UIFont.preferredFont(forTextStyle: .callout)
+        let calloutfontSize = calloutSize.pointSize
+        monthLabel.font = UIFont(name: "HakgyoansimGeurimilgiTTF-R", size: calloutfontSize)
+        let largeTitleSize = UIFont.preferredFont(forTextStyle: .largeTitle)
+        let largeTitlefontSize = largeTitleSize.pointSize
+        dayLabel.font = UIFont(name: "HakgyoansimGeurimilgiTTF-R", size: largeTitlefontSize)
+        dowLabel.font = UIFont(name: "HakgyoansimGeurimilgiTTF-R", size: calloutfontSize)
         
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
@@ -77,9 +81,8 @@ class DailyViewCell: UITableViewCell {
         firstImageView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
         firstImageView.clipsToBounds = true
         
-        
         containerView.layer.cornerRadius = 10
-        containerView.layer.shadowColor = UIColor.gray.cgColor
+        containerView.layer.shadowColor = UIColor.systemGray.cgColor
         containerView.layer.shadowOpacity = 0.4
         containerView.layer.shadowOffset = CGSize(width: 1, height: 1)
         containerView.layer.shadowRadius = 5

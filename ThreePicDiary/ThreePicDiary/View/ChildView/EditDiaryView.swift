@@ -23,6 +23,10 @@ final class EditDiaryView: UIViewController, ThreePictureViewDelegate {
     
     var contentField = UITextView()
     
+    private var backgroundLayer: CALayer!
+    
+    let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+    
     init(_ diary: Diary?, date: String) {
         super.init(nibName: nil, bundle: nil)
         self.diary = diary
@@ -35,7 +39,6 @@ final class EditDiaryView: UIViewController, ThreePictureViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
         
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
@@ -43,23 +46,50 @@ final class EditDiaryView: UIViewController, ThreePictureViewDelegate {
         threePicsView.delegate = self
         
         self.navigationItem.title = dateString
+        let preferredSize = UIFont.preferredFont(forTextStyle: .title3)
+        let fontSize = preferredSize.pointSize
+        self.navigationController?.navigationBar.titleTextAttributes = [
+            .font: UIFont(name: "HakgyoansimGeurimilgiTTF-R", size: fontSize)!
+        ]
         
+        setupBackgroundLayer()
+        changeBackground()
         setViews()
         addViews()
         addConstraints()
+    }
+    
+    private func setupBackgroundLayer() {
+        backgroundLayer = CALayer()
+        backgroundLayer.contents = UIImage(named: "background")?.cgImage
+        backgroundLayer.frame = view.bounds
+        view.layer.insertSublayer(backgroundLayer, at: 0)
+    }
+    
+    private func changeBackground() {
+        registerForTraitChanges([UITraitUserInterfaceStyle.self]) { (self: Self, previousTraitCollection: UITraitCollection) in
+            self.backgroundLayer.contents = UIImage(named: "background")?.cgImage
+        }
     }
     
     private func setViews() {
         //    MARK: 네비게이션바
         let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(closeButtonTapped))
         
-        navigationItem.leftBarButtonItem = backButton
-        
         let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonTapped))
-        saveButton.image = UIImage(systemName: "square.and.arrow.down")
-        saveButton.title = "Save"
+        saveButton.setTitleTextAttributes([.font: UIFont(name: "HakgyoansimGeurimilgiTTF-R", size: UIFont.buttonFontSize)!], for: .normal)
+        saveButton.setTitleTextAttributes([.font: UIFont(name: "HakgyoansimGeurimilgiTTF-R", size: UIFont.buttonFontSize)!], for: .selected)
         
+        backButton.tintColor = .label
+        saveButton.tintColor = .label
+        
+        navigationItem.leftBarButtonItem = backButton
         navigationItem.rightBarButtonItem = saveButton
+        
+        let preferredSize = UIFont.preferredFont(forTextStyle: .title2)
+        let fontSize = preferredSize.pointSize
+        contentField.font = UIFont(name: "HakgyoansimGeurimilgiTTF-R", size: fontSize)
+        contentField.backgroundColor = .clear
         
         //    MARK: translates~ = false
         threePicsView.translatesAutoresizingMaskIntoConstraints = false
@@ -73,18 +103,16 @@ final class EditDiaryView: UIViewController, ThreePictureViewDelegate {
             threePicsView.secondImageView.image = diary?.secondImage
             threePicsView.thirdImageView.image = diary?.thirdImage
             addPicsButton.addTarget(self, action: #selector(imageEditButtonTapped), for: .touchUpInside)
-            contentField.font = UIFont.systemFont(ofSize: 16)
         } else {    // 데이터 없을때
             let imageConfig = UIImage.SymbolConfiguration(pointSize: 24)
             let configuredImage = UIImage(systemName: "plus", withConfiguration: imageConfig)
             addPicsButton.setImage(configuredImage, for: .normal)
-            addPicsButton.backgroundColor = .systemGray
+            addPicsButton.backgroundColor = .systemGray2
             addPicsButton.layer.cornerRadius = CGFloat(10)
             addPicsButton.tintColor = .white
             addPicsButton.addTarget(self, action: #selector(imageEditButtonTapped), for: .touchUpInside)
             contentField.text = "아직 작성된 일기가 없어요..."
             contentField.textColor = .placeholderText
-            contentField.font = UIFont.systemFont(ofSize: 16)
         }
     }
     

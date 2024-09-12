@@ -22,6 +22,7 @@
 		097248DF2C7C311D00D8B58B /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097248DE2C7C311D00D8B58B /* SettingView.swift */; };
 		097248E22C7C54B000D8B58B /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 097248E12C7C54B000D8B58B /* UserNotifications.framework */; };
 		097248E42C7E0C8600D8B58B /* ImageOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097248E32C7E0C8600D8B58B /* ImageOverlayView.swift */; };
+		0988B1372C90123600144F14 /* Hakgyoansim Geurimilgi TTF R.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0988B1362C90123600144F14 /* Hakgyoansim Geurimilgi TTF R.ttf */; };
 		09AE8E5A2C6DE254008F8740 /* EditDiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AE8E592C6DE254008F8740 /* EditDiaryView.swift */; };
 		09AE8E5C2C6DE25C008F8740 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AE8E5B2C6DE25C008F8740 /* DetailView.swift */; };
 		09AE8E5E2C6DE2B4008F8740 /* ThreePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AE8E5D2C6DE2B4008F8740 /* ThreePictureView.swift */; };
@@ -48,6 +49,7 @@
 		097248DE2C7C311D00D8B58B /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		097248E12C7C54B000D8B58B /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		097248E32C7E0C8600D8B58B /* ImageOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageOverlayView.swift; sourceTree = "<group>"; };
+		0988B1362C90123600144F14 /* Hakgyoansim Geurimilgi TTF R.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Hakgyoansim Geurimilgi TTF R.ttf"; sourceTree = "<group>"; };
 		09AE8E592C6DE254008F8740 /* EditDiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDiaryView.swift; sourceTree = "<group>"; };
 		09AE8E5B2C6DE25C008F8740 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		09AE8E5D2C6DE2B4008F8740 /* ThreePictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreePictureView.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 				09AE8E632C6DE35A008F8740 /* Model */,
 				09AE8E612C6DE31C008F8740 /* View */,
 				091F84842C607D9200FD8EE1 /* Assets.xcassets */,
+				0988B1362C90123600144F14 /* Hakgyoansim Geurimilgi TTF R.ttf */,
 				091F84862C607D9200FD8EE1 /* LaunchScreen.storyboard */,
 				091F84812C607D9100FD8EE1 /* ThreePicDiary.xcdatamodeld */,
 				091F84892C607D9200FD8EE1 /* Info.plist */,
@@ -122,6 +125,7 @@
 		09AE8E602C6DE311008F8740 /* ChildView */ = {
 			isa = PBXGroup;
 			children = (
+				097248DE2C7C311D00D8B58B /* SettingView.swift */,
 				097248E32C7E0C8600D8B58B /* ImageOverlayView.swift */,
 				091F848F2C60C84A00FD8EE1 /* MonthView.swift */,
 				091F84912C60C85200FD8EE1 /* DailyView.swift */,
@@ -139,7 +143,6 @@
 			isa = PBXGroup;
 			children = (
 				091F847C2C607D9100FD8EE1 /* MainView.swift */,
-				097248DE2C7C311D00D8B58B /* SettingView.swift */,
 				09AE8E602C6DE311008F8740 /* ChildView */,
 			);
 			path = View;
@@ -214,6 +217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				091F84852C607D9200FD8EE1 /* Assets.xcassets in Resources */,
+				0988B1372C90123600144F14 /* Hakgyoansim Geurimilgi TTF R.ttf in Resources */,
 				091F84882C607D9200FD8EE1 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -392,6 +396,7 @@
 				DEVELOPMENT_TEAM = R3VHXN24RU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ThreePicDiary/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "세장일기";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -419,6 +424,7 @@
 				DEVELOPMENT_TEAM = R3VHXN24RU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ThreePicDiary/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "세장일기";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

@@ -20,6 +20,10 @@ final class DetailView: UIViewController {
     
     var diary: Diary?
     
+    private var backgroundLayer: CALayer!
+    
+    let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+    
     init(_ diary: Diary?, date: String) {
         super.init(nibName: nil, bundle: nil)
         self.diary = diary
@@ -33,6 +37,11 @@ final class DetailView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = dateString
+        let preferredSize = UIFont.preferredFont(forTextStyle: .title3)
+        let fontSize = preferredSize.pointSize
+        self.navigationController?.navigationBar.titleTextAttributes = [
+            .font: UIFont(name: "HakgyoansimGeurimilgiTTF-R", size: fontSize)!
+        ]
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
         threePicsView.delegate = self
@@ -41,11 +50,24 @@ final class DetailView: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.view.backgroundColor = .systemBackground
-        
+        setupBackgroundLayer()
+        changeBackground()
         setViews()
         addViews()
         addConstraints()
+    }
+    
+    private func setupBackgroundLayer() {
+        backgroundLayer = CALayer()
+        backgroundLayer.contents = UIImage(named: "background")?.cgImage
+        backgroundLayer.frame = view.bounds
+        view.layer.insertSublayer(backgroundLayer, at: 0)
+    }
+    
+    private func changeBackground() {
+        registerForTraitChanges([UITraitUserInterfaceStyle.self]) { (self: Self, previousTraitCollection: UITraitCollection) in
+            self.backgroundLayer.contents = UIImage(named: "background")?.cgImage
+        }
     }
     
     private func setViews() {
@@ -63,7 +85,9 @@ final class DetailView: UIViewController {
                 self.deleteButtonTapped()
             }
         }
+        
         var barButtonMenu = UIMenu()
+        
         if diary != nil {
             barButtonMenu = UIMenu(title: "menu", children: [
                 UIAction(title: "edit", image: UIImage(systemName: "pencil"), handler: menuHandler),
@@ -78,6 +102,9 @@ final class DetailView: UIViewController {
         
         let menuButton = UIBarButtonItem(title: "menu", image: UIImage(systemName: "ellipsis"),target: self, action: nil)
         
+        backButton.tintColor = .label
+        menuButton.tintColor = .label
+        
         navigationItem.rightBarButtonItem = menuButton
         navigationItem.rightBarButtonItem?.menu = barButtonMenu
         
@@ -87,8 +114,9 @@ final class DetailView: UIViewController {
         threePicsView.firstImageView.image = diary?.firstImage
         threePicsView.secondImageView.image = diary?.secondImage
         threePicsView.thirdImageView.image = diary?.thirdImage
-        
-        contentLabel.font = UIFont.systemFont(ofSize: 16)
+        let preferredSize = UIFont.preferredFont(forTextStyle: .title2)
+        let fontSize = preferredSize.pointSize
+        contentLabel.font = UIFont(name: "HakgyoansimGeurimilgiTTF-R", size: fontSize)
         contentLabel.numberOfLines = 0
         contentLabel.sizeToFit()
         contentLabel.text = self.diary?.content
