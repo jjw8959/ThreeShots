@@ -44,10 +44,7 @@ class MainView: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        let halfWidth = segmentControl.frame.width / 2
-        xPosition = segmentControl.frame.origin.x + (halfWidth * CGFloat(segmentControl.selectedSegmentIndex))
-        
-        underLineView.frame.origin.x = xPosition
+        changeUnderLinePosition(false)
     }
 
     
@@ -96,7 +93,7 @@ class MainView: UIViewController {
         segmentControl.setBackgroundImage(UIImage(), for: .normal, barMetrics: .default)
         segmentControl.setDividerImage(UIImage(), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
         
-        segmentControl.addTarget(self, action: #selector(changeUnderLinePosition), for: .valueChanged)
+        segmentControl.addTarget(self, action: #selector(segmentValueChanged), for: .valueChanged)
         segmentControl.translatesAutoresizingMaskIntoConstraints = false
         
         underLineView.backgroundColor = .label
@@ -151,15 +148,26 @@ class MainView: UIViewController {
     
     // MARK: segment functions
     
-    @objc private func changeUnderLinePosition(_ segment: UISegmentedControl) {
+    @objc private func segmentValueChanged(_ animated: Bool = true) {
+        UIView.animate(withDuration: 0.2) {
+            self.changeUnderLinePosition(animated)
+        }
+    }
+    
+    @objc private func changeUnderLinePosition(_ animated: Bool) {
         let halfWidth = segmentControl.frame.width / 2
         xPosition = segmentControl.frame.origin.x + (halfWidth * CGFloat(segmentControl.selectedSegmentIndex))
         
-        UIView.animate(withDuration: 0.2) {
+        if animated {
+            UIView.animate(withDuration: 0.2) {
+                self.underLineView.frame.origin.x = self.xPosition
+            }
+        } else {
             self.underLineView.frame.origin.x = self.xPosition
         }
         
-        switch segment.selectedSegmentIndex {
+        
+        switch segmentControl.selectedSegmentIndex {
         case 0:
             monthView.view.isHidden = false
             dailyView.view.isHidden = true
